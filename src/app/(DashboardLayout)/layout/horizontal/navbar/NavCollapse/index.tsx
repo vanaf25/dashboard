@@ -154,7 +154,7 @@ const NavCollapse = ({ menu, level, pathWithoutLastPart, pathDirect, hideMenu, o
           color:
             open && level < 2
               ? menu.bgcolor + ".main"
-              : `inherit` && level > 1 && open
+              : level > 1 && open
               ? menu.bgcolor + ".main"
               : `inherit`,
           ".MuiListItemIcon-root": {
