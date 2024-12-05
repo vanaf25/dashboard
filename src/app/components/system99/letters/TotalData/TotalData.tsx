@@ -1,7 +1,11 @@
 import {Typography} from "@mui/material";
 import Box from "@mui/material/Box";
-
-const TotalData = ({header,total}) => {
+import React from "react";
+interface TotalDataProps{
+    header:string,
+    total:string
+}
+const TotalData:React.FC<TotalDataProps> = ({header,total}) => {
   return (
     <Box
       sx={{
