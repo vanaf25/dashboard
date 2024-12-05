@@ -13,7 +13,7 @@ const Calculations = () => {
             <h1 style={{ textAlign: "center" }}>All calculators({calculators.length})</h1>
             {calculators.map(el => (
                 <Paper sx={{ p: 2, width: "80%", margin: "0 auto 10px", fontSize: 25, textAlign: "center" }} key={el}>
-                    <Link href={`/system99/calculations/${el}`} passHref>
+                    <Link href={`/system99/calculators/${el}`} passHref>
                         {el}
                     </Link>
                 </Paper>
