@@ -7,7 +7,7 @@ interface ResultField {
 }
 export interface CardProps {
   resultFields: ResultField[];
-  _id:string,
+  _id?:string,
 }
 
 const Card: React.FC<CardProps> = ({ resultFields }) => {
