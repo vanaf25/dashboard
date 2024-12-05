@@ -1,3 +1,4 @@
+"use client"
 import { Paper } from '@mui/material';
 import Link from 'next/link';
 
@@ -7,7 +8,6 @@ const Calculations = () => {
         "SheetSiding", "Soffit", "PergolaShade", "FreezeBoard", "PlankSiding", "Fascia",
         "StuccoWallCovering", "BrickWallCovering", "PorchCeiling", "StarFraming", "Fencing"
     ];
-
     return (
         <Paper sx={{ maxWidth: 600, margin: "0 auto", p: 2 }}>
             <h1 style={{ textAlign: "center" }}>All calculators({calculators.length})</h1>
