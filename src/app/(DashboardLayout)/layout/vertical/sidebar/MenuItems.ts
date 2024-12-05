@@ -28,6 +28,13 @@ const Menuitems: MenuitemsType[] = [
     href: "/",
     bgcolor: "primary",
   },
+  {
+    id: uniqueId(),
+    title: "system99",
+    icon: 'screencast-2-line-duotone',
+    href: "/system99",
+    bgcolor: "primary",
+  },
 ];
 
 export default Menuitems;
