@@ -1,4 +1,4 @@
-import "use client";
+"use client";
 import Links from '../../../components/global/Links/Links';
 const Page = () => {
   const additionalWorkComponentsArray = [
