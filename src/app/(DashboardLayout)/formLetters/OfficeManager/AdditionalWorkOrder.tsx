@@ -33,18 +33,18 @@ const columns=[{field:"itemNumber",editable:true,headerName:"Item Number",flex:1
     flex:4,
     editable:true,
     headerName:"We hereby submit the following specifically described additional work:"}]
-  const gridRef=useRef(null)
+  const gridRef=useRef<any>(null)
   return (
     <div>
       <CustomerDetails customer={{
         companyPhone:"0990930450",email:"vana@gmail.com",companyAddress:"24 rue de vignes"}}/>
       <CustomerDetails
         customer={{Estimator:"ivan",Email:"vanay@gmail.com",Phone:"0990930450",Address:"Some Adress"}}/>
-      <Table ref={gridRef} rows={rows}
+      <Table customRef={gridRef} rows={rows}
              columns={columns}
       />
         <Typography sx={{display:"inline",fontWeight:"700",mb:1}}>
-          Additional charge for above described work is:       <BlueBlock text={"$5000"}/>
+          Additional charge for above described work is:       <BlueBlock/>
         </Typography>
         <Typography sx={{mb:1}}>
           Additional charge for above described work is:With payments to be made as follows:

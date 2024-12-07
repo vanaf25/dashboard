@@ -1,7 +1,7 @@
 import CustomerDetails from '../../../components/global/CustomerDetails/CustomerDetails';
 import { Typography } from '@mui/material';
-import SignaturesSection from '../../../../components/letters/signatureSection/signatureSection';
 import Box from '@mui/material/Box';
+import SignaturesSection from "@/app/components/letters/signatureSection/signatureSection";
 
 const CompletionCert = () => {
   return (
