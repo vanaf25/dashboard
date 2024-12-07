@@ -11,10 +11,7 @@ interface ErrorResponse {
     error: string;
 }
 
-interface RowData {
-    // Add appropriate types for row data
-}
-
+type RowData=any
 interface TableData {
     tableName:string,
     rows:any[]}

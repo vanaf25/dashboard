@@ -20,7 +20,7 @@ const VinylPartsTable = () => {
     { item: 'Vinyl Siding nails per box', quantity: 0 },
     { item: 'T 50 staples per box', quantity: 0 },
   ], []);
-  const createColumns = useCallback(headerName => ([
+  const createColumns = useCallback((headerName:string) => ([
     {
       headerName: headerName,
       field: 'item',

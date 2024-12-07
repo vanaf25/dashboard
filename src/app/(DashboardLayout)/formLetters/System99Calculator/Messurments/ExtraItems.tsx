@@ -1,10 +1,10 @@
 "use client";
 import { useMemo } from 'react';
-import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 import Box from "@mui/material/Box";
 import TableName from "../../../../components/letters/TableName/TableName";
+import Table from "@/app/components/letters/Table/Table";
 const ExtraItems = () => {
   // Supplies Data
   const suppliesColumns = useMemo(() => [
@@ -71,30 +71,23 @@ const ExtraItems = () => {
         Extra supplies, transitions & flashing
       </TableName>
       <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
-        <div className="ag-theme-alpine" style={{flex: 1, marginBottom: '10px'}}>
-          <AgGridReact
-            columnDefs={suppliesColumns}
+          <Table
+            columns={suppliesColumns}
             domLayout='autoHeight'
-            rowData={suppliesRowData}
+            rows={suppliesRowData}
+          />
+          <Table
+            domLayout='autoHeight'
+            columns={transitionColumns}
+            rows={transitionRowData}
+          />
+          <Table
+            domLayout='autoHeight'
+            columns={flashingColumns}
+            rows={flashingRowData}
           />
         </div>
-        <div className="ag-theme-alpine" style={{flex: 1, marginBottom: '10px'}}>
-          <AgGridReact
-            domLayout='autoHeight'
-            columnDefs={transitionColumns}
-            rowData={transitionRowData}
-          />
-        </div>
-        <div className="ag-theme-alpine" style={{flex: 1, marginBottom: '10px'}}>
-          <AgGridReact
-            domLayout='autoHeight'
-            columnDefs={flashingColumns}
-            rowData={flashingRowData}
-          />
-        </div>
-      </div>
     </Box>
-
   );
 };
 

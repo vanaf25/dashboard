@@ -1,10 +1,15 @@
 "use client";
-import {useMemo} from 'react';
+import React, {useMemo} from 'react';
 import TableName from "../../../../components/letters/TableName/TableName";
 import Table from "../../../../components/letters/Table/Table";
 import lengthAndWidthColumns from "../../../../consts/LengthAndWidthColumns";
-
-const Concrete = ({additionalColumns,additionalRow,onCellValueChanged,customRef}) => {
+interface ConcreteProps{
+    additionalColumns:any[],
+    additionalRow?:any,
+    onCellValueChanged:(p:any)=>void,
+    customRef:React.MutableRefObject<any>
+}
+const Concrete:React.FC<ConcreteProps>= ({additionalColumns,additionalRow,onCellValueChanged,customRef}) => {
   const columns=useMemo(()=>([...lengthAndWidthColumns,...additionalColumns]),[]);
   const rows = useMemo(
     ()=>{

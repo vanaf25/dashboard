@@ -3,7 +3,7 @@
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 import Table from "../../../../components/letters/Table/Table";
-export function roundToTwoDecimalPlaces(num) {
+export function roundToTwoDecimalPlaces(num:number) {
   return Math.round(num * 100) / 100;
 }
 const ProductTable = () => {
@@ -165,13 +165,13 @@ const ProductTable = () => {
   ];
   const columnDefs = [
     { headerName: 'Product Name', field: 'productName' },
-    { headerName: 'Page Estimate', field: 'materialEstimate',cellRenderer:(params)=>{
+    { headerName: 'Page Estimate', field: 'materialEstimate',cellRenderer:(params:any)=>{
       return `$${params.value}`
       } },
     { headerName: 'Overhead', field: 'overhead',editable:true,agCellEditor:"agNumberCellEditor" },
     { headerName: 'Labor Ticker', field: 'laborTicker' },
     { headerName: 'Labor Cost', field: 'laborCost' },
-    { headerName: 'Sub Total', field: 'subTotal',valueGetter:(params)=>{
+    { headerName: 'Sub Total', field: 'subTotal',valueGetter:(params:any)=>{
       const data=params.data
       return roundToTwoDecimalPlaces(
         Number(data.materialEstimate)
@@ -179,18 +179,18 @@ const ProductTable = () => {
       },
       },
     { headerName: 'Profit %', field: 'profitPercentage'},
-    { headerName: 'Profit', field: 'profit',valueGetter:(params)=>{
+    { headerName: 'Profit', field: 'profit',valueGetter:(params:any)=>{
         const data=params.data
         return  roundToTwoDecimalPlaces(+data.subTotal*Number(data.profitPercentage))
       },
       },
-    { headerName: 'Total', field: 'total',valueGetter:({data})=>roundToTwoDecimalPlaces(+data.subTotal+Number(data.profit))},
+    { headerName: 'Total', field: 'total',valueGetter:({data}:any)=>roundToTwoDecimalPlaces(+data.subTotal+Number(data.profit))},
     { headerName: 'Commission %', field: 'commissionPercentage' },
     { headerName: 'Sales Commission', field: 'salesCommission',
-      valueGetter:({data})=>roundToTwoDecimalPlaces(
+      valueGetter:({data}:any)=>roundToTwoDecimalPlaces(
         +data.commissionPercentage*Number(data.total)) },
     { headerName: 'Total Cost to Customer', field: 'totalCostToCustomer',
-      valueGetter:({data})=>(+data.salesCommission+Number(data.total)).toFixed(2) },
+      valueGetter:({data}:any)=>(+data.salesCommission+Number(data.total)).toFixed(2) },
   ];
   const cleanRowData = rowData.map((item) => ({
     ...item,
