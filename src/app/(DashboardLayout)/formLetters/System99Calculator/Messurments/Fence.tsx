@@ -13,7 +13,7 @@ const Fence = () => {
     filter(el=>el.field==="length")), []);
   const tableWidthRef=useRef(null)
   const [linerFeet,setLinerFeet]=useState(0)
-  const onCellValueChanged=useCallback((params)=>{
+  const onCellValueChanged=useCallback((params:any)=>{
     const newValue = params.newValue;
     const oldValue = params.oldValue;
     if (newValue <= 0) {

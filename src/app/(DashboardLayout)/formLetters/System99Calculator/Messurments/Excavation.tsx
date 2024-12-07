@@ -6,8 +6,8 @@ import lengthAndWidthColumns from "../../../../consts/LengthAndWidthColumns";
 interface ConcreteProps{
     additionalColumns:any[],
     additionalRow?:any,
-    onCellValueChanged:(p:any)=>void,
-    customRef:React.MutableRefObject<any>
+    onCellValueChanged?:(p:any)=>void,
+    customRef?:React.MutableRefObject<any>
 }
 const Concrete:React.FC<ConcreteProps>= ({additionalColumns,additionalRow,onCellValueChanged,customRef}) => {
   const columns=useMemo(()=>([...lengthAndWidthColumns,...additionalColumns]),[]);

@@ -1,11 +1,15 @@
 "use client";
-import {useEffect, useMemo, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import TableName from "../../../../components/letters/TableName/TableName";
 import Table from "../../../../components/letters/Table/Table";
 import lengthAndWidthColumns from "../../../../consts/LengthAndWidthColumns";
 import { TextField, Box } from '@mui/material';
-
-const Concrete = ({onCellValueChanged,customRef,additionalColumns}) => {
+interface ConcreteProps{
+    onCellValueChanged?:(p:any)=>void,
+    customRef?:React.MutableRefObject<any>,
+    additionalColumns:any[]
+}
+const Concrete:React.FC<ConcreteProps> = ({onCellValueChanged,customRef,additionalColumns}) => {
   const [thickness1, setThickness1] = useState('');
   const [thickness2, setThickness2] = useState('');
   const columns=useMemo(()=>([...lengthAndWidthColumns,...additionalColumns]),[lengthAndWidthColumns,additionalColumns])

@@ -64,7 +64,7 @@ const Deck = () => {
     { deckSurface: '', allLevels: null },
     { deckSurface: '', allLevels: null },
     { deckSurface: '', allLevels: null },
-  ])
+  ],[]);
   const deckSurfaceRowData1 =useMemo(()=>getDeckSurfaceRowData(),[]);
   const deckSurfaceRowData2 =useMemo(()=>getDeckSurfaceRowData(),[]);
   const deckSurfaceRowData3 =useMemo(()=>getDeckSurfaceRowData(),[]);
@@ -109,7 +109,7 @@ const Deck = () => {
       editable: true,
       flex: 1,
     }
-  ]));
+  ]),[]);
 
   return (
     <div>
