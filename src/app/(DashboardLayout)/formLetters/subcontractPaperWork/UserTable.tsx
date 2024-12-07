@@ -6,7 +6,7 @@ import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 // Type for each row of data
 interface TableRow {
     label: string;
-    type: "text" | "date"; // Specify the type of data in the row
+    type?: "text" | "date"; // Specify the type of data in the row
     value?: string | number; // Value is optional since date rows may not have it
 }
 
