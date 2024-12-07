@@ -1,11 +1,10 @@
 import { memo } from 'react';
 
-import styles from './Loading.module.scss';
 
-export const Loading = memo(() => <div className={styles.loading} />);
+export const Loading = memo(() => <div  >Loading...</div>);
 Loading.displayName = 'Loading';
 
 export const InlineLoading = memo(() => (
-  <div data-testid="inline-loading" className={styles.inlineLoading} />
+    <div  >Loading...</div>
 ));
 InlineLoading.displayName = 'InlineLoading';
