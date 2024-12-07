@@ -3,8 +3,8 @@ import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
 
 interface LegalLetterProps {
-    title: string;
-    name: string;
+    title?: string;
+    name: string | number;
     letterText?: string; // Optional letter text
     paragraphs?: string[]; // Optional array of paragraphs
 }

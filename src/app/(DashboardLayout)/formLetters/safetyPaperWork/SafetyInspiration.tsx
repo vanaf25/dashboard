@@ -19,7 +19,7 @@ const SafetyInspiration = () => {
   ]), []);
 
   // Handle form submission
-  const onSubmit = (formData) => {
+  const onSubmit = (formData:any) => {
     console.log(formData); // You can handle the data here (e.g., send it to a backend)
   };
 
