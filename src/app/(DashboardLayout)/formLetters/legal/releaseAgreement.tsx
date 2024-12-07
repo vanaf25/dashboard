@@ -74,7 +74,7 @@ const ReleaseAgreement = () => {
         </Typography>
       </Box>
       <Box sx={{mb:2}}>
-        <Typography varaint={"h4"}>Section 6.	Governing Law; Jurisdiction.</Typography>
+        <Typography variant={"h4"}>Section 6.	Governing Law; Jurisdiction.</Typography>
         <Typography>
           This Agreement shall be governed by and construed in accordance with the provisions of the laws of the company’s principal state without regard to the conflicts of laws provisions thereof.
         </Typography>
