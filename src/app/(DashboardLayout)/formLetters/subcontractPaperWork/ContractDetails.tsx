@@ -1,5 +1,6 @@
 import { Grid, Paper, Typography, Box } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import React from "react";
 
 const useStyles = makeStyles(() => ({
   greenBackground: {
@@ -17,8 +18,12 @@ const useStyles = makeStyles(() => ({
     color: '#2196F3', // Blue text color for the amount
   },
 }));
-
-const ContractDetails = ({contractAmount,materialBudget,timeBonus}) => {
+interface ContractDetails{
+  contractAmount:number,
+  materialBudget:number,
+  timeBonus:number
+}
+const ContractDetails:React.FC<ContractDetails> = ({contractAmount,materialBudget,timeBonus}) => {
   const classes = useStyles()
 
   return (
