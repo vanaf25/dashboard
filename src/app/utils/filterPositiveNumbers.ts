@@ -5,7 +5,7 @@ interface Params extends ICellEditorParams {
   oldValue: number;
 }
 
-export default (params: Params): void => {
+export default (params: any): void => {
   const { newValue, oldValue } = params;
   console.log('oldValue:', oldValue);
   if(params?.api.getRowNode){

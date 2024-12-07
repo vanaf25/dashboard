@@ -23,7 +23,7 @@ const Invoice = () => {
         rows={[{dateSold:"",p:"",dateBalance:""}]}
         columns={[{field:"dateSold",
           cellDataType:"date",
-          valueFormatter: (params) => {
+          valueFormatter: (params:any) => {
           if(params.value){
             const date = new Date(params.value);
             return date.toLocaleDateString();
@@ -47,7 +47,7 @@ const Invoice = () => {
             cellEditor:"agNumberCellEditor",
             cellDataType:"number",
             editable:true,label:"Rate or Item Cost"}
-          ,{field:"amount",valueGetter:(p)=>{
+          ,{field:"amount",valueGetter:(p:any)=>{
             if(p.data.quantity && p.data.rate) return +(p.data.quantity)*+(+p.data.rate);
               return "";
             }
