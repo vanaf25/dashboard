@@ -1,3 +1,4 @@
+"use client";
 import EstimatorDetails from '../../../../components/global/EstimatorDetails/EstimatorDetails';
 import CustomerDetails from '../../../../components/global/CustomerDetails/CustomerDetails';
 import { Paper, Typography } from '@mui/material';

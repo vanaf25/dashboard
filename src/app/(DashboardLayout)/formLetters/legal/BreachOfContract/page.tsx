@@ -1,6 +1,6 @@
 "use client";
 import { Typography } from '@mui/material';
-import BlueBlock from '../../../components/global/blueBlock/BlueBlock';
+import BlueBlock from '../../../../components/global/blueBlock/BlueBlock';
 const BreachOfContract = () => {
   return (
     <div>

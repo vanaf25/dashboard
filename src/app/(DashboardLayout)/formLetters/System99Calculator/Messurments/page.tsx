@@ -1,3 +1,4 @@
+"use client";
 import SquareFootage from "./SquareFootage";
 import Size from "./Size";
 import Windows from "./Windows";

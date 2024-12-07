@@ -1,7 +1,8 @@
+"use client";
 import Box from '@mui/material/Box';
 import { Typography } from '@mui/material';
-import BlueBlock from '../../../components/global/blueBlock/BlueBlock';
-import SignaturesSection from '../../../components/letters/signatureSection/signatureSection';
+import SignaturesSection from "@/app/components/letters/signatureSection/signatureSection";
+import BlueBlock from "@/app/components/global/blueBlock/BlueBlock";
 
 const ClaimOfLien = () => {
   return (

@@ -1,6 +1,7 @@
+"use client";
 import Box from '@mui/material/Box';
 import { Typography } from '@mui/material';
-import SignaturesSection from '../../../components/letters/signatureSection/signatureSection';
+import SignaturesSection from '../../../../components/letters/signatureSection/signatureSection';
 
 const NonDisclosureAgreement = () => {
   const sections = [

@@ -1,3 +1,4 @@
+"use client";
 import FormCreator from "@/app/components/system99/calculations/Form/Form";
 const Page = () => {
   const inputFields = [

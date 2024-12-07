@@ -1,6 +1,7 @@
+"use client";
 import { Typography } from '@mui/material';
 import Box from '@mui/material/Box';
-import SignaturesSection from '../../../components/letters/signatureSection/signatureSection';
+import SignaturesSection from '../../../../components/letters/signatureSection/signatureSection';
 
 const ReleaseAgreement = () => {
   return (

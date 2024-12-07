@@ -403,7 +403,7 @@ const Menuitems = [
     children: [
       {
         id: uniqueId(),
-        title: 'Form Elements',
+        title: 'RenovationRequestForm Elements',
         href: '/forms/form-elements/autocomplete',
         children: [
           {
@@ -440,32 +440,32 @@ const Menuitems = [
       },
       {
         id: uniqueId(),
-        title: 'Form Layout',
+        title: 'RenovationRequestForm Layout',
         href: '/forms/form-layout',
       },
       {
         id: uniqueId(),
-        title: 'Form Horizontal',
+        title: 'RenovationRequestForm Horizontal',
         href: '/forms/form-horizontal',
       },
       {
         id: uniqueId(),
-        title: 'Form Vertical',
+        title: 'RenovationRequestForm Vertical',
         href: '/forms/form-vertical',
       },
       {
         id: uniqueId(),
-        title: 'Form Custom',
+        title: 'RenovationRequestForm Custom',
         href: '/forms/form-custom',
       },
       {
         id: uniqueId(),
-        title: 'Form Wizard',
+        title: 'RenovationRequestForm Wizard',
         href: '/forms/form-wizard',
       },
       {
         id: uniqueId(),
-        title: 'Form Validation',
+        title: 'RenovationRequestForm Validation',
         href: '/forms/form-validation',
       },
     ],

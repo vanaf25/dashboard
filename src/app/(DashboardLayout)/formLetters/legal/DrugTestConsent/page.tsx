@@ -1,6 +1,7 @@
+"use client";
 import { Paper } from '@mui/material';
 import {Typography } from '@mui/material';
-import SignaturesSection from '../../../components/letters/signatureSection/signatureSection';
+import SignaturesSection from "@/app/components/letters/signatureSection/signatureSection";
 
 
 const DrugTestNotice = () => {
