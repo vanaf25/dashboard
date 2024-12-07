@@ -35,6 +35,13 @@ const Menuitems: MenuitemsType[] = [
     href: "/system99",
     bgcolor: "primary",
   },
+  {
+    id: uniqueId(),
+    title: "form Letters",
+    icon: 'screencast-2-line-duotone',
+    href: "/formLetters",
+    bgcolor: "primary",
+  },
 ];
 
 export default Menuitems;
