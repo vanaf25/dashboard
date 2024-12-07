@@ -94,7 +94,7 @@ const FinancialDocuments: React.FC = () => {
         {
             label: 'Invoices',
             items: [
-                { title: 'Invoice 1', description: 'Invoice details', price: '400.00', status: 'Paid', statusColor: 'success' },
+                { title: 'Page 1', description: 'Page details', price: '400.00', status: 'Paid', statusColor: 'success' },
             ],
         },
         {
