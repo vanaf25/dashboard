@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, useMemo, useCallback } from 'react';
+import React, { useEffect, useRef, useState, useMemo, useCallback } from 'react';
 import Box from '@mui/material/Box';
 import Table from '../../../components/letters/Table/Table';
 import TableWithOutHeaders from '../../../components/letters/TableWithoutHeaders/TableWithOutHeaders';
@@ -10,12 +10,12 @@ import UserDetails from './UserDetails';
 const totalKeys = ["amount", "totalPay", "totalCost"];
 const JobCost = () => {
   const contractDetails={contractAmount:1000,materialBudget:1000,timeBonus:1000}
-  const firstTableRef = useRef(null);
-  const laborTableRef = useRef(null);
-  const fullBidSubTableRef = useRef(null);
-  const totalTableRef = useRef(null);
+  const firstTableRef = useRef<any>(null);
+  const laborTableRef = useRef<any>(null);
+  const fullBidSubTableRef = useRef<any>(null);
+  const totalTableRef = useRef<any>(null);
   const [result, setResult] = useState({bonusAchieved:0 });
-  const updateTotalTable = useCallback((ref, key, totalKey) => {
+  const updateTotalTable = useCallback((ref:React.MutableRefObject<any>, key:string, totalKey:string) => {
     console.log('upd!');
     const amount = calculateTotalAmount(ref, key);
     let firstRowNode = totalTableRef?.current?.api?.getDisplayedRowAtIndex(0);
@@ -67,7 +67,7 @@ const JobCost = () => {
   useEffect(() => {
     updateLaborSub();
   }, [updateLaborSub]);
-  const onCellValueChanged = useCallback((params) => {
+  const onCellValueChanged = useCallback((params:any) => {
     console.log('paramsL', params);
     const newValue = params.newValue;
     const oldValue = params.oldValue;
@@ -89,7 +89,7 @@ const JobCost = () => {
     { field: 'supplierName', editable: true, headerName: 'Supplier Name' },
     { field: 'description', editable: true, headerName: 'Description of Page Used' },
     { field: 'date', cellDataType: "date",
-      valueFormatter: (params) => {
+      valueFormatter: (params:any) => {
         const date = new Date(params.value);
         return date.toLocaleDateString(); // Форматирование даты
       },
@@ -97,7 +97,7 @@ const JobCost = () => {
     { field: 'checkNumber', editable: true, headerName: 'time' },
     { field: 'amount', cellDataType: "number", editable: true,
       cellEditor: 'agNumberCellEditor', headerName: 'Amount',
-      valueFormatter: (params) => parseFloat(params.value).toFixed(2) // Округление до двух знаков
+      valueFormatter: (params:any) => parseFloat(params.value).toFixed(2) // Округление до двух знаков
     }
   ], []);
 
@@ -136,16 +136,16 @@ const JobCost = () => {
     { field: 'week4', editable: true, cellEditor: 'agNumberCellEditor', headerName: 'Week 4' },
     { field: 'week5', editable: true, cellEditor: 'agNumberCellEditor', headerName: 'Week 5' },
     { field: 'week6', editable: true, cellEditor: 'agNumberCellEditor', headerName: 'Week 6' },
-    { field: 'totalHours', valueGetter: (p) => calculateSeriesOfNumbers(p, "week", 6),
+    { field: 'totalHours', valueGetter: (p:any) => calculateSeriesOfNumbers(p, "week", 6),
       headerName: 'Total Hours' },
-    { field: 'totalPay', valueGetter: (p) => {
+    { field: 'totalPay', valueGetter: (p:any) => {
         const total = p.getValue('totalHours');
         if (total !== null && p.data.rate !== null) {
-          return parseFloat((+total) * (+p.data.rate)).toFixed(2);
+          return (+total) * (+p.data.rate);
         }
         return "-";
       }, headerName: 'Total Pay',
-      valueFormatter: (params) => params.value !== "-" ? `$${params.value}` : params.value
+      valueFormatter: (params:any) => params.value !== "-" ? `$${params.value}` : params.value
     }
   ], []);
   const laborTableRows = useMemo(() => [
@@ -205,14 +205,14 @@ const JobCost = () => {
     { field: 'payment5', cellEditor: 'agNumberCellEditor', editable: true, headerName: 'Payment 5' },
     { field: 'totalSiteHours',cellEditor: 'agNumberCellEditor', editable: true, headerName: 'Total Site Hours' },
     { field: 'totalCost', headerName: 'Total Cost',
-      valueGetter: (p) => {
+      valueGetter: (p:any) => {
         const payments = calculateSeriesOfNumbers(p, "payment", 5);
         if (payments !== "-" && p.data.deposit) {
-          return parseFloat(payments + (+p.data.deposit)).toFixed(2);
+          return payments + (+p.data.deposit).toFixed(2);
         }
         return "-";
       },
-      valueFormatter: (params) => params.value !== "-" ? `$${params.value}` : params.value
+      valueFormatter: (params:any) => params.value !== "-" ? `$${params.value}` : params.value
     }
   ], []);
   const fullBidSubTableRows = useMemo(() => [
