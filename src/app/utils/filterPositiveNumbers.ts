@@ -1,0 +1,21 @@
+import { ICellEditorParams } from 'ag-grid-community';
+
+interface Params extends ICellEditorParams {
+  newValue: number;
+  oldValue: number;
+}
+
+export default (params: Params): void => {
+  const { newValue, oldValue } = params;
+  console.log('oldValue:', oldValue);
+  if(params?.api.getRowNode){
+    if (newValue <= 0 ) {
+      // @ts-ignore
+      params.api.getRowNode(params.node.id).setDataValue(params.column.colId, oldValue);
+    } else {
+      // @ts-ignore
+      params.api.getRowNode(params.node.id).setDataValue(params.column.colId, newValue);
+    }
+  }
+
+};

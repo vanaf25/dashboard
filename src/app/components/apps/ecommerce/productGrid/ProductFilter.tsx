@@ -220,7 +220,7 @@ const ProductFilter = () => {
         </Box>
         <Divider></Divider>
         {/* ------------------------------------------- */}
-        {/* Filter By Pricing */}
+        {/* Filter By Page */}
         {/* ------------------------------------------- */}
         <Typography variant="h6" px={3} mt={3} pb={2}>
           By Pricing

@@ -1,6 +1,5 @@
 "use client"
 import FormCreator from "@/app/components/system99/calculations/Form/Form";
-
 const VinylSiding = () => {
   const inputFields = [
     { label: "Wall Length (LF)", name: "A", id: "outlined-basic1" },

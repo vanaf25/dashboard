@@ -160,7 +160,7 @@ interface LinkType {
 const pageLinks: LinkType[] = [
   {
     href: "/theme-pages/pricing",
-    title: "Pricing Page",
+    title: "Page Page",
   },
   {
     href: "/auth/auth1/login",

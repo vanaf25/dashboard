@@ -55,8 +55,8 @@ const featuresData: FeaturesType[] = [
   {
     icon: <IconTag width={30} height={30} strokeWidth={1.5} />,
     color: "error",
-    title: "Material Ui",
-    subtext: "Its been made with Material Ui and full responsive layout.",
+    title: "Page Ui",
+    subtext: "Its been made with Page Ui and full responsive layout.",
   },
   {
     icon: <IconDiamond width={30} height={30} strokeWidth={1.5} />,

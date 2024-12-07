@@ -302,7 +302,7 @@ const ProductFilter2 = () => {
               </Menu>
               <Divider orientation="vertical" variant="middle" flexItem />
               {/* ------------------------------------------- */}
-              {/* Filter By Pricing */}
+              {/* Filter By Page */}
               {/* ------------------------------------------- */}
               <Button
                 id="sort-button"
