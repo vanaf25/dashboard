@@ -2,6 +2,7 @@ import {  Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import Paragraphs from '../../../components/letters/parahraphs/Paragraphs';
 import SignaturesSection from '../../../components/letters/signatureSection/signatureSection';
+import React from "react";
 const termsAndConditions = [
   {
     title: "1. INDEPENDENT INVESTIGATION",
@@ -256,7 +257,11 @@ const termsAndConditions2= [
    i) Daily inspection of all rigging systems.
    j) Inspection of load pick points.`,
 ];
-const Element=({title,content})=>{
+interface  ElementProps{
+  title:string,
+  content:string
+}
+const Element:React.FC<ElementProps>=({title,content})=>{
   return( <Box  sx={{ marginBottom: 4 }}>
     <Typography sx={{mb:1}} variant="h6" gutterBottom>
       {title}
