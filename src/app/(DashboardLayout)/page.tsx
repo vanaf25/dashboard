@@ -150,6 +150,7 @@ export default function Dashboard() {
                     Invite Team Member
                 </Button>
             </BlankCard>
+{/*
              <BlankCard sx={{display:"flex",justifyContent:"space-between",mb:2}}>
                  <Box>
                      <h2>Quickstart Quide</h2>
@@ -162,17 +163,17 @@ export default function Dashboard() {
                          gap:2
                      }}
                  >
-                     {/* Select */}
+                      Select
                      <Select defaultValue="gettingStarted" sx={{ minWidth: 150 }}>
                          <MenuItem value="gettingStarted">Getting Started</MenuItem>
                          <MenuItem value="option1">Option 1</MenuItem>
                          <MenuItem value="option2">Option 2</MenuItem>
                      </Select>
 
-                     {/* Secondary Typography */}
+                      Secondary Typography
                      <Typography color="text.secondary">8 of 8 Complete</Typography>
 
-                     {/* Fill Bar */}
+                      Fill Bar
                      <Box sx={{ flex: 1 }}>
                          <LinearProgress
                              variant="determinate"
@@ -189,6 +190,7 @@ export default function Dashboard() {
                  </Box>
 
              </BlankCard>
+*/}
             <BlankCard sx={{mb:2}}>
                 <Box sx={{display: "flex",justifyContent:"space-between"}}>
                     <h2>Projects (12)</h2>
@@ -216,7 +218,9 @@ export default function Dashboard() {
             <BigCalendar/>
             <FinancialDocuments/>
             <CreateNew/>
+{/*
             <FastSavePayments/>
+*/}
             <SupportComponent/>
         </Box>
     </PageContainer>

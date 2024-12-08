@@ -12,7 +12,9 @@ const items: Item[] = [
     { name: 'Estimate', imageSrc: '/images/fileUpload.png' },
     { name: 'Invoice', imageSrc: '/images/fileUpload.png' },
     { name: 'Task', imageSrc: '/images/fileUpload.png' },
+/*
     { name: '3d Floor Plan', imageSrc: '/images/fileUpload.png' },
+*/
     { name: 'TakeOff', imageSrc: '/images/fileUpload.png' },
     { name: 'Daily log', imageSrc: '/images/fileUpload.png' },
     { name: 'Time entry', imageSrc: '/images/fileUpload.png' },

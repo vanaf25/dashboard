@@ -6,7 +6,7 @@ import BlankCard from '@/app/components/shared/BlankCard'; // Importing BlankCar
 const SupportComponent: React.FC = () => {
     return (
         <BlankCard sx={{mt:2}}>
-            <Box
+           {/* <Box
                 sx={{
                     display: 'flex',
                     alignItems: 'center',
@@ -14,7 +14,7 @@ const SupportComponent: React.FC = () => {
                     gap:2
                 }}
             >
-                {/* Profile Image */}
+                 Profile Image
                 <Box
                     sx={{
                         width: '100px',
@@ -32,7 +32,7 @@ const SupportComponent: React.FC = () => {
                     />
                 </Box>
 
-                {/* Information */}
+                 Information
                 <Box sx={{ maxWidth: '60%' }}>
                     <Typography variant="h5" sx={{ marginBottom: 1 }}>
                         Julia Hagenbaumer
@@ -42,11 +42,11 @@ const SupportComponent: React.FC = () => {
                     </Typography>
                     <Button variant="contained">Schedule a Call</Button>
                 </Box>
-            </Box>
+            </Box>*/}
 
             {/* Cards with Icons */}
             <Grid container spacing={2} justifyContent="center" sx={{ marginTop: 3 }}>
-                {['Help Center', 'Video Tutorials', 'Webinars', 'Learn'].map((item, index) => (
+                {['Help Center', 'Video Tutorials'].map((item, index) => (
                     <Grid item xs={6} sm={3} key={index}>
                         <Paper
                             elevation={3}
@@ -80,14 +80,14 @@ const SupportComponent: React.FC = () => {
             </Grid>
 
             {/* Support Text */}
-            <Box sx={{ textAlign: 'center', marginTop: 3 }}>
+          {/*  <Box sx={{ textAlign: 'center', marginTop: 3 }}>
                 <Typography variant="body2">
                     For technical support,{' '}
                     <Link href="tel:(833)432-3779" sx={{ textDecoration: 'none' }}>
                         call (833) 432-3779
                     </Link>
                 </Typography>
-            </Box>
+            </Box>*/}
         </BlankCard>
     );
 };
