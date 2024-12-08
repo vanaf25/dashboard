@@ -21,7 +21,7 @@ const Page = () => {
   ];
   return (
     <div>
-      <Links links={additionalComponentsArray} to={'formLetters/productionPaperWork'}/>
+      <Links links={additionalComponentsArray} to={'formLetters/ProductionPaperWork'}/>
     </div>
   );
 };

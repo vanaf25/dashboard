@@ -3,8 +3,8 @@ import Box from '@mui/material/Box';
 import Links from "@/app/components/global/Links/Links";
 
 const Page = () => {
-  const letters=["accounting","legal","OfficeManager","productionPaperWork",
-    "salesManager","safetyPaperWork","subContractPaperWork","system99Calculator"
+  const letters=["accounting","legal","OfficeManager","ProductionPaperWork",
+    "salesManager","safetyPaperWork","subContractPaperWork","System99Calculator"
     ,]
   return (
     <Box sx={{maxWidth:1000,margin:"10px auto"}}>

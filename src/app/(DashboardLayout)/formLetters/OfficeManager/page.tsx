@@ -13,7 +13,7 @@ const Page = () => {
   ];
   return (
     <div>
-      <Links links={additionalWorkComponentsArray} to={"formLetters/officeManager"}/>
+      <Links links={additionalWorkComponentsArray} to={"formLetters/OfficeManager"}/>
     </div>
   );
 };
