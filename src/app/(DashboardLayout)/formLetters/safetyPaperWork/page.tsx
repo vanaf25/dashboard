@@ -2,7 +2,7 @@
 import Links from '../../../components/global/Links/Links';
 
 const Page = () => {
-  const names= ["incidentReport","safetyInspiration","safetyViolation"]
+  const names= ["IncidentReport","SafetyInspiration","SafetyViolation"]
   return (
     <div>
       <Links links={names} to={"formLetters/safetyPaperWork"}/>
