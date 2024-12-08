@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Links from "@/app/components/global/Links/Links";
 
 const Page = () => {
-  const letters=["accounting","legal","officeManager","productionPaperWork",
+  const letters=["accounting","legal","OfficeManager","productionPaperWork",
     "salesManager","safetyPaperWork","subContractPaperWork","system99Calculator"
     ,]
   return (
