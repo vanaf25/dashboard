@@ -16,13 +16,13 @@ import "@/app/api/index";
 
 const MyApp = ({ children,
                    initialSession
-               }: { children: React.ReactNode,initialSession:Session }) => {
+               }: { children: React.ReactNode,initialSession?:Session }) => {
     const theme = ThemeSettings();
     const customizer = useSelector((state: AppState) => state.customizer);
     const [supabaseClient] = useState(() => createBrowserSupabaseClient());
     return (
         <>
-            <SessionContextProvider  supabaseClient={supabaseClient} initialSession={initialSession}>
+            <SessionContextProvider  supabaseClient={supabaseClient} initialSession={initialSession as Session}>
                 <AppRouterCacheProvider options={{ enableCssLayer: true }}>
                     <ThemeProvider theme={theme}>
                         <RTL direction={customizer.activeDir}>
