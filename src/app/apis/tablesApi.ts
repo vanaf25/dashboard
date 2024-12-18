@@ -15,7 +15,12 @@ type RowData=any
 interface TableData {
     tableName:string,
     rows:any[]}
-
+interface CreateTableDto{
+    name: string;
+    group: string;
+    columns: string[];
+    rows: object[];
+}
 export const getAllRowsByType = async (type: string): Promise<RowData[] | ErrorResponse> => {
     try {
         const res: AxiosResponse<any[]> = await axiosInstance.get(`tables/allRows/${type}`);
@@ -24,7 +29,6 @@ export const getAllRowsByType = async (type: string): Promise<RowData[] | ErrorR
         return { error: 'Some error happened' };
     }
 };
-
 export const getAllTablesByType = async (type: string): Promise<TableData[] | ErrorResponse> => {
     try {
         const res: AxiosResponse<TableData[]> = await axiosInstance.get(`tables/${type}`);
@@ -34,7 +38,7 @@ export const getAllTablesByType = async (type: string): Promise<TableData[] | Er
     }
 };
 
-export const createTable = async (data: TableData): Promise<TableData | ErrorResponse> => {
+export const createTable = async (data: CreateTableDto): Promise<TableData | ErrorResponse> => {
     try {
         const res: AxiosResponse<TableData> = await axiosInstance.post('tables/createTable', data);
         return res.data;

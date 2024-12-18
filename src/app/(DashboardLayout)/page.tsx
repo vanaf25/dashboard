@@ -5,22 +5,14 @@ import PageContainer from "@/app/components/container/PageContainer";
 import BlankCard from "@/app/components/shared/BlankCard";
 import Image from "next/image";
 import Button from "@mui/material/Button";
-import Chip from "@mui/material/Chip";
-import Select from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
 import Typography from "@mui/material/Typography";
-import LinearProgress from "@mui/material/LinearProgress";
-import Divider from "@mui/material/Divider";
 import FinancialDocuments from "@/app/components/financialDocuments/financialDocuments";
 import CreateNew from "@/app/components/createNew/createNew";
-import FastSavePayments from "@/app/components/FastSavePayments/FastSavePayments";
 import SupportComponent from "@/app/components/SupportComponent/SupportComponent";
 import BigCalendar from "@/app/(DashboardLayout)/apps/calendar/page";
-interface Status{
-    title:string,
-    description:string,
-    status:string
-}
+import {Status} from "@/app/types/dashboardTypes";
+import Leads from "@/app/components/Leads/Leads";
+
 const StatusCard:React.FC<Status>=
     ({ title, description, status }) => {
     return (
@@ -71,67 +63,11 @@ const StatusCard:React.FC<Status>=
         </Box>
     );
 };
-const LeadItem:React.FC<Status> = ({ title, description, status }) => {
-    return (
-        <Box
-            sx={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                padding: 2,
-            }}
-        >
-            {/* Title and Description */}
-            <Box>
-                <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
-                    {title}
-                </Typography>
-                <Typography color="text.secondary">{description}</Typography>
-            </Box>
-
-            {/* Status */}
-            <Chip label={status} color="primary" />
-        </Box>
-    );
-};
-
-const LeadsList = () => {
-    const leads = Array.from({ length: 12 }, (_, index) => ({
-        title: `Lead ${index + 1}`,
-        description: 'This is the lead description.',
-        status: index % 2 === 0 ? 'Meeting Scheduled' : 'In Progress', // Alternating statuses
-    }));
-
-    return (
-        <BlankCard sx={{mb:2}}>
-            {/* Header */}
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', padding: 2 }}>
-                <Typography variant="h4">Leads (12)</Typography>
-                <Button variant="contained">Create New Lead</Button>
-            </Box>
-
-            {/* Leads List */}
-            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                {leads.map((lead, index) => (
-                    <React.Fragment key={index}>
-                        <LeadItem title={lead.title} description={lead.description} status={lead.status} />
-                        {/* Add a Divider unless it's the last item */}
-                        {index < leads.length - 1 && <Divider />}
-                    </React.Fragment>
-                ))}
-            </Box>
-        </BlankCard>
-    );
-};
 export default function Dashboard() {
-  const [isLoading, setLoading] = useState(true);
-  useEffect(() => {
-    setLoading(false);
-  }, []);
     const cards = Array.from({ length: 12 }, (_, index) => ({
         title: `Card ${index + 1}`,
         description: 'This is a secondary description.',
-        status: index % 2 === 0 ? 'Active' : 'Inactive', // Alternating statuses
+        status: index % 2 === 0 ? 'Active' : 'Inactive',
     }));
   return (
     <PageContainer title="Dashboard" description="this is Dashboard">
@@ -150,7 +86,8 @@ export default function Dashboard() {
                     Invite Team Member
                 </Button>
             </BlankCard>
-{/*
+            <Leads/>
+            {/*
              <BlankCard sx={{display:"flex",justifyContent:"space-between",mb:2}}>
                  <Box>
                      <h2>Quickstart Quide</h2>
@@ -214,13 +151,9 @@ export default function Dashboard() {
                     ))}
                 </Box>
             </BlankCard>
-            <LeadsList/>
             <BigCalendar/>
             <FinancialDocuments/>
             <CreateNew/>
-{/*
-            <FastSavePayments/>
-*/}
             <SupportComponent/>
         </Box>
     </PageContainer>

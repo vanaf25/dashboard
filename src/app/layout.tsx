@@ -5,8 +5,8 @@ import "./global.css";
 
 
 export const metadata = {
-  title: "Spike Minisidebar Demo",
-  description: "Spike Minisidebar kit",
+  title: "Admin Dashboard",
+  description: "Dashboard",
 };
 
 export default function RootLayout({
