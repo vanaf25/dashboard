@@ -29,6 +29,7 @@ export default function RootLayout({ children }: Props) {
     const [isSidebarOpen, setSidebarOpen] = useState(true);
     const [isMobileSidebarOpen, setMobileSidebarOpen] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);  // State to track login status
+    // @ts-ignore
     const customizer = useSelector((state: AppState) => state.customizer);
     const theme = useTheme();
     const MainWrapper = styled("div")(() => ({
