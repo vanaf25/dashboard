@@ -18,7 +18,7 @@ const MyApp = ({ children,
                    initialSession
                }: { children: React.ReactNode,initialSession?:Session }) => {
     const theme = ThemeSettings();
-    const customizer = useSelector((state: AppState) => state.customizer);
+    const customizer = useSelector((state: any) => state.customizer);
     const [supabaseClient] = useState(() => createBrowserSupabaseClient());
     return (
         <>
