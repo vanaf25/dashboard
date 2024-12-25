@@ -25,6 +25,7 @@ const Header = () => {
   
 
   // drawer
+  // @ts-ignore
   const customizer = useSelector((state: AppState) => state.customizer);
   const dispatch = useDispatch();
 

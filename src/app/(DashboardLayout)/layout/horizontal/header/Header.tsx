@@ -23,6 +23,7 @@ export default function Header() {
   const lgUp = useMediaQuery((theme: Theme) => theme.breakpoints.up("lg"));
 
   // drawer
+  // @ts-ignore
   const customizer = useSelector((state: AppState) => state.customizer);
   const dispatch = useDispatch();
 
