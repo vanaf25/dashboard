@@ -1,6 +1,6 @@
 "use client"
 
-import React from 'react';
+import React, {useEffect} from 'react';
 import Button from '@mui/material/Button';
 import CardContent from '@mui/material/CardContent';
 import Dialog from '@mui/material/Dialog';
@@ -14,13 +14,15 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import moment from 'moment';
-import Events from '@/app/(DashboardLayout)/EventData';
+import Events, {EventType} from '@/app/(DashboardLayout)/EventData';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import './Calendar.css';
 
 import PageContainer from '@/app/components/container/PageContainer';
 import { IconCheck } from '@tabler/icons-react';
 import BlankCard from '@/app/components/shared/BlankCard';
+import {useSelector} from "@/store/hooks";
+import {Client} from "@/app/components/Leads/Leads";
 
 moment.locale('en-GB');
 const localizer = momentLocalizer(moment);
@@ -34,7 +36,19 @@ type EvType = {
 };
 
 const BigCalendar = () => {
-  const [calevents, setCalEvents] = React.useState<any>(Events);
+  const meetings=useSelector<Client[]>(
+      state=>state.dashboard.projects)
+  console.log('meetings:',meetings);
+  const [calevents, setCalEvents] =
+      React.useState<any[]>([]);
+  useEffect(() => {
+    setCalEvents(meetings.filter(el=>el.meetingDate).map(el=>{
+      return {title:`Meeting with ${el.name}`,
+        start:new Date(el.meetingDate),
+        end: new Date(new Date(el.meetingDate).setMinutes(new Date(el.meetingDate).getMinutes() + 20)),
+        color: 'default',   allDay: false,}
+    }))
+  }, [meetings]);
   const [open, setOpen] = React.useState<boolean>(false);
   const [title, setTitle] = React.useState<string>('');
   const [slot, setSlot] = React.useState<EvType>();
@@ -42,7 +56,6 @@ const BigCalendar = () => {
   const [end, setEnd] = React.useState<any | null>();
   const [color, setColor] = React.useState<string>('default');
   const [update, setUpdate] = React.useState<EvType | undefined | any>();
-
   const ColorVariation = [
     {
       id: 1,

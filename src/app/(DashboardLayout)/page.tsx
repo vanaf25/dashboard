@@ -5,73 +5,31 @@ import PageContainer from "@/app/components/container/PageContainer";
 import BlankCard from "@/app/components/shared/BlankCard";
 import Image from "next/image";
 import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
 import FinancialDocuments from "@/app/components/financialDocuments/financialDocuments";
 import CreateNew from "@/app/components/createNew/createNew";
 import SupportComponent from "@/app/components/SupportComponent/SupportComponent";
 import BigCalendar from "@/app/(DashboardLayout)/apps/calendar/page";
-import {Status} from "@/app/types/dashboardTypes";
 import Leads from "@/app/components/Leads/Leads";
-
-const StatusCard:React.FC<Status>=
-    ({ title, description, status }) => {
-    return (
-        <Box
-            sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-                borderRadius: '16px',
-                border: '1px solid #ccc',
-                overflow: 'hidden',
-                width: '300px',
-                boxShadow: 2,
-                margin: 2, // Space between cards
-            }}
-        >
-            {/* Border Top */}
-            <Box
-                sx={{
-                    width: '100%',
-                    height: '8px',
-                    backgroundColor: '#1976d2', // Replace with desired color
-                }}
-            ></Box>
-
-            {/* Content */}
-            <Box sx={{ padding: 2, textAlign: 'center', flex: 1 }}>
-                <Typography variant="h4" sx={{ fontWeight: 'bold' }}>
-                    {title}
-                </Typography>
-                <Typography color="text.secondary">{description}</Typography>
-            </Box>
-
-            {/* White Status Box */}
-            <Box
-                sx={{
-                    display:"inline-block",
-                    padding: '10px',
-                    textAlign: 'center',
-                    marginBottom:"10px",
-                }}
-            >
-                <Typography variant="body1" color="text.primary">
-                    Status: {status}
-                </Typography>
-            </Box>
-        </Box>
-    );
-};
+import Projects from "@/app/components/Projects/Projects";
+import {useDispatch} from "@/store/hooks";
+import {useUser} from "@supabase/auth-helpers-react";
+import {fetchProjects} from "@/store/apps/dasbhoard/dashboardSlice";
+import Loading from "@/app/(DashboardLayout)/loading";
 export default function Dashboard() {
-    const cards = Array.from({ length: 12 }, (_, index) => ({
-        title: `Card ${index + 1}`,
-        description: 'This is a secondary description.',
-        status: index % 2 === 0 ? 'Active' : 'Inactive',
-    }));
+    const dispatch=useDispatch();
+    const user=useUser();
+    const [isLoading,setIsLoading]=useState(true)
+   useEffect(()=>{
+       setIsLoading(true)
+       if(user){
+           dispatch(fetchProjects(user?.id)).then(res=>{
+               setIsLoading(false);
+           })
+       }
+   },[]);
   return (
     <PageContainer title="Dashboard" description="this is Dashboard">
-        <Box>
+        {isLoading ? <Loading/>:<Box>
             <BlankCard sx={{display:"flex",justifyContent:"space-between",padding:"30px",mb:1}}>
                 <Box sx={{display:"flex",gap:2}}>
                     <Image
@@ -87,6 +45,7 @@ export default function Dashboard() {
                 </Button>
             </BlankCard>
             <Leads/>
+            <Projects/>
             {/*
              <BlankCard sx={{display:"flex",justifyContent:"space-between",mb:2}}>
                  <Box>
@@ -128,34 +87,11 @@ export default function Dashboard() {
 
              </BlankCard>
 */}
-            <BlankCard sx={{mb:2}}>
-                <Box sx={{display: "flex",justifyContent:"space-between"}}>
-                    <h2>Projects (12)</h2>
-                    <Button>Create  new project</Button>
-                </Box>
-                <Box
-                    sx={{
-                        display: 'flex',
-                        flexWrap: 'wrap',
-                        justifyContent: 'center',
-                        gap: 2,
-                    }}
-                >
-                    {cards.map((card, index) => (
-                        <StatusCard
-                            key={index}
-                            title={card.title}
-                            description={card.description}
-                            status={card.status}
-                        />
-                    ))}
-                </Box>
-            </BlankCard>
             <BigCalendar/>
             <FinancialDocuments/>
             <CreateNew/>
             <SupportComponent/>
-        </Box>
+        </Box>}
     </PageContainer>
   );
 }

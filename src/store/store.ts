@@ -15,6 +15,7 @@ import ContactsReducer from "./apps/contacts/ContactSlice";
 import UserProfileReducer from "./apps/userProfile/UserProfileSlice";
 import UserProfile2Reducer from "./apps/userProfile/UserProfileSlice2";
 import BlogReducer from "./apps/blog/BlogSlice";
+import DashboardSlice from "@/store/apps/dasbhoard/dashboardSlice";
 
 const persistConfig = {
   key: "root",
@@ -32,10 +33,10 @@ export const store = configureStore({
     emailReducer: EmailReducer,
     notesReducer: NotesReducer,
     contactsReducer: ContactsReducer,
-    ticketReducer: TicketReducer,
     userpostsReducer: UserProfileReducer,
     userpostsReducer2: UserProfile2Reducer,
     blogReducer: BlogReducer,
+    dashboard:DashboardSlice
   },
   devTools: process.env.NODE_ENV !== "production",
   middleware: (getDefaultMiddleware) =>

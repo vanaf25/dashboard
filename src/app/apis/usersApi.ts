@@ -1,5 +1,5 @@
-/*
 import axios from 'axios';
+/*
 import { API_URL, setHeaders } from './config';
 
 export const getUsers = async () => {
@@ -38,4 +38,16 @@ export const deleteUser = async (id) => {
   }
 };
 */
-export default {message:"notih!"}
+
+export const fetchCustomers = async (userId:string, type?:string) => {
+    try {
+        const { data } = await axios.get('/api/leads/getLeads', {
+            params: {
+                userId,
+            },
+        });
+        return data.customers;
+    } catch (error) {
+        throw new Error('Failed to fetch customers');
+    }
+};
