@@ -12,22 +12,24 @@ export async function GET(req: NextRequest) {
         if(type==="project"){
             const { data, error } = await supabase
                 .from('customers')
-                .select('*')
+                .select('*,documents (id)')
                 .eq('created_by', userId)
                 .eq('status', 'project');
             if (error) {
                 throw error;
             }
+            console.log('dataFromServer:',data);
             return NextResponse.json({ customers: data });
         }
         else {
             const { data, error } = await supabase
                 .from('customers')
-                .select('*')
+                .select('*,documents (id)')
                 .eq('created_by', userId)
             if (error) {
                 throw error;
             }
+            console.log('dataFromServer:',data);
             return NextResponse.json({ customers: data });
         }
 

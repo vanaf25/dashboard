@@ -4,6 +4,7 @@ import { useSupabaseClient } from '@supabase/auth-helpers-react';
 import {Client} from "@/app/components/Leads/Leads";
 import {useDispatch} from "@/store/hooks";
 import {changeProject} from "@/store/apps/dasbhoard/dashboardSlice";
+import Link from 'next/link';
 type LeadItemProps=Client & { onEdit: (isDateOnly?:boolean) => void; onDelete: () => void }
 const LeadItem: React.FC<LeadItemProps> = ({
                                                                                        id,
@@ -12,6 +13,7 @@ const LeadItem: React.FC<LeadItemProps> = ({
                                                                                        onEdit,
     project,
     meetingDate,
+    documents,
                                                                                        onDelete,
     ...rest
                                                                                    }) => {
@@ -76,7 +78,6 @@ const LeadItem: React.FC<LeadItemProps> = ({
                                 {new Date(meetingDate as Date).toLocaleString()}</Typography>
                         </Box>:<Button onClick={()=>onEdit(true)}>Create meeting</Button>}
                     </Box>
-
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
                         <Chip
                             label={currentStatus || 'In progress'}
@@ -87,9 +88,15 @@ const LeadItem: React.FC<LeadItemProps> = ({
                         <Button color="error" variant="outlined" onClick={onDelete}>
                             Delete
                         </Button>
-                        <Button onClick={()=>handleStatusChange("project")}  variant="outlined">
-                            Move To projects
-                        </Button>
+                        {documents.length ? <Link href={`/quote/${documents[0].id}`}>
+                            <Button  variant="outlined">
+                                View Quote
+                            </Button>
+                        </Link>:<Link href={`/newQuote/${id}?type=${project}`} >
+                            <Button  variant="outlined">
+                                Make Quote
+                            </Button>
+                        </Link>}
                     </Box>
 
                     <Popover

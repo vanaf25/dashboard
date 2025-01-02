@@ -15,10 +15,10 @@ interface CustomerDetailsProps {
 
 const CustomerDetails: React.FC<CustomerDetailsProps> = ({ customer, withOutTitle, title, ...rest }) => {
     return (
-        <Box sx={{ mb: 1 }} {...rest}>
+        <Box sx={{ mb: 1,maxWidth:250 }} {...rest}>
             {!withOutTitle && <Typography variant="h5" sx={{ mb: 1 }}>{title ? title : "Customer info"}</Typography>}
             {Object.entries(customer).map(([key, value]) => (
-                <Typography key={key}>
+                <Typography sx={{fontSize:"18px",mb:1}} key={key}>
                     {key}: {value}
                 </Typography>
             ))}

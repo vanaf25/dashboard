@@ -1,0 +1,8 @@
+.ag-theme-alpine-dark {
+    --ag-background-color: #2e2e2e;
+    --ag-header-background-color: #1f1f1f;
+    --ag-border-color: #4a4a4a;
+    --ag-odd-row-background-color: #3b3b3b;
+    --ag-even-row-background-color: #2e2e2e;
+    --ag-font-color: #f1f1f1;
+}

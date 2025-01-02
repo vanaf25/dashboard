@@ -3,7 +3,7 @@ import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import TextField from "@mui/material/TextField";
-import {CALCULATORS} from "@/app/consts/calculators";
+import {CALCULATORS,typesOfProjects} from "@/app/consts/calculators";
 import MenuItem from "@mui/material/MenuItem";
 import {DatePicker, LocalizationProvider, TimePicker} from "@mui/x-date-pickers";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
@@ -15,6 +15,7 @@ import {addProject, changeProject} from "@/store/apps/dasbhoard/dashboardSlice";
 import {useDispatch} from "@/store/hooks";
 import {Client, FormData} from "./../Leads/Leads"
 import {useSupabaseClient, useUser} from "@supabase/auth-helpers-react";
+import {contractData} from "@/app/consts/contractData/contractData";
 
 interface LeadPopupFormProps{
    open:boolean,
@@ -63,17 +64,18 @@ const LeadPopupForm:React.FC<LeadPopupFormProps> = ({open,close,isEditMode,defau
         { label: 'State', name: 'state' },
         { label: 'Zip', name: 'zip' },
     ];
+    const [isMeetingOpen,setIsMeetingOpen]=useState(false);
     const validateForm = () => {
         const errors: Record<string, string> = {};
         if (!formData.name.trim()) errors.name = "Name is required.";
-        if (!formData.email.trim()) errors.email = "Email is required.";
+  /*      if (!formData.email.trim()) errors.email = "Email is required.";
         if (!formData.phone.trim()) errors.phone = "Phone is required.";
         if (!formData.address.trim()) errors.address = "Address is required.";
         if (!formData.city.trim()) errors.city = "City is required.";
         if (!formData.state.trim()) errors.state = "State is required.";
         if (!formData.zip.trim()) errors.zip = "Zip is required.";
-        if (!formData.status.trim()) errors.status = "Status is required.";
-        if ((formData.status === 'Meeting Scheduled' || dateOnly)  && !formData.meetingDate) {
+        if (!formData.status.trim()) errors.status = "Status is required.";*/
+        if ((isMeetingOpen || dateOnly)  && !formData.meetingDate) {
             errors.meetingDate = "Meeting Date is required.";
         }
         if (!formData.project.trim()) errors.project = "Project is required.";
@@ -88,7 +90,8 @@ const LeadPopupForm:React.FC<LeadPopupFormProps> = ({open,close,isEditMode,defau
             zip: '', status: "", meetingDate: null,project:"",
         });
     };
-    const statuses: string[] = ['Meeting Scheduled', 'In Progress', 'Completed'];
+    const statuses: string[] = ['Meeting Scheduled in Home',
+        "Meeting Scheduled Online",'In Progress',"Completed"];
     const handleDateChange = (newDate: Dayjs | null) => {
         setFormData((prev) => ({ ...prev, meetingDate: newDate }));
     };
@@ -155,56 +158,9 @@ const LeadPopupForm:React.FC<LeadPopupFormProps> = ({open,close,isEditMode,defau
         <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
             <DialogTitle>{isEditMode ? 'Edit Lead' : 'Create New Lead'}</DialogTitle>
             <DialogContent>
-                {!dateOnly && <>
-                    {inputFields.map((field) => (
-                        <TextField
-                            key={field.name}
-                            fullWidth
-                            margin="normal"
-                            label={field.label}
-                            name={field.name}
-                            value={formData[field.name as keyof FormData]}
-                            onChange={handleChange}
-                            error={Boolean(formErrors[field.name])}
-                            helperText={formErrors[field.name] || ''}
-                        />
-                    ))}
-                    <TextField
-                        fullWidth
-                        margin="normal"
-                        select
-                        label="Project"
-                        name="project"
-                        value={formData.project}
-                        onChange={handleChange}
-                        error={Boolean(formErrors.project)}
-                        helperText={formErrors.project || ''}
-                    >
-                        {CALCULATORS.map((project) => (
-                            <MenuItem key={project} value={project}>
-                                {project}
-                            </MenuItem>
-                        ))}
-                    </TextField>
-                    <TextField
-                        fullWidth
-                        margin="normal"
-                        select
-                        label="Status"
-                        name="status"
-                        value={formData.status}
-                        onChange={handleChange}
-                        error={Boolean(formErrors.status)}
-                        helperText={formErrors.status || ''}
-                    >
-                        {statuses.map((status) => (
-                            <MenuItem key={status} value={status}>
-                                {status}
-                            </MenuItem>
-                        ))}
-                    </TextField>
-                </>}
-                {(formData.status  === 'Meeting Scheduled' || dateOnly) && (
+                {!dateOnly && <Button onClick={()=>setIsMeetingOpen(prevState=>!prevState)}
+                        fullWidth sx={{mb:2}}>{isMeetingOpen ? "Cancel Meeting":"Create Meeting"}</Button>}
+                {(isMeetingOpen || dateOnly) && (
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <DatePicker
                             label="Meeting Date"
@@ -223,6 +179,55 @@ const LeadPopupForm:React.FC<LeadPopupFormProps> = ({open,close,isEditMode,defau
                     Meeting date is required
                 </Typography> }
                 {formError && <Typography color="error">{formError}</Typography>}
+                {!dateOnly && <>
+                    <TextField
+                        fullWidth
+                        margin="normal"
+                        select
+                        label="Project"
+                        name="project"
+                        value={formData.project}
+                        onChange={handleChange}
+                        error={Boolean(formErrors.project)}
+                        helperText={formErrors.project || ''}
+                    >
+                        {contractData.map(el=>el.name).map((project) => (
+                            <MenuItem key={project} value={project}>
+                                {project}
+                            </MenuItem>
+                        ))}
+                    </TextField>
+                    {inputFields.map((field) => (
+                        <TextField
+                            key={field.name}
+                            fullWidth
+                            margin="normal"
+                            label={field.label}
+                            name={field.name}
+                            value={formData[field.name as keyof FormData]}
+                            onChange={handleChange}
+                            error={Boolean(formErrors[field.name])}
+                            helperText={formErrors[field.name] || ''}
+                        />
+                    ))}
+                    <TextField
+                        fullWidth
+                        margin="normal"
+                        select
+                        label="Status"
+                        name="status"
+                        value={formData.status}
+                        onChange={handleChange}
+                        error={Boolean(formErrors.status)}
+                        helperText={formErrors.status || ''}
+                    >
+                        {statuses.map((status) => (
+                            <MenuItem key={status} value={status}>
+                                {status}
+                            </MenuItem>
+                        ))}
+                    </TextField>
+                </>}
             </DialogContent>
             <DialogActions>
                 <Button disabled={isSubmitting} onClick={handleClose}>Cancel</Button>

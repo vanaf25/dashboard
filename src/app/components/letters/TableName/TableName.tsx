@@ -10,8 +10,9 @@ const TableName: React.FC<TableNameProps> = ({ children }) => {
         <Box
             sx={{
                 backgroundColor: "#4caf50",
-                padding: "8px",
+                padding: "12px",
                 textAlign: "center",
+                borderRadius:"0%"
             }}
         >
             <Typography

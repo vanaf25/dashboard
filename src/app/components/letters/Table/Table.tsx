@@ -2,6 +2,8 @@ import React from "react";
 import { AgGridReact, AgGridReactProps } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
+import {useSelector} from "@/store/hooks";
+import "./darkTheme.css";
 
 // Define the props type
 interface ReusableTableProps extends AgGridReactProps {
@@ -22,9 +24,11 @@ const ReusableTable: React.FC<ReusableTableProps> = React.memo(
                     : undefined,
         marginBottom: withOutMargin ? "0px" : "30px",
       };
-
-      return (
-          <div className="ag-theme-quartz" style={containerStyle}>
+        const activeMode=useSelector((state:any)=>state.customizer.activeMode)
+        const themeClass =
+            activeMode === "light" ? "ag-theme-quartz" : "ag-theme-alpine-dark";
+        return (
+          <div className={themeClass} style={containerStyle}>
             <AgGridReact
                 rowData={rows}
                 columnDefs={columns}

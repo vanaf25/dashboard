@@ -33,8 +33,10 @@ export interface FormData {
     meetingDate?: any;
     project:string
 }
-
-export  type Client = FormData & { id: string; created_at: string; created_by: string };
+interface Document{
+    id:string
+}
+export  type Client = FormData & { id: string; created_at: string; created_by: string,documents:Document[] };
 const Leads: React.FC = () => {
     const [open, setOpen] = useState(false);
     const [isDateOnly,setIsDateOnly]=useState(false);
