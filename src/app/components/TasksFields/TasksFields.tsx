@@ -35,6 +35,7 @@ const TaskList: React.FC<TaskListProps> = (
         defaultRowsItems,defaultCustomField,
         defaultNoteToClient, }
 ) => {
+    console.log('customFields:',defaultCustomField);
     const { control, handleSubmit, getValues, setValue } = useForm<TaskListFormValues>({
         defaultValues: {
             selectedTasks: fields.map(() => !!readOnly),
@@ -71,7 +72,7 @@ const TaskList: React.FC<TaskListProps> = (
                 .insert([{ created_by: user?.id as string,
                     fields: selectedTasks, service: type,
                     company: "", type: "quote",
-                    custom_fields: customFields,
+                    custom_fields: data.customFields,
                     line_items: rowData, notes: data.notesToClient,
                     client_id: slug}])
                 .select().single()

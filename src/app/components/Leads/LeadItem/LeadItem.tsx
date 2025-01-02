@@ -85,8 +85,8 @@ const LeadItem: React.FC<LeadItemProps> = ({
                             onClick={handleOpenPopover}
                             sx={{ cursor: 'pointer' }}
                         />
-                        <Button color="error" variant="outlined" onClick={onDelete}>
-                            Delete
+                        <Button color="error" variant="outlined">
+                           Button
                         </Button>
                         {documents?.length ? <Link href={`/quote/${documents[0].id}`}>
                             <Button  variant="outlined">
