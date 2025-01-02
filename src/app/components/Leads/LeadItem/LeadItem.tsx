@@ -88,7 +88,7 @@ const LeadItem: React.FC<LeadItemProps> = ({
                         <Button color="error" variant="outlined" onClick={onDelete}>
                             Delete
                         </Button>
-                        {documents.length ? <Link href={`/quote/${documents[0].id}`}>
+                        {documents?.length ? <Link href={`/quote/${documents[0].id}`}>
                             <Button  variant="outlined">
                                 View Quote
                             </Button>

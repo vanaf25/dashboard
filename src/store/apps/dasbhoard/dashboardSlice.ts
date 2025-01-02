@@ -1,4 +1,3 @@
-import axios from '../../../app/utils/axios';
 import { createSlice } from '@reduxjs/toolkit';
 import { AppDispatch } from '../../store';
 import {Client} from "@/app/components/Leads/Leads";
@@ -23,7 +22,7 @@ export const  dashboardSlice= createSlice({
             state.projects = action.payload;
         },
         addProject:(state:StateType, action) => {
-            state.projects.push(action.payload as Client);
+            state.projects.push({...action.payload,documents:[]} as Client);
         },
         changeProject:(state:StateType, action) => {
             console.log('action.payload:',action.payload);
