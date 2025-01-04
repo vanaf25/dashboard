@@ -40,7 +40,7 @@ const TaskList: React.FC<TaskListProps> = (
     console.log('customFields:',defaultCustomField);
     const { control, handleSubmit, getValues, setValue } = useForm<TaskListFormValues>({
         defaultValues: {
-            selectedTasks: fields.map((el) =>selectedFields?.includes(el.order) ),
+            selectedTasks: fields.map((el) =>!!selectedFields?.includes(el.order) ),
             customFields:defaultCustomField ||  [],
             notesToClient:defaultNoteToClient || "",
         },
