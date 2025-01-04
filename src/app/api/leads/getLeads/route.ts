@@ -24,7 +24,7 @@ export async function GET(req: NextRequest) {
         else {
             const { data, error } = await supabase
                 .from('customers')
-                .select('*,documents (id)')
+                .select('*,documents (id,service)')
                 .eq('created_by', userId)
             if (error) {
                 throw error;

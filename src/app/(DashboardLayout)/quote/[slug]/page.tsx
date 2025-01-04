@@ -7,6 +7,7 @@ import {supabase} from "@/lib/supabase";
 import TasksFields from "@/app/components/TasksFields/TasksFields";
 import EstimatorDetails from "@/app/components/global/EstimatorDetails/EstimatorDetails";
 import CustomerDetails from "@/app/components/global/CustomerDetails/CustomerDetails";
+import {contractData} from "@/app/consts/contractData/contractData";
 
 const Page = () => {
     const { slug } = useParams();
@@ -64,8 +65,10 @@ const Page = () => {
                 <TasksFields defaultCustomField={data.custom_fields}
                              defaultNoteToClient={data.notes}
                              defaultRowsItems={data.line_items}
-                             type={""} slug={""} fields={data.fields}
-                             readOnly />
+                             currentId={data.id}
+                             fields={contractData.find(el=>el.name===data.service)?.fields || []}
+                             type={data.service} slug={""} selectedFields={data.fields.map((f:any)=>f.order)}
+                             update />
                 <Box sx={{display:"flex",justifyContent:"center",gap:2}}>
                     <Typography sx={{fontSize:"18px"}}>Company Phone:{data.profiles.phone}</Typography>
                     <Typography sx={{fontSize:"18px"}}>Company Address:

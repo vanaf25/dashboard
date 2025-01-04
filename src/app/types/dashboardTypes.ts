@@ -10,3 +10,11 @@ export interface Meeting{
     client:Client
     date:string
 }
+export  interface FieldType{
+    order:number,
+    title:string,
+    description:string
+}
+export interface Document{
+
+}

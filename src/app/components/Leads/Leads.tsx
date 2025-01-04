@@ -35,6 +35,7 @@ export interface FormData {
 }
 interface Document{
     id:string
+    service:string,
 }
 export  type Client = FormData & { id: string; created_at: string; created_by: string,documents:Document[] };
 const Leads: React.FC = () => {

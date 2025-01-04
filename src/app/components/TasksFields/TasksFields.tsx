@@ -15,6 +15,7 @@ import Button from "@mui/material/Button";
 import PaymentCalculation, {RowData} from "@/app/components/TasksFields/PaymentCalculation/PaymentCalculation";
 import {supabase} from "@/lib/supabase";
 import {useUser} from "@supabase/auth-helpers-react";
+import {FieldType} from "@/app/types/dashboardTypes";
 
 type TaskListFormValues = {
     selectedTasks: boolean[];
@@ -22,23 +23,24 @@ type TaskListFormValues = {
     notesToClient: string;
 };
 interface TaskListProps{
-    fields:any[],
+    fields:FieldType[],
+    selectedFields:number[],
     type:string,
     slug:string,
-    readOnly?:boolean
+    update?:boolean
     defaultRowsItems?:RowData[]
     defaultNoteToClient?:string,
     defaultCustomField?:{id:string,value:string}[]
-}
+    currentId?:number,}
 const TaskList: React.FC<TaskListProps> = (
-    {fields,type,slug,readOnly,
-        defaultRowsItems,defaultCustomField,
-        defaultNoteToClient, }
+    {fields,type,slug,update,
+        defaultRowsItems,defaultCustomField,selectedFields,
+        defaultNoteToClient,currentId }
 ) => {
     console.log('customFields:',defaultCustomField);
     const { control, handleSubmit, getValues, setValue } = useForm<TaskListFormValues>({
         defaultValues: {
-            selectedTasks: fields.map(() => !!readOnly),
+            selectedTasks: fields.map((el) =>selectedFields.includes(el.order) ),
             customFields:defaultCustomField ||  [],
             notesToClient:defaultNoteToClient || "",
         },
@@ -65,30 +67,86 @@ const TaskList: React.FC<TaskListProps> = (
         console.log("Custom Fields:", data.customFields.map(field => field.value));
         console.log("Notes to Client:", data.notesToClient);
         console.log('paymentCalculations:',rowData);
-        let updRowData=[];
+        /*if(!update){
+            try {
+                const { data:serverData, error } = await supabase
+                    .from('documents')
+                    .insert([{ created_by: user?.id as string,
+                        fields: selectedTasks, service: type,
+                        company: "", type: "quote",
+                        custom_fields: data.customFields,
+                        line_items: rowData, notes: data.notesToClient,
+                        client_id: slug}])
+                    .select().single()
+                console.log('serverData:',serverData);
+                if(serverData.id){
+                    router.push(`/quote/${serverData.id}`);
+                }
+                if (error) {
+                    throw error
+                }
+
+            } catch (error:any) {
+                alert("Error adding document")
+                console.error('Error adding document', error)
+            }
+        }*/
         try {
-            const { data:serverData, error } = await supabase
-                .from('documents')
-                .insert([{ created_by: user?.id as string,
-                    fields: selectedTasks, service: type,
-                    company: "", type: "quote",
-                    custom_fields: data.customFields,
-                    line_items: rowData, notes: data.notesToClient,
-                    client_id: slug}])
-                .select().single()
-            console.log('serverData:',serverData);
-            if(serverData.id){
-                router.push(`/quote/${serverData.id}`);
-            }
-            if (error) {
-                throw error
-            }
+            if (!update) {
+                // Insert new document
+                const { data: serverData, error } = await supabase
+                    .from('documents')
+                    .insert([
+                        {
+                            created_by: user?.id as string,
+                            fields: selectedTasks,
+                            service: type,
+                            company: "",
+                            type: "quote",
+                            custom_fields: data.customFields,
+                            line_items: rowData,
+                            notes: data.notesToClient,
+                            client_id: slug,
+                        }
+                    ])
+                    .select()
+                    .single();
 
-        } catch (error:any) {
-            alert("Error adding document")
-            console.error('Error adding document', error)
+                console.log('serverData:', serverData);
+
+                if (serverData?.id) {
+                    router.push(`/quote/${serverData.id}`);
+                }
+
+                if (error) {
+                    throw error;
+                }
+            } else {
+                // Update existing document
+                const { data: serverData, error } = await supabase
+                    .from('documents')
+                    .update({
+                        fields: selectedTasks,
+                        custom_fields: data.customFields,
+                        line_items: rowData,
+                        notes: data.notesToClient,
+                    })
+                    .eq('id', currentId);
+
+                console.log('Updated serverData:', serverData);
+
+                if (error) {
+                    throw error;
+                }
+
+                if (currentId) {
+                    router.push(`/quote/${currentId}`);
+                }
+            }
+        } catch (error: any) {
+            alert(update ? "Error updating document" : "Error adding document");
+            console.error(update ? 'Error updating document' : 'Error adding document', error);
         }
-
     };
 
     const addCustomField = () => {
@@ -96,10 +154,10 @@ const TaskList: React.FC<TaskListProps> = (
     };
 
     return (
-        <Box sx={readOnly ? {pointerEvents:"none"}:{}}>
+        <Box>
             <form style={{marginBottom: "20px",}} onSubmit={handleSubmit(onSubmit)}>
                 <Typography variant="h1" sx={{textAlign: "center"}} gutterBottom>
-                    {readOnly ? "View Quote":"Generate Quote"}
+                    {update ? "Update Quote":"Generate Quote"}
                 </Typography>
                 <Divider/>
                 <List>
@@ -108,10 +166,8 @@ const TaskList: React.FC<TaskListProps> = (
                             <ListItem
                                 button
                                 onClick={() => {
-                                    if (!readOnly) {
                                         const currentValue = getValues(`selectedTasks.${index}`);
                                         setValue(`selectedTasks.${index}`, !currentValue);
-                                    }
                                 }}
                             >
                                 <Controller
@@ -119,7 +175,6 @@ const TaskList: React.FC<TaskListProps> = (
                                     control={control}
                                     render={({field: {onChange, value}}) => (
                                         <Checkbox
-                                            readOnly
                                             edge="start"
                                             checked={value}
                                             onChange={(e) => onChange(e.target.checked)}
@@ -143,13 +198,13 @@ const TaskList: React.FC<TaskListProps> = (
                 <Typography variant="h5" gutterBottom>
                     Additional Work Description
                 </Typography>
-                {!readOnly && <Button
+                <Button
                     variant="contained"
                     onClick={addCustomField}
                     sx={{alignSelf: "flex-start", width: 250, margin: "10px auto"}}
                 >
                     Add Text Field
-                </Button>}
+                </Button>
                 <Box sx={{display: "flex", flexDirection: "column", gap: 2, mb: 2}}>
                     {customFields.map((customField, index) => (
                         <Box
@@ -202,14 +257,13 @@ const TaskList: React.FC<TaskListProps> = (
                         />
                     )}
                 />
-
-                {!readOnly && <Button
+                { <Button
                     type="submit"
                     variant="contained"
                     color="primary"
                     style={{width: 300, margin: "10px auto"}}
                 >
-                    Submit
+                    {update ? "Update":"Submit"}
                 </Button>}
             </form>
         </Box>
