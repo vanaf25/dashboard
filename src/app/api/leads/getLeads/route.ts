@@ -25,6 +25,7 @@ export async function GET(req: NextRequest) {
                 .from('customers')
                 .select('*,documents (id,service)')
                 .eq('created_by', userId)
+                .filter('documents.type', 'eq', 'quote');
             if (error) {
                 throw error;
             }
