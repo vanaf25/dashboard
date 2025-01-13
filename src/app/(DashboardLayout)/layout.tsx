@@ -9,7 +9,6 @@ import Navigation from "./layout/horizontal/navbar/Navigation";
 import HorizontalHeader from "./layout/horizontal/header/Header";
 import { useSelector } from "@/store/hooks";
 import { AppState } from "@/store/store";
-import { supabase } from "@/lib/supabase";
 import {useUser} from "@supabase/auth-helpers-react"; // Import the supabase client
 
 const PageWrapper = styled("div")(() => ({
@@ -26,8 +25,6 @@ interface Props {
 }
 
 export default function RootLayout({ children }: Props) {
-    const [isSidebarOpen, setSidebarOpen] = useState(true);
-    const [isMobileSidebarOpen, setMobileSidebarOpen] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);  // State to track login status
     // @ts-ignore
     const customizer = useSelector((state: AppState) => state.customizer);
@@ -39,11 +36,12 @@ export default function RootLayout({ children }: Props) {
         padding: customizer.isHorizontal ? 0 : "20px",
     }));
     const user = useUser();
-    console.log("user:",user);
     useEffect(() => {
-        if (user) {
+        console.log("Layout removed!!!!",Date.now())
+        if (user && !isLoggedIn) {
             setIsLoggedIn(true);
         }
+        return ()=>console.log("Layout removed!!!!",Date.now());
     }, [user]);
 
     return (

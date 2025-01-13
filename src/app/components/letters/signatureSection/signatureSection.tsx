@@ -17,18 +17,15 @@ const SignaturesSection: React.FC<SignaturesSectionProps> = ({
         <Grid container spacing={4}>
           {/* Signature of Client */}
           <Grid item xs={12}>
-            <Grid container alignItems="center" spacing={1}>
-              <Grid item xs={1}>
-                <Typography>{client}</Typography>
+            <Grid container alignItems="center" spacing={3}>
+              <Grid item xs={6}>
+                <Box sx={{marginBottom:"10px", borderBottom: "1px solid #cfd8dc", width: "100%" }} />
+                  <Typography variant={"h6"}>{client}</Typography>
               </Grid>
-              <Grid item xs={5}>
-                <Box sx={{ borderBottom: "1px solid #cfd8dc", width: "100%" }} />
-              </Grid>
-              <Grid item xs={1}>
-                <Typography>Date</Typography>
-              </Grid>
-              <Grid item xs={5}>
-                <Box sx={{ borderBottom: "1px solid #cfd8dc", width: "100%" }} />
+
+              <Grid xs={6} item>
+                <Box sx={{marginBottom:"10px", borderBottom: "1px solid #cfd8dc", width: "100%" }} />
+                  <Typography variant={"h6"}>Date</Typography>
               </Grid>
             </Grid>
           </Grid>

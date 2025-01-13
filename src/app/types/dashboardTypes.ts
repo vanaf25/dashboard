@@ -3,7 +3,8 @@ import {Client} from "@/app/components/Leads/Leads";
 export  interface Status{
     title:string,
     description:string,
-    status:string
+    totalPrice:number
+    id:string,
 }
 export interface Meeting{
     id:number,

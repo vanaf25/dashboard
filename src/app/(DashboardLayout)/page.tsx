@@ -20,12 +20,14 @@ export default function Dashboard() {
     const user=useUser();
     const [isLoading,setIsLoading]=useState(true)
    useEffect(()=>{
+       console.log('Company mounted!!!');
        setIsLoading(true)
        if(user){
            dispatch(fetchProjects(user?.id)).then(res=>{
                setIsLoading(false);
            })
        }
+       return ()=>console.log("Component removed!!");
    },[]);
   return (
     <PageContainer title="Dashboard" description="this is Dashboard">

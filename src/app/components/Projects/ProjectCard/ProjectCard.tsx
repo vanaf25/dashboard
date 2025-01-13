@@ -3,9 +3,10 @@ import {Status} from "@/app/types/dashboardTypes";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Link from "next/link";
+import Button from "@mui/material/Button";
 
 const StatusCard:React.FC<Status>=
-    ({ title, description, status }) => {
+    ({ title, description, totalPrice,id }) => {
         return (
             <Box
                 sx={{
@@ -32,26 +33,24 @@ const StatusCard:React.FC<Status>=
 
                 {/* Content */}
                 <Box sx={{ padding: 2, textAlign: 'center', flex: 1 }}>
-                   <Link href={`/system99/calculators/${title}`}>
+                   <Link href={`/quote/${id}`}>
                        <Typography variant="h4" sx={{ fontWeight: 'bold',mb:2 }}>
                            {title}
                        </Typography>
                    </Link>
-                    <Typography color="text.secondary">Client:{description}</Typography>
+                    <Typography variant={"h5"} sx={{fontWeight:"500"}}>Client:{description}</Typography>
                 </Box>
 
                 {/* White Status Box */}
                 <Box
-                    sx={{
-                        display:"inline-block",
-                        padding: '10px',
-                        textAlign: 'center',
-                        marginBottom:"10px",
-                    }}
+                   sx={{marginTop:"10px",mb:2}}
                 >
-                    <Typography variant="body1" color="text.primary">
-                        Status: {status}
+                    <Typography sx={{fontSize:"16px",fontWeight:500,mb:1}}>
+                        TotalPrice: {totalPrice}
                     </Typography>
+                    <Link href={`/quote/${id}`}>
+                        <Button fullWidth>Details</Button>
+                    </Link>
                 </Box>
             </Box>
         );

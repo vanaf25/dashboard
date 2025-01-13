@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import { useParams } from "next/navigation";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -8,6 +8,12 @@ import TasksFields from "@/app/components/TasksFields/TasksFields";
 import EstimatorDetails from "@/app/components/global/EstimatorDetails/EstimatorDetails";
 import CustomerDetails from "@/app/components/global/CustomerDetails/CustomerDetails";
 import {contractData} from "@/app/consts/contractData/contractData";
+import { Grid } from '@mui/material';
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import TableName from "@/app/components/letters/TableName/TableName";
+import Table from "@/app/components/letters/Table/Table";
+import SignatureSection from '@/app/components/letters/signatureSection/signatureSection';
 
 const Page = () => {
     const { slug } = useParams();
@@ -42,10 +48,44 @@ const Page = () => {
 
         fetchDocument();
     }, [slug]);
-
+    const columnDefs =useMemo(()=>([
+        {
+            headerName: "Percentage",
+            field: "percentage",
+            width: 150
+        },
+        {
+            headerName: "Price",
+            valueGetter: (params:any) => {
+                return (params.data.percentage / 100) * data.totalPrice;
+            },
+            width: 150
+        },
+        {
+            headerName: "Description",
+            field: "description",
+            width: 400,
+            flex:3
+        }
+    ]),[data?.totalPrice])
+    const contractDataRows = [
+        {
+            percentage: 30,
+            description: "Due within 3 days of executing this contract."
+        },
+        {
+            percentage: 45,
+            description: "Due 5 days after the arrival of supplies and the start of work, whichever comes first."
+        },
+        {
+            percentage: 25,
+            description: "Due and payable in full at the company's office at the address below."
+        }
+    ];
     if (loading) {
         return <Typography>Loading...</Typography>;
     }
+
     return (
         <Box>
             {data && <>
@@ -62,6 +102,12 @@ const Page = () => {
                         companyPhone:data.profiles.phone,
                     }}/>
                 </Box>
+                {data.type==="contract" && <Box>
+                    <Typography sx={{mb:1}}>Hereafter company refers to:<mark>{data.customers.name}</mark></Typography>
+                    <Typography>Hereafter client, owner and customer refers to
+                        <mark>{data.profiles.username}</mark> and their spouse or life partner.
+                    </Typography>
+                </Box>}
                 <TasksFields defaultCustomField={data.custom_fields}
                              defaultNoteToClient={data.notes}
                              defaultRowsItems={data.line_items}
@@ -69,6 +115,39 @@ const Page = () => {
                              fields={contractData.find(el=>el.name===data.service)?.fields || []}
                              type={data.service} slug={""} selectedFields={data.fields.map((f:any)=>f.order)}
                              update />
+                {data.type==="contract" && <>
+                    <Typography sx={{mb:"15px"}}
+                                variant={"h3"}>Terms And Conditions:</Typography>
+                    <Typography sx={{ mb: "20px" }}>
+                        All labor and material necessary to perform the work described
+                        above will be furnished for the sum of{' '}
+                        <Box component="span" sx={{ backgroundColor: 'yellow', padding: '0 4px', borderRadius: '4px' }}>
+                            {data.totalPrice}
+                        </Box>{' '}
+                        (the “Contract Price”).
+                    </Typography>
+                    <TableName>All payments must be made as follows:</TableName>
+                    <Table columns={columnDefs} rows={contractDataRows}/>
+                    <Grid sx={{mb:2}} container spacing={1}>
+                        {contractData.find(el=>el.name===data.service)?.terms?.map((item, index) => (
+                            <Grid item xs={12} sm={12} md={12} key={index}>
+                                <Card sx={{p:4}}>
+                                    <Box>
+                                        <Typography variant="h3" sx={{mb:"20px"}} component="div">
+                                            {item.title}
+                                        </Typography>
+                                        <Typography sx={{fontSize:"18px"}}>
+                                            {item.description}
+                                        </Typography>
+                                    </Box>
+                                </Card>
+                            </Grid>
+                        ))}
+                    </Grid>
+                    <SignatureSection client={"Signature of Customer"}/>
+                    <SignatureSection client={"Signature of Spouse"}/>
+                    <SignatureSection client={"Signature of Company Representative"}/>
+                </> }
                 <Box sx={{display:"flex",justifyContent:"center",gap:2}}>
                     <Typography sx={{fontSize:"18px"}}>Company Phone:{data.profiles.phone}</Typography>
                     <Typography sx={{fontSize:"18px"}}>Company Address:

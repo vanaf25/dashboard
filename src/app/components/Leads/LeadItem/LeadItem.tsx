@@ -20,6 +20,7 @@ import { useDispatch } from '@/store/hooks';
 import { changeProject } from '@/store/apps/dasbhoard/dashboardSlice';
 import { Client } from '@/app/components/Leads/Leads';
 import { contractData } from '@/app/consts/contractData/contractData';
+import ProjectPopup from '../../ProjectPopup/ProjectPopup';
 
 type LeadItemProps = Client & {
     onEdit: (isDateOnly?: boolean) => void;
@@ -40,6 +41,9 @@ const LeadItem: React.FC<LeadItemProps> = ({
     const supabase = useSupabaseClient();
     const router = useRouter();
     const statuses: string[] = ['In Progress', 'Completed'];
+    const [currentDocumentId,setCurrentDocument]=useState<string | null>(
+        null)
+    const [isProjectPopup,setIsProjectPopup]=useState(false);
     const [currentStatus, setCurrentStatus] = useState(status);
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const dispatch = useDispatch();
@@ -129,21 +133,41 @@ const LeadItem: React.FC<LeadItemProps> = ({
                             </Select>
                         </FormControl>
                         {documents?.length ? (
-                            <FormControl sx={{ width: 130 }}>
-                                <InputLabel id={`quote-view-label-${id}`}>View Quotes</InputLabel>
-                                <Select
-                                    labelId={`quote-view-label-${id}`}
-                                    id={`quote-view-${id}`}
-                                    onChange={handleDocumentSelect}
-                                    defaultValue=""
-                                >
-                                    {documents.map((c) => (
-                                        <MenuItem key={c.id} value={c.id}>
-                                            {c.service}
-                                        </MenuItem>
-                                    ))}
-                                </Select>
-                            </FormControl>
+                            <>
+                                <FormControl sx={{ width: 130 }}>
+                                    <InputLabel id={`quote-view-label-${id}`}>View Quotes</InputLabel>
+                                    <Select
+                                        labelId={`quote-view-label-${id}`}
+                                        id={`quote-view-${id}`}
+                                        onChange={handleDocumentSelect}
+                                        defaultValue=""
+                                    >
+                                        {documents.map((c) => (
+                                            <MenuItem key={c.id} value={c.id}>
+                                                {c.service}
+                                            </MenuItem>
+                                        ))}
+                                    </Select>
+                                </FormControl>
+                                <FormControl sx={{ width: 130 }}>
+                                    <InputLabel id={`quote-view-label-${id}`}>Move to Projects</InputLabel>
+                                    <Select
+                                        labelId={`quote-view-label-${id}`}
+                                        id={`quote-view-${id}`}
+                                        defaultValue=""
+                                        onChange={(e)=>{
+                                            setCurrentDocument(e.target.value);
+                                            setIsProjectPopup(true)
+                                        }}
+                                    >
+                                        {documents.map((c) => (
+                                            <MenuItem key={c.id} value={c.id}>
+                                                {c.service}
+                                            </MenuItem>
+                                        ))}
+                                    </Select>
+                                </FormControl>
+                            </>
                         ) : (
                             ''
                         )}
@@ -170,6 +194,10 @@ const LeadItem: React.FC<LeadItemProps> = ({
                     </Popover>
                 </Box>
             )}
+            {isProjectPopup && currentDocumentId && <ProjectPopup
+                id={currentDocumentId}
+                name={name}
+                open={isProjectPopup} close={()=>setIsProjectPopup(false)}/>}
         </>
     );
 };

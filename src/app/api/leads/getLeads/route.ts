@@ -18,8 +18,7 @@ export async function GET(req: NextRequest) {
             if (error) {
                 throw error;
             }
-            console.log('dataFromServer:',data);
-            return NextResponse.json({ customers: data });
+            return NextResponse.json({ customers: data});
         }
         else {
             const { data, error } = await supabase
@@ -29,7 +28,6 @@ export async function GET(req: NextRequest) {
             if (error) {
                 throw error;
             }
-            console.log('dataFromServer:',data);
             return NextResponse.json({ customers: data });
         }
 
