@@ -60,7 +60,7 @@ const ProjectPopup: React.FC<ProjectPopupForm> = ({ close, open,name,id }) => {
         close();
         reset(); // Reset the form when dialog is closed
     };
-
+            // contractData.find(el=>el.name===data.service)?.terms?
     return (
         <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
             <DialogTitle>Generate Contract For {name}</DialogTitle>
