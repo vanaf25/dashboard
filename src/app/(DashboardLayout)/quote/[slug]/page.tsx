@@ -112,6 +112,8 @@ const Page = () => {
                              defaultNoteToClient={data.notes}
                              defaultRowsItems={data.line_items}
                              currentId={data.id}
+                             selectedTerms={data.terms ? data.terms:[]}
+                             isContract={data.type==="contract"}
                              fields={contractData.find(el=>el.name===data.service)?.fields || []}
                              type={data.service} slug={""} selectedFields={data.fields.map((f:any)=>f.order)}
                              update />
@@ -126,24 +128,9 @@ const Page = () => {
                         </Box>{' '}
                         (the “Contract Price”).
                     </Typography>
+
                     <TableName>All payments must be made as follows:</TableName>
                     <Table columns={columnDefs} rows={contractDataRows}/>
-                    <Grid sx={{mb:2}} container spacing={1}>
-                        {contractData.find(el=>el.name===data.service)?.terms?.map((item, index) => (
-                            <Grid item xs={12} sm={12} md={12} key={index}>
-                                <Card sx={{p:4}}>
-                                    <Box>
-                                        <Typography variant="h3" sx={{mb:"20px"}} component="div">
-                                            {item.title}
-                                        </Typography>
-                                        <Typography sx={{fontSize:"18px"}}>
-                                            {item.description}
-                                        </Typography>
-                                    </Box>
-                                </Card>
-                            </Grid>
-                        ))}
-                    </Grid>
                     <SignatureSection client={"Signature of Customer"}/>
                     <SignatureSection client={"Signature of Spouse"}/>
                     <SignatureSection client={"Signature of Company Representative"}/>

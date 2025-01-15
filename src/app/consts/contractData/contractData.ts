@@ -1680,3 +1680,119 @@ export const contractData = [
         ],
     },
 ]
+export const TERMS=[
+    {
+        order: 1,
+        title: 'Option to cancel',
+        description:
+            "This Agreement is subject to approval by management of the Company and is valid for thirty (30) days from date of Agreement. The Company reserves the right and Customer grants permission to inquire with third parties as to Customer's credit and the Company reserves the right to cancel the Proposal and Agreement with the Customer at any time with no cost to The Company if the proposal is: 1. (Not approved by management) or 2. The company, in its sole discretion, is not fully satisfied with credit inquiry. Customer has the option to cancel this transaction, without cost to them and have their deposit returned to them within three calendar (3) Calendar days. If Customer decides to cancel, they may do so by notifying The Company in writing at the address listed. If for any reason Customer cancels after three (3) Calendar days, The Company shall be entitled to a cancellation fee equal to fifteen (15) percent of the Contract Price as well as payment for any work that has already been performed. If the Customer cancels within the 3 day time frame and their original form of payment has not cleared the Company's bank account, or the original form of payment has been altered, incorrectly dated, or in any way appears to be fraudulent, the return of the Customer's deposit will be delayed until the Company's bank clears the transaction.",
+    },
+    {
+        order: 2,
+        title: 'Color changes',
+        description:
+            'Customer agrees that any change in color selection of products, supplies, paint or any other item after the ordering or delivery of said items to the jobsite shall be subject to a 20% fee plus the cost of the new material. These costs will be added as additional to the Contract Price.',
+    },
+    {
+        order: 3,
+        title: 'Property Access',
+        description:
+            "The Customer agrees to grant property access to the Company and allow use of driveways, sidewalks and all areas surrounding work in the work description or added to the work scope by the Customer or the Company. This contract establishes a 15-foot-wide, unlimited in length, walking and working path way to and from public access areas to the working area and surrounding all work locations. The Customer agrees that the company will not be liable for damage or wear and tear to, plants, grass, Customer's property or business property within the walking and working area. If in order to access the working area or at the request of the Customer, the installation team is required to move, transplant, clean up, wash, or haul off property not belonging to the company within the walking and working area additional charges may apply. It is the request of the company that all personal and business property be moved out of the working area prior to the start of work. The company further requests and Customer agrees that the Customer remove all property that is hanging on the inside of the walls of their home, near the working area or that may be damaged by the installation of work, as during demolition their home may move or shake due to the installation or removal of substrates on the outside of their home.",
+    },
+    {
+        order: 4,
+        title: 'Hidden conditions',
+        description:
+            'The company shall at their sole discretion replace or make suitable any conditions that impede the installation or completion of this contract. Certain conditions such as rotted wood may be revealed during demolition or installation of the work described above. Unsuitable substrate, hidden rot and decay, broken decking or framing materials which are revealed as the work progresses, and which are not specifically mentioned in this Agreement, may be charged to the Customer for replacing and the additional cost added to the contract price. Rotted wood and/or other conditions that prevent proper and safe installation of the work described in this contract is additional. The company agrees that it will notify the Customer prior to performing extra work that is hidden.',
+    },
+    {
+        order: 5,
+        title: 'Additional Work',
+        description:
+            "The Customer agrees that any work that is verbally requested, revealed during demolition, noted, assumed, expressed by the Customer or a party to the Customer as (should be included in work scope) or is not clearly defined in the work description is extra and will be charged to the Customer at an additional cost of $589.00 per 8 hour DAY, PER 2 man crew plus the cost of any materials used. The company agrees that it will notify the Customer prior to performing any additional work and further agrees not to perform any extra work without the Customer's authorization.",
+    },
+    {
+        order: 6,
+        title: 'Crew communications',
+        description:
+            "The Customer is not allowed to pause the installation team once they have begun performance of the work in this contract. If during the installation the Customer has concerns about safety, production or installation team members. The Customer agrees to contact the company regarding the concern by phone & email a picture of the concern to the company. They also agree to send the concern to the Company's production manager between the times of 8 am and 7 pm. allowing the production manager 48 hours to address the concern and correct the installation teams' behavior or work. In the event of a medical emergency the Customer agrees to call the Company's office and if needed an emergency service. The Customer agrees not to order, demand, require or directly communicate with the installation team as this creates an unsafe working condition. If the Customer needs to communicate to the installation team in anyway, the Customer agrees to communicate to the team using direct communication with the production manager sent by email and phone. If during production the Customer requests, requires or demands work beyond the Company's standard installation or work originally agreed to, the Customer agrees that the additional work will be performed at an additional cost.",
+    },
+    {
+        order: 7,
+        title: 'Time of completion',
+        description:
+            'The Company is committed to a timely job completion; however, the company cannot guarantee work will be performed in a specific schedule or timeline. No verbal quotes or claims made by the company or their workers regarding time, completion, or additional work will be binding to the contract or its execution.',
+    },
+    {
+        order: 8,
+        title: 'Permits and licenses',
+        description:
+            'All permits, engineered specifications, inspections, drawings, utility licenses, regulatory licenses or any other licenses needed or required to complete or perform work are by contract the responsibility of the Customer. The company will not pay for or be responsible for obtaining permits, licensed utility work, trade work or inspections that may be required by any regulatory body. If the Customer requests or requires the company to obtain, drawings, permits, engineered specifications, inspections, licensed utility work or trade work prior to starting work or during the installation of work additional charges for the cost of completing the customer’s request or requirement will be added to the contract cost.',
+    },
+    {
+        order: 9,
+        title: 'Standard installation',
+        description:
+            "Although the company will always demand a high quality of workmanship from employees and contractors hired by the company, the means, methods and quality of the workmanship performed is determined by the company alone. The customer understands and agrees that the standard installation of any new products, pickets, decking, sheeting, lumber and all other products will be installed at the discretion of the company’s standards and may require face nailing. Nail heads and possibly tool marks will be visible during and after installation. Filling, calking, sealing, refinishing and refining any fastener, transitions, imperfections, tool marks or any other installation marks will be at the company’s sole discretion. Details will only be filled, polished, refinished, painted, calked, buffed, sealed or touched up if the company deems the imperfections to be within a standard scope of installation for the product being installed. Customer agrees that all work will be performed using the installation guides outlined in the work description, contract and to the company's standard installation. Furthermore, the customer agrees that the installation team may alter installation methods at any time that they determine it to be 'needed' to safely and properly complete the installation of assigned work. Customer waives all rights to withhold any payments from the company citing imperfections within the company's standard installation.",
+    },
+    {
+        order: 10,
+        title: "Customer's standard quality check",
+        description:
+            "The company will complete 1 (15 item) punch out list submitted to the company by the customer at the end of the installation of the work outlined in this contract. The Customer may note within the punch out list quality concerns and/or request touch up or repairs to the standard installation. If during or after the completion of the punch out list any controversy or concerns about quality, performance, standards, installation methods or timely completion of the project arise, the customer agrees to submit concerns to the company by phone and certified U.S. mail giving the company 5 working days from the time of receipt to address the Customer's concerns. If the Customer requests, requires or demands the company to       to perform higher work quality, product quality, performance standards, installation standards or any standards that are above and beyond the Company's standard work, this work may be considered additional and additional cost MAY apply.",
+    },
+    {
+        order: 11,
+        title: 'Highly detail quality',
+        description:
+            "If after the company completes the punch out list for the Company's standard installation the Customer is still not satisfied with the installation and requires further detail work. The Customer agrees to pay in full all bills due for the standard installation. After which the customer may purchase the Company's finishing team at a reduced cost of $653.00 per day per man plus the cost of any material. The customer agrees to direct supervision and direction of the finishing team while they are working. The customer also agrees to work alongside of the finishing team showing them each item of concern, moving item by item and inspecting each item performed and all work performed so that the finishing team can bring all standard installation work up to the customer’s standards.",
+    },
+    {
+        order: 12,
+        title: 'Pictures of work and work signs',
+        description:
+            "The Customer gives the company the right to display advertising signs on their property during the Work and for a minimum of 30 days following completion of the Work. The Customer also gives the company permission to use any form of advertising, including but not limited to photographs or videos of their property before and after completion of the Work for use in the Company's advertising. The Customer grants the Company the right to use in its advertising any letters, notes or any other writings the Customer or others send to the Customer about the work.",
+    },
+    {
+        order: 13,
+        title: 'Theft prevention',
+        description:
+            "For use in preventing theft of the Company's property, tools, equipment, labor, supplies, Company's service and intellectual property rights. The Customer agrees to allow the company to record video of their property, work progress, locations of supplies, production team, company staff that access the Company's work locations. Additionally, verbal communications between the contract signers and company representatives may include audio and video during recordings. All recordings may be turned over to a governing authority in the event of a possible theft or dispute.",
+    },
+    {
+        order: 14,
+        title: 'Written communications',
+        description:
+            'Customer agrees that all written communications, notices, advisements, information, expectations, warnings, or any other Communications sent to the customer by the company whether via, email, text message or other form of written communication constitute an agreement between the company and customer and may be considered binding addendums to the contract; It is the sole responsibility of the customer to take the necessary steps to protect themselves, their property, and any visitors to their property from any potential adverse conditions that may arise during the installation of requested products on their home and or that are stated in communications, notices, advisements, information, expectations, warnings, or other Communications sent to the customer by the company regardless of the form of communication.',
+    },
+    {
+        order: 15,
+        title: 'Customer reviews',
+        description:
+            'The Customer retains the option to review the work performed by the company; however, any review, comments, disputes, disagreements, concerns, discredits or any other actions on the part of the customer must; 1st be submitted to the company via united states postal service, giving the Company 45 calendar days to respond to the review or any concerns. 2nd the Customer agrees to allow the company 30 calendar days to address any concerns the customer plans on describing in their review prior to communicating their concerns to any other parties, services, individuals or companies.',
+    },
+    {
+        order: 16,
+        title: 'Clean up',
+        description:
+            "The Company shall clean up all debris resulting from the production of work to the Company's standards. Only trash resulting from installation of the products outlined in this contract will be hauled away by the Company. Any material, trash, debris, soil, plants, or other debris that is placed by the Customer in Company's trash hauling trailers, trucks, dumpsters and/or is not specifically trash created by the installation team from work covered under the contract’s description is extra and will be charged as an additional cost to the Customer. Customer agrees to allow the company access and use of all utilities on their property including and not limited to, water, electric, bathrooms, gas, internet and any other utilities needed by the installation team to complete the work assigned to them. Furthermore, the customer releases the company from any and all charges, fees, usage fee, damage or utility bills generated for the use of utilities that the company uses during the installation of products or services.",
+    },
+    {
+        order: 17,
+        title: 'MUTUAL WAIVER OF SUBROGATION',
+        description:
+            'The parties mutually agree that with respect to any loss, damage or liability that may occur to the premises, any improvements thereto or any other cause which could be insured against under the terms of any insurance policy, the party hereto carrying such insurance and suffering said loss hereby releases the other from any and all claims with respect to such loss; and the parties further mutually agree that their respective insurance companies shall have no right of subrogation against the other party hereto on account of any such loss.',
+    },
+    {
+        order: 18,
+        title: 'Breach of agreement',
+        description:
+            'If the customer breaches this agreement and if after 10 days does not return to compliance the company will be entitled to an early termination fee and breach of contract fee of not less than 30% of the contract price plus full payment of all materials and work performed up to the date of the customers breach. The company maintains the right to immediately stop all work and remove installation teams and production equipment from work site discontinuing the project or delaying the project until the customer is no longer in breach. If the customer is in breach of contract for more than 10 days the company may move the customer’s account to collections and proceed to charge cancellation and breach of contract fees to the customer. If the company breaches this agreement the company if after 10 days does not return to compliance the customer may cancel the project without a cancellation fee the customer will however be required to pay for all work performed up to the date of the companies assumed breach and or customers cancellation.',
+    },
+    {
+        order: 19,
+        title: 'ARBITRATION OF DISPUTES',
+        description:
+            "The Customer and company mutually agree that any controversy or claim arising out of or relating to this Proposal and Agreement, or breach thereof, shall be settled by arbitration binding on both parties in accordance with the Federal Arbitration Act and the Construction Industry Arbitration Rules of the American Arbitration Association, and judgment upon the award rendered by the arbitrators may be entered in any court having jurisdiction thereof. If in the state of Texas then arbitration is subject to Federal law although will take place in the state of Texas. Any and all disputes, claims or controversies (hereafter referred to as a 'Claim') arising under or relating to this contract and any related documents, loans, security instruments, accounts or notes, including by way of example and not as a limitation; (i) the relationships resulting from this contract and the transactions arising as a result thereof; (ii) the terms of this contract; or (iii) the validity of this contract or the validity or enforceability of this arbitration agreement, shall be subject to the procedures of the Commercial Rules of the American Arbitration Association ('AAA'). You agree that you will not assert a Claim on behalf of, or as a member of, any group or class. The findings of the arbitrator shall be final and binding on all parties to this contract and may include an award of costs and legal fees. This agreement will be specifically, enforceable under the prevailing law of any court having jurisdiction. Notice of any demand for arbitration may be filed by the party asserting the Claim with the other party to this contract. Any demand for arbitration shall be made within 180 days from the time after the Claim in question has arisen, and in no event, shall any such demand be made after the date when arbitration proceeding brought under this contract, and any award, finding or verdict of or from such proceeding shall remain confidential between the parties and shall not be made public. By entering into this provision, both parties are accepting the use of arbitration, as an acceptable method to resolve their dispute. However, The Company still retains the option to use judicial or non-judicial relief to enforce the monetary obligation (collection) by lawsuit. The institution and maintenance of such an action for judicial relief in a court to foreclose upon any collateral or to enforce or collect upon a monetary debt or judgment is not a waiver of the right of any party to compel arbitration of any Claim, including the filing of a counterclaim by the Customer in a suit brought by the company pursuant to this arbitration provision. If binding arbitration is found to be unenforceable by a court of law, then any controversy or claim arising out of or related to this Proposal and Agreement shall first be mediated prior to the institution of any legal action being in any court. The parties agree that mediation expenses will be charged to the Customer. Limitation of liability: The Company's liability whether it arises out of contract, negligence, warranty or otherwise shall not exceed 10% of the contract price.",
+    },
+]

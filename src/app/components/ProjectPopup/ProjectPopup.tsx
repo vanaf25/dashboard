@@ -8,7 +8,10 @@ import TextField from "@mui/material/TextField";
 import { useForm, Controller } from "react-hook-form";
 import axios from "axios";
 import {useRouter} from "next/navigation";
-
+import {TERMS} from "./../../consts/contractData/contractData"
+import Grid from "@mui/material/Grid";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
 interface ProjectPopupForm {
     close: () => void;
     open: boolean;
@@ -19,6 +22,7 @@ interface ProjectPopupForm {
 interface FormValues {
     description: string;
     price: string;
+    terms: { [key: string]: boolean };
 }
 
 const ProjectPopup: React.FC<ProjectPopupForm> = ({ close, open,name,id }) => {
@@ -31,6 +35,7 @@ const ProjectPopup: React.FC<ProjectPopupForm> = ({ close, open,name,id }) => {
         defaultValues: {
             description: "",
             price: "",
+            terms: {},
         },
     });
     console.log('id:',id);
@@ -38,12 +43,17 @@ const ProjectPopup: React.FC<ProjectPopupForm> = ({ close, open,name,id }) => {
     const onSubmit = async (data:FormValues) => {
         try {
             console.log("Form submitted:", data);
+            const selectedTerms = Object.keys(data.terms)
+                .filter((key) => data.terms[key])  // Only include checked terms
+                .map((key) => parseInt(key)-1);      // Convert the key (order) to a number
+            console.log("Selected terms order:", selectedTerms);
             const response = await axios.patch("/api/contracts/moveToContracts", {
                 id,
                 updateData: {
                     instructions: data.description,
                     totalPrice: +data.price,
-                    type:"contract"
+                    type:"contract",
+                    terms:selectedTerms,
                 },
             });
             console.log("Document updated successfully:", response.data);
@@ -108,6 +118,28 @@ const ProjectPopup: React.FC<ProjectPopupForm> = ({ close, open,name,id }) => {
                             />
                         )}
                     />
+                    <Grid container spacing={1} direction="column" marginTop={1}>
+                        {TERMS.map((term) => (
+                            <Grid item key={term.order}>
+                                <Controller
+                                    name={`terms.${term.order}`} // Use unique order as the key
+                                    control={control}
+                                    render={({ field }) => (
+                                        <FormControlLabel
+                                            control={
+                                                <Checkbox
+                                                    {...field}
+                                                    checked={field.value || false}
+                                                    color="primary"
+                                                />
+                                            }
+                                            label={term.title}
+                                        />
+                                    )}
+                                />
+                            </Grid>
+                        ))}
+                    </Grid>
                 </form>
             </DialogContent>
             <DialogActions>
