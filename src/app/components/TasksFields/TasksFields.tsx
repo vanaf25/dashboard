@@ -19,12 +19,15 @@ import { FieldType } from "@/app/types/dashboardTypes";
 import { TERMS } from "@/app/consts/contractData/contractData";
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
+import booleanObjectToArray from "@/app/utils/booleanObjectToArray";
+import numberArrayToObject from "@/app/utils/numberArrayToObject";
+import Alert from "@mui/material/Alert";
 
 type TaskListFormValues = {
     selectedTasks: boolean[];
     customFields: { id: string; value: string }[];
     notesToClient: string;
-    selectedTerms: boolean[]; // Add selectedTerms as part of form state
+    selectedTerms:  { [key: string]: boolean };
 };
 
 interface TaskListProps {
@@ -44,19 +47,19 @@ interface TaskListProps {
 const TaskList: React.FC<TaskListProps> = ({
                                                fields, type, slug, update,
                                                defaultRowsItems, defaultCustomField, selectedFields,
-                                               defaultNoteToClient, currentId, isContract, selectedTerms = []
+                                               defaultNoteToClient, currentId, isContract, selectedTerms:excludedTerms = []
                                            }) => {
-    console.log('selectedTerms:', selectedTerms);
-
-    const { control, handleSubmit, getValues, setValue } = useForm<TaskListFormValues>({
+    console.log('selectedTerms:', excludedTerms);
+    const [terms,setTerms]
+        =useState(TERMS.filter((term)=>!excludedTerms.includes(term.order)))
+    const { control, handleSubmit,resetField,getValues, setValue } = useForm<TaskListFormValues>({
         defaultValues: {
             selectedTasks: fields.map((el) => !!selectedFields?.includes(el.order)),
             customFields: defaultCustomField || [],
             notesToClient: defaultNoteToClient || "",
-            selectedTerms: TERMS.map((term) => selectedTerms.includes(term.order-1)), // Initialize terms selection
+            selectedTerms:numberArrayToObject(TERMS)
         },
     });
-    console.log('term:',TERMS.map((term) => selectedTerms.includes(term.order)));
     const { fields: customFields, append, remove } = useFieldArray({
         control,
         name: "customFields",
@@ -114,20 +117,22 @@ const TaskList: React.FC<TaskListProps> = ({
             } else {
                 // Update existing document
                 console.log("sleectedTer,s:",data.selectedTerms);
-                const terms=data.selectedTerms
-                    .map((el,index)=>el ? index:undefined).filter(el=>el!==undefined);
-                console.error('term',terms);
+                const selectedTerms=booleanObjectToArray(data.selectedTerms);
                 const { data: serverData, error } = await supabase
                     .from('documents')
                     .update({
                         fields: selectedTasks,
                         custom_fields: data.customFields,
                         line_items: rowData,
-                        terms,
+                        terms:[...excludedTerms,...selectedTerms].filter((value, index, self) => self.indexOf(value) === index),
                         notes: data.notesToClient,
                     })
                     .eq('id', currentId);
-
+                setTerms(prevState =>
+                    prevState.filter(el=>!selectedTerms.includes(el.order)));
+                resetField("selectedTerms", {
+                    defaultValue: numberArrayToObject(TERMS),
+                });
                 console.log('Updated serverData:', serverData);
 
                 if (error) {
@@ -248,18 +253,28 @@ const TaskList: React.FC<TaskListProps> = ({
                         />
                     )}
                 />
-
+                {isContract && <Alert sx={{mt:2}} severity="info">
+                    <Typography variant={"h3"}>
+                        Terms that you  select will disappear!
+                    </Typography>
+                </Alert>}
                 {isContract && <Grid sx={{ mb: 2,mt:2 }} container spacing={1}>
-                    {TERMS.map((item, index) => (
+                    {terms.map((item, index) => (
                         <Grid item xs={12} sm={12} md={12} key={index}>
                             <Card
                                 onClick={() => {
-                                const currentValue = getValues(`selectedTerms.${index}`);
-                                setValue(`selectedTerms.${index}`, !currentValue);
+                                    const currentTermValue =
+                                        getValues(`selectedTerms.${item.order}`);
+                                    console.log('cur:',currentTermValue);
+                                    if (currentTermValue === undefined) {
+                                        setValue(`selectedTerms.${item.order}`, true);
+                                    } else {
+                                        setValue(`selectedTerms.${item.order}`, !currentTermValue);
+                                    }
                             }} sx={{ p: 4,cursor:"pointer" }}>
                                 <Box>
                                     <Controller
-                                        name={`selectedTerms.${index}`}
+                                        name={`selectedTerms.${item.order}`}
                                         control={control}
                                         render={({ field: { onChange, value } }) => (
                                             <Checkbox
@@ -271,10 +286,9 @@ const TaskList: React.FC<TaskListProps> = ({
                                     <Typography variant="h3" sx={{ mb: "20px" }} component="div">
                                         {item.title}
                                     </Typography>
-                                    {selectedTerms?.includes(index) &&
                                         <Typography sx={{ fontSize: "18px" }}>
                                         {item.description}
-                                    </Typography>}
+                                    </Typography>
                                 </Box>
                             </Card>
                         </Grid>

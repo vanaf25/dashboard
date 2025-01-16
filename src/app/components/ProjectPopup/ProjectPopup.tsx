@@ -12,6 +12,9 @@ import {TERMS} from "./../../consts/contractData/contractData"
 import Grid from "@mui/material/Grid";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
+import booleanObjectToArray from "@/app/utils/booleanObjectToArray";
+import Alert from "@mui/material/Alert";
+import Typography from "@mui/material/Typography";
 interface ProjectPopupForm {
     close: () => void;
     open: boolean;
@@ -43,10 +46,7 @@ const ProjectPopup: React.FC<ProjectPopupForm> = ({ close, open,name,id }) => {
     const onSubmit = async (data:FormValues) => {
         try {
             console.log("Form submitted:", data);
-            const selectedTerms = Object.keys(data.terms)
-                .filter((key) => data.terms[key])  // Only include checked terms
-                .map((key) => parseInt(key)-1);      // Convert the key (order) to a number
-            console.log("Selected terms order:", selectedTerms);
+            const selectedTerms = booleanObjectToArray(data.terms);
             const response = await axios.patch("/api/contracts/moveToContracts", {
                 id,
                 updateData: {
@@ -118,6 +118,11 @@ const ProjectPopup: React.FC<ProjectPopupForm> = ({ close, open,name,id }) => {
                             />
                         )}
                     />
+                    <Alert sx={{mt:1}} severity="info">
+                        <Typography variant={"h3"}>
+                            Terms that you  select will disappear!
+                        </Typography>
+                    </Alert>
                     <Grid container spacing={1} direction="column" marginTop={1}>
                         {TERMS.map((term) => (
                             <Grid item key={term.order}>
