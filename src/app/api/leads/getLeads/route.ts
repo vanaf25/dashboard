@@ -9,7 +9,7 @@ export async function GET(req: NextRequest) {
         if (authError || !user?.user) {
             return NextResponse.redirect(new URL("/login", req.url));
         }
-        const userId = user?.user?.id; // Access the userId from session
+        const userId = user?.user?.id;
         if (!userId) {
             return NextResponse.json({ error: 'User ID is required' }, { status: 400 });
         }
