@@ -10,6 +10,7 @@ import HorizontalHeader from "./layout/horizontal/header/Header";
 import { useSelector } from "@/store/hooks";
 import { AppState } from "@/store/store";
 import {createClient} from "@/lib/supabase";
+import { usePathname } from 'next/navigation'
 const PageWrapper = styled("div")(() => ({
     display: "flex",
     flexGrow: 1,
@@ -34,7 +35,9 @@ export default function RootLayout({ children }: Props) {
         width: "100%",
         padding: customizer.isHorizontal ? 0 : "20px",
     }));
+
     const supabase=createClient();
+    const pathname = usePathname()
     useEffect(() => {
         const  check=async ()=>{
             const { data: user } = await supabase.auth.getUser();
@@ -43,7 +46,7 @@ export default function RootLayout({ children }: Props) {
             }
         }
         check();
-    }, [supabase]);
+    }, [supabase,pathname]);
 
     return (
         <MainWrapper>
