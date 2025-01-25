@@ -47,13 +47,14 @@ const ProjectPopup: React.FC<ProjectPopupForm> = ({ close, open,name,id }) => {
         try {
             console.log("Form submitted:", data);
             const selectedTerms = booleanObjectToArray(data.terms);
+            console.log('terms:',selectedTerms);
             const response = await axios.patch("/api/contracts/moveToContracts", {
                 id,
                 updateData: {
                     instructions: data.description,
                     totalPrice: +data.price,
                     type:"contract",
-                    terms:selectedTerms,
+                    terms:selectedTerms || [],
                 },
             });
             console.log("Document updated successfully:", response.data);

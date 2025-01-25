@@ -39,13 +39,9 @@ export const deleteUser = async (id) => {
 };
 */
 
-export const fetchCustomers = async (userId:string, type?:string) => {
+export const fetchCustomers = async () => {
     try {
-        const { data } = await axios.get('/api/leads/getLeads', {
-            params: {
-                userId,
-            },
-        });
+        const { data } = await axios.get('/api/leads/getLeads');
         return data.customers;
     } catch (error) {
         throw new Error('Failed to fetch customers');

@@ -1,17 +1,22 @@
-import { supabase } from '@/lib/supabase';
 import {NextRequest, NextResponse} from 'next/server';
+import {createClient} from "@/lib/supabaseServer";
 export async function GET(request: NextRequest) {
-    const client_id =   request.nextUrl.searchParams.get('client_id')
-
-    if (!client_id) {
-        return NextResponse.json({ error: 'client_id query parameter is required' }, { status: 400 });
+    const supabase = await createClient()
+    const { data:user, error:authError } = await supabase.auth.getUser()
+    if (authError || !user?.user) {
+        return NextResponse.redirect(new URL("/login", request.url));
     }
+    const userId = user?.user?.id; // Access the userId from session
+    if (!userId) {
+        return NextResponse.json({ error: 'User ID is required' }, { status: 400 });
+    }
+
 
     try {
         const { data, error } = await supabase
             .from('documents')
             .select('id,service, instructions, totalPrice, customers(name)')
-            .eq('created_by', client_id)
+            .eq('created_by', userId)
             .eq('type', 'contract');
         if (error) {
             throw error;

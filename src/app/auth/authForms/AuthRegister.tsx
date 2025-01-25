@@ -8,8 +8,7 @@ import { Stack } from "@mui/system";
 import { registerType } from "@/app/(DashboardLayout)/types/auth/auth";
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { supabase } from '@/lib/supabase';
-
+import {createClient} from "@/lib/supabase";
 type AuthError = {
     message: string;
     status: number;
@@ -22,7 +21,7 @@ const AuthRegister = ({ title, subtitle, subtext }: registerType) => {
     const [loading, setLoading] = useState(false); // To show loading state
 
     const router = useRouter(); // Initialize useRouter
-
+    const supabase=createClient();
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);

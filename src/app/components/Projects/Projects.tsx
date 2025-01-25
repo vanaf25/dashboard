@@ -10,14 +10,11 @@ import ProjectPopup from "@/app/components/ProjectPopup/ProjectPopup";
 import CreateProjectPopup from "@/app/components/CreateProjectPopup/CreateProjectPopup";
 
 const Projects = () => {
-    // State for projects and loading
     const [projects, setProjects] = useState<any[]>([]);  // Change 'any' type if needed
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
     const user=useUser();
     const [isPopupOpen,setIsPopupOpen]=useState(false);
-    console.log("projects:",projects);
-    // Fetch projects on component mount
     useEffect(() => {
         const fetchProjects = async () => {
             try {

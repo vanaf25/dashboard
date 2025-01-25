@@ -9,8 +9,6 @@ import Navigation from "./layout/horizontal/navbar/Navigation";
 import HorizontalHeader from "./layout/horizontal/header/Header";
 import { useSelector } from "@/store/hooks";
 import { AppState } from "@/store/store";
-import {useUser} from "@supabase/auth-helpers-react"; // Import the supabase client
-
 const PageWrapper = styled("div")(() => ({
     display: "flex",
     flexGrow: 1,
@@ -35,9 +33,9 @@ export default function RootLayout({ children }: Props) {
         width: "100%",
         padding: customizer.isHorizontal ? 0 : "20px",
     }));
-    const user = useUser();
+    const user = {};
     useEffect(() => {
-        console.log("Layout removed!!!!",Date.now())
+        console.log("Layout mounted!!!!",Date.now())
         if (user && !isLoggedIn) {
             setIsLoggedIn(true);
         }

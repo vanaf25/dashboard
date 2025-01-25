@@ -16,6 +16,7 @@ import {useDispatch} from "@/store/hooks";
 import {Client, FormData} from "./../Leads/Leads"
 import {useSupabaseClient, useUser} from "@supabase/auth-helpers-react";
 import {contractData} from "@/app/consts/contractData/contractData";
+import {createClient} from "@/lib/supabase";
 
 interface LeadPopupFormProps{
    open:boolean,
@@ -53,7 +54,6 @@ const LeadPopupForm:React.FC<LeadPopupFormProps> = ({open,close,isEditMode,defau
             project: defaultLead?.project || "",
         })
     },[defaultLead])
-    console.log('meetingDate:',formData.meetingDate);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const inputFields = [
         { label: 'Name', name: 'name' },
@@ -96,13 +96,12 @@ const LeadPopupForm:React.FC<LeadPopupFormProps> = ({open,close,isEditMode,defau
         setFormData((prev) => ({ ...prev, meetingDate: newDate }));
     };
     const dispatch=useDispatch();
-    const supabase = useSupabaseClient();
+    const supabase = createClient();
     const [formErrors, setFormErrors] = useState<Record<string, string>>({});
     const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
         setFormData((prev) => ({ ...prev, [name]: value }));
     };
-    const user=useUser();
     const handleSubmit = async () => {
         if(!validateForm()) return;
         setIsSubmitting(true);
@@ -112,7 +111,7 @@ const LeadPopupForm:React.FC<LeadPopupFormProps> = ({open,close,isEditMode,defau
         let formState={...formData,meetingDate};
         if (isEditMode) {
             if(dateOnly) formState.status="Meeting Scheduled"
-            console.log(formState);
+
             const { data, error } = await supabase
                 .from('customers')
                 .update({ ...formState })
@@ -128,13 +127,13 @@ const LeadPopupForm:React.FC<LeadPopupFormProps> = ({open,close,isEditMode,defau
                 setFormError(error.details);
             }
         } else {
-            console.log('dataToSend:',formState);
+            const { data: user } = await supabase.auth.getUser();
+            console.log('currentUser:',user);
             const { data, error } = await supabase
                 .from('customers')
-                .insert([{ created_by: user?.id as string, ...formState}])
+                .insert([{ created_by: user?.user?.id as string, ...formState}])
                 .select()
                 .single();
-            console.log('data:',data);
             if (!error) {
                 dispatch(addProject(data));
                 /*

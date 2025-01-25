@@ -4,22 +4,13 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
-import Dialog from "@mui/material/Dialog";
-import DialogTitle from "@mui/material/DialogTitle";
-import DialogContent from "@mui/material/DialogContent";
-import TextField from "@mui/material/TextField";
-import DialogActions from "@mui/material/DialogActions";
-import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
-import MenuItem from "@mui/material/MenuItem";
-import dayjs, { Dayjs } from "dayjs";
-import { LocalizationProvider, DatePicker, TimePicker } from '@mui/x-date-pickers';
-import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
+
 import LeadItem from "@/app/components/Leads/LeadItem/LeadItem";
-import {CALCULATORS} from "@/app/consts/calculators";
-import {fetchCustomers} from "@/app/apis/usersApi";
 import {useDispatch, useSelector} from "@/store/hooks";
 import {addProject, changeProject, deleteProject} from "@/store/apps/dasbhoard/dashboardSlice";
 import LeadPopupForm from "@/app/components/LeadPopupForm/LeadPopupForm";
+import {createClient} from "@/lib/supabase";
 
 export interface FormData {
     name: string;
@@ -52,7 +43,7 @@ const Leads: React.FC = () => {
         setIsEditMode(false);
         setIsDateOnly(false);
     };
-    const supabase = useSupabaseClient();
+    const supabase = createClient();
     const [error, setError] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState(false);
 /*

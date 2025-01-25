@@ -12,21 +12,17 @@ import BigCalendar from "@/app/(DashboardLayout)/apps/calendar/page";
 import Leads from "@/app/components/Leads/Leads";
 import Projects from "@/app/components/Projects/Projects";
 import {useDispatch} from "@/store/hooks";
-import {useUser} from "@supabase/auth-helpers-react";
 import {fetchProjects} from "@/store/apps/dasbhoard/dashboardSlice";
 import Loading from "@/app/(DashboardLayout)/loading";
 export default function Dashboard() {
     const dispatch=useDispatch();
-    const user=useUser();
     const [isLoading,setIsLoading]=useState(true)
    useEffect(()=>{
-       console.log('Company mounted!!!');
+       console.log('Component  mounted!!!');
        setIsLoading(true)
-       if(user){
-           dispatch(fetchProjects(user?.id)).then(res=>{
+           dispatch(fetchProjects()).then(res=>{
                setIsLoading(false);
            })
-       }
        return ()=>console.log("Component removed!!");
    },[]);
   return (

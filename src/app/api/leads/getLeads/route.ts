@@ -1,38 +1,33 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { supabase } from '@/lib/supabase';
+import {redirect} from "next/navigation";
+import {createClient} from "@/lib/supabaseServer";
 
 export async function GET(req: NextRequest) {
-    const userId = req.nextUrl.searchParams.get('userId'); // Extract userId from query params
-    const type=req.nextUrl.searchParams.get('type')
-    if (!userId) {
-        return NextResponse.json({ error: 'User ID is required' }, { status: 400 });
-    }
-
     try {
-        if(type==="project"){
-            const { data, error } = await supabase
-                .from('customers')
-                .select('*,documents (id)')
-                .eq('created_by', userId)
-                .eq('status', 'project');
-            if (error) {
-                throw error;
-            }
-            return NextResponse.json({ customers: data});
+        const supabase = await createClient()
+        const { data:user, error:authError } = await supabase.auth.getUser()
+        if (authError || !user?.user) {
+            return NextResponse.redirect(new URL("/login", req.url));
         }
-        else {
-            const { data, error } = await supabase
-                .from('customers')
-                .select('*,documents (id,service)')
-                .eq('created_by', userId)
-                .filter('documents.type', 'eq', 'quote');
-            if (error) {
-                throw error;
-            }
-            return NextResponse.json({ customers: data });
+        const userId = user?.user?.id; // Access the userId from session
+        if (!userId) {
+            return NextResponse.json({ error: 'User ID is required' }, { status: 400 });
         }
+
+        const { data, error } = await supabase
+            .from('customers')
+            .select('*, documents (id, service)')
+            .eq('created_by', userId)
+            .filter('documents.type', 'eq', 'quote');
+
+        if (error) {
+            throw error;
+        }
+
+        return NextResponse.json({ customers: data });
 
     } catch (error) {
+        console.log('err:',(error as Error).message)
         return NextResponse.json({ error: (error as Error).message }, { status: 500 });
     }
 }

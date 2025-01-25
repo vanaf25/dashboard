@@ -11,8 +11,8 @@ import NavGroup from './NavGroup/NavGroup';
 import { AppState } from '@/store/store';
 import { toggleMobileSidebar } from '@/store/customizer/CustomizerSlice';
 import Button from '@mui/material/Button';
-import { supabase } from '@/lib/supabase';
 import { useRouter } from 'next/navigation';
+import { createClient } from '@/lib/supabase';
 
 const SidebarItems = () => {
   const pathname = usePathname();
@@ -23,29 +23,23 @@ const SidebarItems = () => {
   const hideMenu: any = lgUp ? customizer.isCollapse && !customizer.isSidebarHover : '';
   const dispatch = useDispatch();
   const router = useRouter();
-
+  const supabase=createClient();
   // Logout function
   const handleLogout = async () => {
     try {
       const { error } = await supabase.auth.signOut();
       if (error) throw error;
-
-      // Redirect to the login page after successful logout
-      router.push('/login');  // Use useRouter to redirect to login page
-    } catch (error:any){
+      router.push('/login');
+    } catch (error: any) {
       console.error('Error logging out:', error.message);
     }
   };
-
   return (
       <Box sx={{ px: '20px' }}>
         <List sx={{ pt: 0 }} className="sidebarNav">
           {Menuitems.map((item) => {
-            // {/********SubHeader**********/}
             if (item.subheader) {
               return <NavGroup item={item} hideMenu={hideMenu} key={item.subheader} />;
-
-              // {/********If Sub Menu**********/}
             } else if (item.children) {
               return (
                   <NavCollapse
@@ -58,11 +52,15 @@ const SidebarItems = () => {
                       onClick={() => dispatch(toggleMobileSidebar())}
                   />
               );
-
-              // {/********If Sub No Menu**********/}
             } else {
               return (
-                  <NavItem item={item} key={item.id} pathDirect={pathDirect} hideMenu={hideMenu} onClick={() => dispatch(toggleMobileSidebar())} />
+                  <NavItem
+                      item={item}
+                      key={item.id}
+                      pathDirect={pathDirect}
+                      hideMenu={hideMenu}
+                      onClick={() => dispatch(toggleMobileSidebar())}
+                  />
               );
             }
           })}

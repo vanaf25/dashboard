@@ -20,12 +20,13 @@ export interface RowData {
 
 interface PaymentCalculationProps {
     rowData: RowData[];
-    setRowData: React.Dispatch<React.SetStateAction<RowData[]>>;
+    isForPrint?:boolean;
+    setRowData?: React.Dispatch<React.SetStateAction<RowData[]>>;
 }
 
 const PaymentCalculation: React.FC<PaymentCalculationProps> = ({
                                                                    rowData,
-                                                                   setRowData,
+                                                                   setRowData,isForPrint,
                                                                }) => {
     const columnDefs: ColDef[] = useMemo(
         () => [
@@ -33,13 +34,13 @@ const PaymentCalculation: React.FC<PaymentCalculationProps> = ({
                 headerName: "Description",
                 field: "description",
                 flex: 2,
-                editable: true,
+                editable: !isForPrint,
             },
             {
                 headerName: "Price",
                 field: "price",
                 flex: 1,
-                editable: true,
+                editable: !isForPrint,
                 valueFormatter: (params: ValueFormatterParams) =>
                     `$${Number(params.value).toFixed(2)}`,
                 valueParser: (params: ValueParserParams) =>
@@ -61,29 +62,29 @@ const PaymentCalculation: React.FC<PaymentCalculationProps> = ({
                     (params.data.price / 36).toFixed(2),
                 valueFormatter: (params: ValueFormatterParams) => `$${params.value}`,
             },
-            {
-                headerName: "Actions",
-                flex: 1,
-                cellRenderer: (params: any) => {
-                    const handleDelete = () => {
-                        const updatedData = rowData.filter(
-                            (row) => row.id !== params.data.id
-                        );
-                        setRowData(updatedData);
-                    };
-
-                    return (
-                        <Button
-                            variant="contained"
-                            color="error"
-                            size="small"
-                            onClick={handleDelete}
-                        >
-                            Delete
-                        </Button>
+        ...(isForPrint ? []:[{
+            headerName: "Actions",
+            flex: 1,
+            cellRenderer: (params: any) => {
+                const handleDelete = () => {
+                    const updatedData = rowData.filter(
+                        (row) => row.id !== params.data.id
                     );
-                },
+                    if(setRowData) setRowData(updatedData);
+                };
+
+                return (
+                    <Button
+                        variant="contained"
+                        color="error"
+                        size="small"
+                        onClick={handleDelete}
+                    >
+                        Delete
+                    </Button>
+                );
             },
+        },])
         ],
         [rowData]
     );
@@ -94,7 +95,7 @@ const PaymentCalculation: React.FC<PaymentCalculationProps> = ({
             description: "",
             price: 0,
         };
-        setRowData((prevData) => [...prevData, newRow]);
+        if(setRowData)         setRowData((prevData) => [...prevData, newRow]);
     };
 
     const gridRef = useRef(null);
@@ -123,23 +124,23 @@ const PaymentCalculation: React.FC<PaymentCalculationProps> = ({
                 ? { ...row, [event.colDef.field as keyof RowData]: event.newValue }
                 : row
         );
-        setRowData(updatedData);
+        if(setRowData) setRowData(updatedData);
     };
 
     useEffect(() => {
-            calculateTotalValues();
+        calculateTotalValues();
     }, [rowData]);
 
     return (
         <Box>
-            <Button
+            {!isForPrint && <Button
                 variant="contained"
                 color="primary"
                 onClick={addRow}
                 style={{ marginBottom: 10 }}
             >
                 Add Row
-            </Button>
+            </Button>}
             <TableName>Monthly Payment Calculation with No Interest Added</TableName>
             <Table
                 rows={rowData}

@@ -1,7 +1,7 @@
 // app/api/updateDocument/route.ts
 
 import { NextResponse } from 'next/server';
-import { supabase } from '@/lib/supabase';  // Adjust the import path as needed
+import {createClient} from "@/lib/supabaseServer";
 
 // Define the expected shape of the request body
 interface UpdateDocumentRequest {
@@ -24,7 +24,7 @@ export async function PATCH(request: Request) {
                 { status: 400 }
             );
         }
-
+        const supabase=await createClient();
         // Update the document in Supabase
         const { data, error } = await supabase
             .from('documents')

@@ -79,6 +79,9 @@ const LeadItem: React.FC<LeadItemProps> = ({
         const selectedDocId = event.target.value as string;
         router.push(`/quote/${selectedDocId}`);
     };
+    const handleImageSelect=(event:any)=>{
+        console.log('val:',event.target.value);
+    }
     return (
         <>
             {currentStatus !== 'project' && (
@@ -114,9 +117,6 @@ const LeadItem: React.FC<LeadItemProps> = ({
                             onClick={handleOpenPopover}
                             sx={{ cursor: 'pointer' }}
                         />
-                        <Button color="error" variant="outlined">
-                            Button
-                        </Button>
                         <FormControl sx={{ width: 130 }}>
                             <InputLabel id={`quote-select-label-${id}`}>New Quote</InputLabel>
                             <Select
@@ -134,6 +134,21 @@ const LeadItem: React.FC<LeadItemProps> = ({
                         </FormControl>
                         {documents?.length ? (
                             <>
+                                <FormControl sx={{ width: 130 }}>
+                                    <InputLabel id={`quote-view-label-${id}`}>Upload Images</InputLabel>
+                                    <Select
+                                        labelId={`quote-view-label-${id}`}
+                                        id={`quote-view-${id}`}
+                                        onChange={handleImageSelect}
+                                        defaultValue=""
+                                    >
+                                        {documents.map((c) => (
+                                            <MenuItem key={c.id} value={c.id}>
+                                                {c.service}
+                                            </MenuItem>
+                                        ))}
+                                    </Select>
+                                </FormControl>
                                 <FormControl sx={{ width: 130 }}>
                                     <InputLabel id={`quote-view-label-${id}`}>View Quotes</InputLabel>
                                     <Select

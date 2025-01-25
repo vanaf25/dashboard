@@ -13,8 +13,6 @@ import {
 import { useRouter } from 'next/navigation';
 import Button from "@mui/material/Button";
 import PaymentCalculation, { RowData } from "@/app/components/TasksFields/PaymentCalculation/PaymentCalculation";
-import { supabase } from "@/lib/supabase";
-import { useUser } from "@supabase/auth-helpers-react";
 import { FieldType } from "@/app/types/dashboardTypes";
 import { TERMS } from "@/app/consts/contractData/contractData";
 import Card from "@mui/material/Card";
@@ -22,6 +20,7 @@ import Grid from "@mui/material/Grid";
 import booleanObjectToArray from "@/app/utils/booleanObjectToArray";
 import numberArrayToObject from "@/app/utils/numberArrayToObject";
 import Alert from "@mui/material/Alert";
+import {createClient} from "@/lib/supabase";
 
 type TaskListFormValues = {
     selectedTasks: boolean[];
@@ -49,7 +48,6 @@ const TaskList: React.FC<TaskListProps> = ({
                                                defaultRowsItems, defaultCustomField, selectedFields,
                                                defaultNoteToClient, currentId, isContract, selectedTerms:excludedTerms = []
                                            }) => {
-    console.log('selectedTerms:', excludedTerms);
     const [terms,setTerms]
         =useState(TERMS.filter((term)=>!excludedTerms.includes(term.order)))
     const { control, handleSubmit,resetField,getValues, setValue } = useForm<TaskListFormValues>({
@@ -68,31 +66,24 @@ const TaskList: React.FC<TaskListProps> = ({
     const [rowData, setRowData] = useState<RowData[]>(defaultRowsItems || [
         { id: 1, description: "", price: 0 },
     ]);
-
-    const user = useUser();
     const router = useRouter();
 
     const onSubmit = async (data: TaskListFormValues) => {
-        console.log('data:', data);
-
         // Collect selected tasks
         let selectedTasks: any[] = [];
         data.selectedTasks.forEach((el, index) => {
             const el1 = fields[index];
             if (el1 && el) selectedTasks.push(el1);
         });
-        console.log("Selected Tasks:", selectedTasks);
-        console.log("Custom Fields:", data.customFields.map(field => field.value));
-        console.log("Notes to Client:", data.notesToClient);
-        console.log('paymentCalculations:', rowData);
-
+        const supabase=createClient();
+        const { data:user, error:authError }= await supabase.auth.getUser()
         try {
             if (!update) {
                 // Insert new document
                 const { data: serverData, error } = await supabase
                     .from('documents')
                     .insert([{
-                        created_by: user?.id as string,
+                        created_by: user?.user?.id as string,
                         fields: selectedTasks,
                         service: type,
                         company: "",
@@ -105,7 +96,6 @@ const TaskList: React.FC<TaskListProps> = ({
                     .select()
                     .single();
 
-                console.log('serverData:', serverData);
 
                 if (serverData?.id) {
                     router.push(`/quote/${serverData.id}`);
@@ -116,7 +106,6 @@ const TaskList: React.FC<TaskListProps> = ({
                 }
             } else {
                 // Update existing document
-                console.log("sleectedTer,s:",data.selectedTerms);
                 const selectedTerms=booleanObjectToArray(data.selectedTerms);
                 const { data: serverData, error } = await supabase
                     .from('documents')
@@ -133,7 +122,6 @@ const TaskList: React.FC<TaskListProps> = ({
                 resetField("selectedTerms", {
                     defaultValue: numberArrayToObject(TERMS),
                 });
-                console.log('Updated serverData:', serverData);
 
                 if (error) {
                     throw error;
@@ -148,11 +136,9 @@ const TaskList: React.FC<TaskListProps> = ({
             console.error(update ? 'Error updating document' : 'Error adding document', error);
         }
     };
-
     const addCustomField = () => {
-        append({ id: Date.now().toString(), value: "" }); // Add an empty custom field
+        append({ id: Date.now().toString(), value: "" });
     };
-
     return (
         <Box>
             <form style={{ marginBottom: "20px", }} onSubmit={handleSubmit(onSubmit)}>
@@ -190,7 +176,6 @@ const TaskList: React.FC<TaskListProps> = ({
                         </React.Fragment>
                     ))}
                 </List>
-
                 <Typography variant="h5" gutterBottom>
                     Additional Work Description
                 </Typography>
@@ -265,7 +250,6 @@ const TaskList: React.FC<TaskListProps> = ({
                                 onClick={() => {
                                     const currentTermValue =
                                         getValues(`selectedTerms.${item.order}`);
-                                    console.log('cur:',currentTermValue);
                                     if (currentTermValue === undefined) {
                                         setValue(`selectedTerms.${item.order}`, true);
                                     } else {

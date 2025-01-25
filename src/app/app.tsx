@@ -2,39 +2,28 @@
 import React from "react";
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import RTL from "@/app/(DashboardLayout)/layout/shared/customizer/RTL";
 import { ThemeSettings } from "@/utils/theme/Theme";
-import { useSelector } from 'react-redux';
-import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter';
-import { SessionContextProvider,Session } from "@supabase/auth-helpers-react";
-import { useState } from "react";
-import { createBrowserSupabaseClient } from "@supabase/auth-helpers-nextjs";
-import { AppState } from "@/store/store";
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
 import "@/utils/i18n";
 import "@/app/api/index";
+import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 
-
-const MyApp = ({ children,
-                   initialSession
-               }: { children: React.ReactNode,initialSession?:Session }) => {
+const MyApp = ({
+                   children,
+               }: {
+    children: React.ReactNode;
+}) => {
     const theme = ThemeSettings();
-    const customizer = useSelector((state: any) => state.customizer);
-    const [supabaseClient] = useState(() => createBrowserSupabaseClient());
+    const queryClient = new QueryClient()
     return (
-        <>
-            <SessionContextProvider  supabaseClient={supabaseClient} initialSession={initialSession as Session}>
-                <AppRouterCacheProvider options={{ enableCssLayer: true }}>
-                    <ThemeProvider theme={theme}>
-                        <RTL direction={customizer.activeDir}>
-                            <CssBaseline />
-                            {children}
-                        </RTL>
-                    </ThemeProvider>
-                </AppRouterCacheProvider>
-            </SessionContextProvider>
-
-        </>
+        <QueryClientProvider client={queryClient} >
+            <AppRouterCacheProvider options={{ enableCssLayer: true }}>
+                <ThemeProvider theme={theme}>
+                        <CssBaseline />
+                        {children}
+                </ThemeProvider>
+            </AppRouterCacheProvider>
+        </QueryClientProvider>
     );
 };
-
 export default MyApp;

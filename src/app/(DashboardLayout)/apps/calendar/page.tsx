@@ -14,11 +14,8 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import moment from 'moment';
-import Events, {EventType} from '@/app/(DashboardLayout)/EventData';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import './Calendar.css';
-
-import PageContainer from '@/app/components/container/PageContainer';
 import { IconCheck } from '@tabler/icons-react';
 import BlankCard from '@/app/components/shared/BlankCard';
 import {useSelector} from "@/store/hooks";
@@ -38,7 +35,6 @@ type EvType = {
 const BigCalendar = () => {
   const meetings=useSelector<Client[]>(
       state=>state.dashboard.projects)
-  console.log('meetings:',meetings);
   const [calevents, setCalEvents] =
       React.useState<any[]>([]);
   useEffect(() => {

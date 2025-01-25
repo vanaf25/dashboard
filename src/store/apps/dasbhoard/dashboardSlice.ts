@@ -25,7 +25,6 @@ export const  dashboardSlice= createSlice({
             state.projects.push({...action.payload,documents:[]} as Client);
         },
         changeProject:(state:StateType, action) => {
-            console.log('action.payload:',action.payload);
             state.projects = state.projects.map(el=>{
                 if(el.id===action.payload.id) return action.payload
                 return el
@@ -45,10 +44,9 @@ export const  dashboardSlice= createSlice({
 export const { getProjects,addProject,changeProject
     ,setMeetings,addMeeting,deleteProject } = dashboardSlice.actions;
 
-export const fetchProjects = (userId:string,type?:"project") => async (dispatch: AppDispatch) => {
+export const fetchProjects = () => async (dispatch: AppDispatch) => {
     try {
-        const response = await fetchCustomers(userId);
-        console.log('res:',response);
+        const response = await fetchCustomers();
         dispatch(getProjects(response));
     } catch (err: any) {
         throw new Error(err);
