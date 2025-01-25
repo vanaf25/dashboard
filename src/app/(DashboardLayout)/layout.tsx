@@ -37,8 +37,8 @@ export default function RootLayout({ children }: Props) {
     const supabase=createClient();
     useEffect(() => {
         const  check=async ()=>{
-            const user = await supabase.auth.getUser();
-            if (user && !isLoggedIn) {
+            const { data: user } = await supabase.auth.getUser();
+            if (user?.user && !isLoggedIn) {
                 setIsLoggedIn(true);
             }
         }
