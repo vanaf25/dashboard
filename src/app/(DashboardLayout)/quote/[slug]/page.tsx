@@ -71,9 +71,13 @@ const Page = () => {
                     )}
                     </Box>:<Box display={"flex"} flexDirection={"column"} gap={3}>
                         <Typography variant={"h3"} sx={{mb:2}}>Documents for {data.service} for services   </Typography>
-                        <FolderComponent name="Images">
-
-                        </FolderComponent>
+                        <Link href={"/quote/image"}>
+                            <FolderComponent name="Images">
+                                <FileComponent name="img2.png" />
+                                <FileComponent name="img3.png" />
+                                <FileComponent name="img4.png" />
+                            </FolderComponent>
+                        </Link>
                         <FolderComponent name="Another Documents">
                             <FileComponent name="doc1.pdf" />
                             <FileComponent name="doc2.docx" />
