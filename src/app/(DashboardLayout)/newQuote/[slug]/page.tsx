@@ -23,7 +23,9 @@ const Page: React.FC = () => {
                 <Typography color={"error"}>Valid Project is required</Typography>
             ) : (
                 <Box>
-                    {field && type && <TasksFields type={type} slug={slug as string} fields={field?.fields} />}
+                    {field && type && <TasksFields type={type}
+                                                   slug={slug as string}
+                                                   fields={field?.fields} />}
                 </Box>
             )}
         </BlankCard>

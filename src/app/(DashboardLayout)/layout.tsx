@@ -35,8 +35,9 @@ export default function RootLayout({ children }: Props) {
         width: "100%",
         padding: customizer.isHorizontal ? 0 : "20px",
     }));
-
-    const supabase=createClient();
+    const publicRoutes = ["/login", "/register", "/forgot-password"];
+    const pathname = usePathname();
+    /*const supabase=createClient();
     const pathname = usePathname()
     useEffect(() => {
         const  check=async ()=>{
@@ -46,14 +47,14 @@ export default function RootLayout({ children }: Props) {
             }
         }
         check();
-    }, [supabase,pathname]);
+    }, [supabase,pathname]);*/
 
     return (
         <MainWrapper>
             <title>System99</title>
             <Box width="100%">
                 {/* Render Sidebar only if user is logged in */}
-                {!customizer.isHorizontal && isLoggedIn && <Sidebar />}
+                {!customizer.isHorizontal && !publicRoutes.includes(pathname) && <Sidebar />}
 
                 {customizer.isHorizontal ? <HorizontalHeader /> : ""}
                 {customizer.isHorizontal ? <Navigation /> : ""}

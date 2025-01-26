@@ -7,6 +7,7 @@ import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
 import "@/utils/i18n";
 import "@/app/api/index";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
+const queryClient = new QueryClient()
 
 const MyApp = ({
                    children,
@@ -14,7 +15,6 @@ const MyApp = ({
     children: React.ReactNode;
 }) => {
     const theme = ThemeSettings();
-    const queryClient = new QueryClient()
     return (
         <QueryClientProvider client={queryClient} >
             <AppRouterCacheProvider options={{ enableCssLayer: true }}>

@@ -1,4 +1,5 @@
-export const API_URL = 'http://localhost:8080/api';
+import axios from "axios";
+/*export const API_URL = 'http://localhost:8080/api';
 
 export const setHeaders = () => {
   const header = {
@@ -8,4 +9,12 @@ export const setHeaders = () => {
   };
 
   return header;
-};
+};*/
+const axiosInstance = axios.create({
+  baseURL: '/api',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
+
+export default axiosInstance;

@@ -21,6 +21,8 @@ import booleanObjectToArray from "@/app/utils/booleanObjectToArray";
 import numberArrayToObject from "@/app/utils/numberArrayToObject";
 import Alert from "@mui/material/Alert";
 import {createClient} from "@/lib/supabase";
+import {useMutation, useQueryClient} from "@tanstack/react-query";
+import {createQuote, updateQuote} from "@/app/apis/documentApi";
 
 type TaskListFormValues = {
     selectedTasks: boolean[];
@@ -40,7 +42,7 @@ interface TaskListProps {
     defaultRowsItems?: RowData[];
     defaultNoteToClient?: string;
     defaultCustomField?: { id: string; value: string }[];
-    currentId?: number;
+    currentId?: string;
 }
 
 const TaskList: React.FC<TaskListProps> = ({
@@ -50,13 +52,48 @@ const TaskList: React.FC<TaskListProps> = ({
                                            }) => {
     const [terms,setTerms]
         =useState(TERMS.filter((term)=>!excludedTerms.includes(term.order)))
-    const { control, handleSubmit,resetField,getValues, setValue } = useForm<TaskListFormValues>({
+    const { control, handleSubmit,
+        reset,getValues, setValue } = useForm<TaskListFormValues>({
         defaultValues: {
             selectedTasks: fields.map((el) => !!selectedFields?.includes(el.order)),
             customFields: defaultCustomField || [],
             notesToClient: defaultNoteToClient || "",
             selectedTerms:numberArrayToObject(TERMS)
         },
+    });
+    const router = useRouter();
+    const queryClient = useQueryClient();
+    const {mutate,isPending}=useMutation({
+        mutationFn:(body:any)=>createQuote(body),
+        onSuccess: (serverData) => {
+            console.log('serverData:',serverData);
+            const document=serverData?.data;
+            const id=document?.id
+            if (id) {
+                queryClient.setQueryData(['document', id], document);
+                router.push(`/quote/${id}`);
+            }
+        },
+        onError: () => {
+            alert('Error adding document');
+        },
+    });
+    const {mutate:updateMutate,isPending:isUpdatePending}=useMutation({
+        onSuccess: (data) => {
+            console.log('updData:',data);
+            if(data && currentId){
+                console.log('creating a new cache!');
+                queryClient.setQueryData(['document', currentId],(oldData:any)=>
+                    ({...oldData,...data}));
+            }
+/*
+            queryClient.invalidateQueries('quotes');
+*/
+        },
+        onError: () => {
+            alert('Error updating document');
+        },
+        mutationFn:({docId,updateBody}:{ docId: string; updateBody: any })=>updateQuote(docId,updateBody)
     });
     const { fields: customFields, append, remove } = useFieldArray({
         control,
@@ -66,21 +103,20 @@ const TaskList: React.FC<TaskListProps> = ({
     const [rowData, setRowData] = useState<RowData[]>(defaultRowsItems || [
         { id: 1, description: "", price: 0 },
     ]);
-    const router = useRouter();
 
     const onSubmit = async (data: TaskListFormValues) => {
-        // Collect selected tasks
         let selectedTasks: any[] = [];
         data.selectedTasks.forEach((el, index) => {
             const el1 = fields[index];
             if (el1 && el) selectedTasks.push(el1);
         });
-        const supabase=createClient();
+/*
         const { data:user, error:authError }= await supabase.auth.getUser()
+*/
         try {
             if (!update) {
                 // Insert new document
-                const { data: serverData, error } = await supabase
+               /* const { data: serverData, error } = await supabase
                     .from('documents')
                     .insert([{
                         created_by: user?.user?.id as string,
@@ -95,19 +131,28 @@ const TaskList: React.FC<TaskListProps> = ({
                     }])
                     .select()
                     .single();
-
-
                 if (serverData?.id) {
                     router.push(`/quote/${serverData.id}`);
                 }
 
                 if (error) {
                     throw error;
-                }
+                }*/
+                mutate({
+                    fields: selectedTasks,
+                    service: type,
+                    company: "",
+                    type: "quote",
+                    customFields: data.customFields,
+                    lineItems: rowData,
+                    notes: data.notesToClient,
+                    clientId: slug
+                })
+
             } else {
                 // Update existing document
                 const selectedTerms=booleanObjectToArray(data.selectedTerms);
-                const { data: serverData, error } = await supabase
+                /*const { data: serverData, error } = await supabase
                     .from('documents')
                     .update({
                         fields: selectedTasks,
@@ -116,20 +161,27 @@ const TaskList: React.FC<TaskListProps> = ({
                         terms:[...excludedTerms,...selectedTerms].filter((value, index, self) => self.indexOf(value) === index),
                         notes: data.notesToClient,
                     })
-                    .eq('id', currentId);
-                setTerms(prevState =>
+                    .eq('id', currentId);*/
+                if(currentId){
+                    updateMutate({
+                        docId:currentId,
+                        updateBody:{
+                            fields: selectedTasks,
+                            custom_fields: data.customFields,
+                            line_items: rowData,
+                            terms:[...excludedTerms,...selectedTerms].filter((value, index, self) => self.indexOf(value) === index),
+                            notes: data.notesToClient,
+                        }
+                    })
+                }
+                /*setTerms(prevState =>
                     prevState.filter(el=>!selectedTerms.includes(el.order)));
                 resetField("selectedTerms", {
                     defaultValue: numberArrayToObject(TERMS),
                 });
-
-                if (error) {
-                    throw error;
-                }
-
                 if (currentId) {
                     router.push(`/quote/${currentId}`);
-                }
+                }*/
             }
         } catch (error: any) {
             alert(update ? "Error updating document" : "Error adding document");
@@ -280,12 +332,13 @@ const TaskList: React.FC<TaskListProps> = ({
                 </Grid>}
 
                 <Button
+                    disabled={isPending || isUpdatePending}
                     type="submit"
                     variant="contained"
                     color="primary"
                     style={{ width: 300, margin: "10px auto" }}
                 >
-                    {update ? "Update" : "Submit"}
+                    {isPending  || isUpdatePending ? "Pending...": update ? "Update" : "Submit"}
                 </Button>
             </form>
         </Box>
