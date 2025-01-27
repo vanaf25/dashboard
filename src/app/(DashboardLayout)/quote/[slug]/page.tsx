@@ -22,6 +22,7 @@ const Page = () => {
         queryFn: () => fetchDocument(slug as string),
         enabled: !!slug,
     });
+    console.log('loading:',isLoading);
     const searchParams = useSearchParams();
     const type = searchParams.get("type");
     return (

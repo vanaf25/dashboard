@@ -86,9 +86,6 @@ const TaskList: React.FC<TaskListProps> = ({
                 queryClient.setQueryData(['document', currentId],(oldData:any)=>
                     ({...oldData,...data}));
             }
-/*
-            queryClient.invalidateQueries('quotes');
-*/
         },
         onError: () => {
             alert('Error updating document');

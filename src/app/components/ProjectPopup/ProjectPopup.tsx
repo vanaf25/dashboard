@@ -15,6 +15,8 @@ import Checkbox from "@mui/material/Checkbox";
 import booleanObjectToArray from "@/app/utils/booleanObjectToArray";
 import Alert from "@mui/material/Alert";
 import Typography from "@mui/material/Typography";
+import {useMutation, useQueryClient} from "@tanstack/react-query";
+import {updateQuote} from "@/app/apis/documentApi";
 interface ProjectPopupForm {
     close: () => void;
     open: boolean;
@@ -43,33 +45,44 @@ const ProjectPopup: React.FC<ProjectPopupForm> = ({ close, open,name,id }) => {
     });
     console.log('id:',id);
     const router = useRouter();
+    const queryClient = useQueryClient();
+    const {mutate,isPending}=useMutation({
+        onSuccess: (data) => {
+            if(data && id){
+                queryClient.setQueryData(['document', id],(oldData:any)=>
+                    ({...oldData,...data}));
+                router.push(`/quote/${id}`);
+            }
+        },
+        onError: () => {
+            alert('Error updating document');
+        },
+        mutationFn:({docId,updateBody}:{ docId: string; updateBody: any })=>updateQuote(docId,updateBody)
+    });
     const onSubmit = async (data:FormValues) => {
         try {
             console.log("Form submitted:", data);
             const selectedTerms = booleanObjectToArray(data.terms);
             console.log('terms:',selectedTerms);
-            const response = await axios.patch("/api/contracts/moveToContracts", {
-                id,
-                updateData: {
+            mutate({
+                docId:id,
+                updateBody:{
                     instructions: data.description,
                     totalPrice: +data.price,
                     type:"contract",
                     terms:selectedTerms || [],
-                },
-            });
-            console.log("Document updated successfully:", response.data);
-            close();
-            reset();
-            router.push(`/quote/${id}`);
-
+                }
+            })
         } catch (error:any) {
             console.error("Error updating document:", error.response?.data || error.message);
             alert("Failed to update the document.");
         }
     };
     const handleClose = () => {
-        close();
-        reset(); // Reset the form when dialog is closed
+        if(!isPending){
+            close();
+            reset();
+        }
     };
             // contractData.find(el=>el.name===data.service)?.terms?
     return (
@@ -149,11 +162,11 @@ const ProjectPopup: React.FC<ProjectPopupForm> = ({ close, open,name,id }) => {
                 </form>
             </DialogContent>
             <DialogActions>
-                <Button onClick={handleClose} color="secondary">
+                <Button disabled={isPending} onClick={handleClose} color="secondary">
                     Cancel
                 </Button>
-                <Button onClick={handleSubmit(onSubmit)} color="primary" variant="contained">
-                    Submit
+                <Button disabled={isPending} onClick={handleSubmit(onSubmit)} color="primary" variant="contained">
+                    {isPending ? "Pending...":"Submit"}
                 </Button>
             </DialogActions>
         </Dialog>
