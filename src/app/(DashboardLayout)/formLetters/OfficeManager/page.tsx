@@ -9,7 +9,7 @@ const Page = () => {
     'PunchOutOf15',
     'PunchOutOf60',
     'ThankYouLetter',
-    'Warranty'
+    'Waranty'
   ];
   return (
     <div>
