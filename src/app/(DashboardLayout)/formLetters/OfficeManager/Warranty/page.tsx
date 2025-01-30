@@ -1,15 +1,18 @@
 "use client";
 import { Typography } from '@mui/material';
 import CustomerDetails from "@/app/components/global/CustomerDetails/CustomerDetails";
+import DocumentHeaderLayout from "@/app/components/DocumentHeaderLayout/DocumentHeaderLayout";
 
 const Waranty = () => {
   return (
     <div>
-      <CustomerDetails withOutTitle customer={{
-        companyPhone:"0990930450",email:"vana@gmail.com",companyAddress:"24 rue de vignes"}}/>
-      <CustomerDetails
-        withOutTitle
-        customer={{Estimator:"ivan",Email:"vanay@gmail.com",Phone:"0990930450",Address:"Some Adress"}}/>
+      <DocumentHeaderLayout>
+        <CustomerDetails title={"Company Info"} customer={{
+          companyPhone:"0990930450",email:"vana@gmail.com",companyAddress:"24 rue de vignes"}}/>
+        <CustomerDetails
+            withOutTitle
+            customer={{Estimator:"ivan",Email:"vanay@gmail.com",Phone:"0990930450",Address:"Some Adress"}}/>
+      </DocumentHeaderLayout>
       <Typography variant={"h5"} sx={{mb:1}}>10 year Limited TRANSFERRABLE INSTALLATION WARRANTY.</Typography>
       <Typography sx={{mb:1}}>
         The company guarantee it is installation and the workmanship for the life of the product

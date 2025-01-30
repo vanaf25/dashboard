@@ -1,5 +1,6 @@
-import { useRouter } from 'next/navigation';
-import {createQuote, updateQuote} from "@/app/apis/documentApi";
+import {useParams, useRouter} from 'next/navigation';
+import { fetchDocument} from "@/app/apis/documentApi";
+import {useQuery} from "@tanstack/react-query";
 /*
    excludedTerms,
                              booleanObjectToArray,
@@ -84,4 +85,13 @@ export const useUpdateQuoteMutation = () => {
 export const useCreateQuoteMutation=()=>{
     const router = useRouter();
     return {}
+}
+export const useGetQuoteQuery=()=>{
+    const { slug } = useParams();
+    return useQuery({
+        queryKey: ["document", slug],
+        queryFn: () => fetchDocument(slug as string),
+        enabled: !!slug,
+        staleTime: 1000 * 60 * 5,
+    });
 }

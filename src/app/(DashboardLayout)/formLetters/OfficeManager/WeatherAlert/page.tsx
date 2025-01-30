@@ -1,14 +1,23 @@
 "use client";
 import { Typography } from '@mui/material';
 import CustomerDetails from "@/app/components/global/CustomerDetails/CustomerDetails";
+import React from "react";
+import DocumentHeaderLayout from "@/app/components/DocumentHeaderLayout/DocumentHeaderLayout";
+import {Box} from "@mui/system";
 
 const WeatherAlert = () => {
   return (
-    <div>
-      <CustomerDetails customer={{
-        companyPhone:"0990930450",email:"vana@gmail.com",companyAddress:"24 rue de vignes"}}/>
-      <CustomerDetails
-        customer={{Estimator:"ivan",Email:"vanay@gmail.com",Phone:"0990930450",Address:"Some Adress"}}/>
+    <Box>
+        <Typography variant={"h2"} sx={{mb:1}}>Mister Exteriror LLC</Typography>
+        <DocumentHeaderLayout>
+            <CustomerDetails
+                customer={{Customer:"ivan",Email:"vanay@gmail.com",Phone:"0990930450",Address:"Some Adress"}}/>
+            <CustomerDetails
+                title={"Company Info"}
+                customer={{
+                companyPhone:"0990930450",email:"vana@gmail.com",companyAddress:"24 rue de vignes"}}/>
+
+        </DocumentHeaderLayout>
       <Typography sx={{mb:1}}>
         Dear Customer
       </Typography>
@@ -22,8 +31,7 @@ const WeatherAlert = () => {
       <Typography sx={{textAlign:"center"}}>
         Thank you for your business and we will see you soon.
       </Typography>
-
-    </div>
+    </Box>
   );
 };
 

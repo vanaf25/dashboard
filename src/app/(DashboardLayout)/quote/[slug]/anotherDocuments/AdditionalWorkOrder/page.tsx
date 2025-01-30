@@ -1,12 +1,10 @@
 "use client";
-import { useRef } from 'react';
-import CustomerDetails from '../../../../components/global/CustomerDetails/CustomerDetails';
-import Table from '../../../../components/letters/Table/Table';
+import {useRef} from 'react';
 import { Typography } from '@mui/material';
-import BlueBlock from '../../../../components/global/blueBlock/BlueBlock';
-import SignaturesSection from '../../../../components/letters/signatureSection/signatureSection';
-import DocumentHeader from "@/app/components/DocumentHeader/DocumentHeader";
-import {Box} from "@mui/system";
+import Table from "@/app/components/letters/Table/Table";
+import BlueBlock from "@/app/components/global/blueBlock/BlueBlock";
+import SignaturesSection from "@/app/components/letters/signatureSection/signatureSection";
+import DocumentLayout from "@/app/components/DocumentLayout/DocumentLayout";
 
 const AdditionalWorkOrder = () => {
   const rows=[
@@ -38,13 +36,7 @@ const columns=[{field:"itemNumber",editable:true,headerName:"Item Number",flex:1
     headerName:"We hereby submit the following specifically described additional work:"}]
   const gridRef=useRef<any>(null)
   return (
-    <div>
-      <Box sx={{display:"flex",justifyContent:"space-between",padding:"0 20px"}}>
-        <CustomerDetails title={"Company details"} customer={{
-          companyPhone:"0990930450",email:"vana@gmail.com",companyAddress:"24 rue de vignes"}}/>
-        <CustomerDetails
-            customer={{Estimator:"ivan",Email:"vanay@gmail.com",Phone:"0990930450",Address:"Some Adress"}}/>
-      </Box>
+    <DocumentLayout>
       <Table customRef={gridRef} rows={rows}
              columns={columns}
       />
@@ -68,9 +60,8 @@ const columns=[{field:"itemNumber",editable:true,headerName:"Item Number",flex:1
           The above prices, specifications and conditions are satisfactory and are hereby accepted. You are authorized to do the work
           as specified. Payments will be made as outlined above.
         </Typography>
-        <SignaturesSection client={"Customer Signature"}/>
-
-    </div>
+             <SignaturesSection client={"Customer Signature"}/>
+    </DocumentLayout>
   );
 };
 

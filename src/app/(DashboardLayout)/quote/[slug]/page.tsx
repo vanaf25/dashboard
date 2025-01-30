@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import {useParams, useSearchParams} from "next/navigation";
-import { useQuery } from "@tanstack/react-query";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import TasksFields from "@/app/components/TasksFields/TasksFields";
@@ -11,20 +10,29 @@ import DocumentHeader from "@/app/components/DocumentHeader/DocumentHeader";
 import DocumentTermsConditions from "@/app/components/DocumentTermsConditions/DocumentTermsConditions";
 import DocumentFooter from "@/app/components/DocumentFooter/DocumentFooter";
 import Link from "next/link";
-import {fetchDocument} from "@/app/apis/documentApi";
 import Loading from "@/app/(DashboardLayout)/loading";
 import QuoteForPrint from "@/app/components/QuoteForPrint/QuoteForPrint";
 import {FileComponent, FolderComponent} from "@/app/components/FolderComponent/FolderComponent";
+import {useGetQuoteQuery} from "@/app/hooks/useQuote";
+
 const Page = () => {
     const { slug } = useParams();
-    const { data, isLoading, error } = useQuery({
-        queryKey: ["document", slug],
-        queryFn: () => fetchDocument(slug as string),
-        enabled: !!slug,
-    });
+    const { data, isLoading, error } = useGetQuoteQuery();
     console.log('loading:',isLoading);
     const searchParams = useSearchParams();
     const type = searchParams.get("type");
+    const anotherDocuments = [
+        'AdditionalWorkOrder',
+        'CompletionCert',
+        'HighTrafficArea',
+        'LearnWaver',
+        'PunchOutOf15',
+        'PunchOutOf60',
+        'ThankYouLetter',
+        'Warranty',
+        "WeatherAlert",
+        "WelcomeLetter",
+    ];
     return (
         <>
         {isLoading ?  <Loading />:<Box>
@@ -57,7 +65,7 @@ const Page = () => {
                                 currentId={data.id}
                                 selectedTerms={data.terms ? data.terms : []}
                                 isContract={data.type === "contract"}
-                                fields={contractData.find((el) => el.name === data.service)?.fields || []}
+                                fields={contractData.find((el) => el.name === data?.service)?.fields || []}
                                 type={data.service}
                                 slug=""
                                 selectedFields={data.fields.map((f: any) => f.order)}
@@ -80,8 +88,9 @@ const Page = () => {
                             </FolderComponent>
                         </Link>
                         <FolderComponent name="Another Documents">
-                            <FileComponent name="doc1.pdf" />
-                            <FileComponent name="doc2.docx" />
+                            {anotherDocuments.map(doc=><Link key={doc} href={`${slug}/anotherDocuments/${doc}`}>
+                                <FileComponent name={doc}/>
+                            </Link>)}
                         </FolderComponent>
                         <FolderComponent name="Quotes and Contracts">
                             <Link href={"?type=quote"}>

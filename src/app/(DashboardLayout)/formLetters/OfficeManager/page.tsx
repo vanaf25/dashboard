@@ -9,7 +9,8 @@ const Page = () => {
     'PunchOutOf15',
     'PunchOutOf60',
     'ThankYouLetter',
-    'Waranty'
+    'Warranty',
+    "WeatherAlert"
   ];
   return (
     <div>

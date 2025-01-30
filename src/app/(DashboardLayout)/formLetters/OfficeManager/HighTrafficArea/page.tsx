@@ -1,14 +1,17 @@
 "use client"
 import { Typography } from '@mui/material';
 import CustomerDetails from '../../../../components/global/CustomerDetails/CustomerDetails';
+import DocumentHeaderLayout from "@/app/components/DocumentHeaderLayout/DocumentHeaderLayout";
 
 const WeatherAlert = () => {
   return (
     <div>
-      <CustomerDetails customer={{
-        companyPhone:"0990930450",email:"vana@gmail.com",companyAddress:"24 rue de vignes"}}/>
-      <CustomerDetails
-        customer={{Estimator:"ivan",Email:"vanay@gmail.com",Phone:"0990930450",Address:"Some Adress"}}/>
+        <DocumentHeaderLayout>
+            <CustomerDetails customer={{
+                companyPhone:"0990930450",email:"vana@gmail.com",companyAddress:"24 rue de vignes"}}/>
+            <CustomerDetails
+                customer={{Estimator:"ivan",Email:"vanay@gmail.com",Phone:"0990930450",Address:"Some Adress"}}/>
+        </DocumentHeaderLayout>
       <Typography sx={{mb:1}}>
         Dear Customer
       </Typography>

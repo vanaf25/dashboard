@@ -58,7 +58,7 @@ const DocumentHeader: React.FC<DocumentHeaderProps> = ({ customers, profiles, ty
                 {/* Estimator Details */}
                 <View style={styles.section}>
                     <Text style={styles.title}>Estimator Info</Text>
-                    <Text style={styles.text}>Signee: {profiles?.username}</Text>
+                    <Text style={styles.text}>Company name: {profiles?.username}</Text>
                     <Text style={styles.text}>Company Email: {profiles?.company_email}</Text>
                     <Text style={styles.text}>Company Phone: {profiles?.phone}</Text>
                 </View>
