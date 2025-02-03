@@ -8,7 +8,6 @@ import "@/utils/i18n";
 import "@/app/api/index";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 const queryClient = new QueryClient()
-
 const MyApp = ({
                    children,
                }: {

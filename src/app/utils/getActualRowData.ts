@@ -5,7 +5,7 @@ interface RowData {
   [key: string]: any;
 }
 
-export default async (api: GridApi | null, rowIndex: number, rowId: string): Promise<RowData> => {
+export default async (api: GridApi | null, rowIndex: number, rowId: string,withOutResponse?:boolean): Promise<RowData> => {
   const row: RowData = {};
 
   if (api) {
@@ -23,6 +23,6 @@ export default async (api: GridApi | null, rowIndex: number, rowId: string): Pro
   }
 
   console.log('actualData:', row);
-  await updateRowChanged(rowId, { ...row });
+ if(!withOutResponse) await updateRowChanged(rowId, { ...row });
   return row;
 };

@@ -5,11 +5,11 @@ import 'ag-grid-community/styles/ag-theme-alpine.css';
 import { Grid, Box, Typography } from "@mui/material";
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-theme-quartz.css";
-import { Loading } from "../../../../components/global/loading/Loading";
-import { sidingColumns } from "../../../../consts/formletters/system99Calculator";
+import { Loading } from "@/app/components/global/loading/Loading";
+import { sidingColumns } from "@/app/consts/formletters/system99Calculator";
 import calculateTotalAmount from "../../../../utils/calculateTotalAmount";
 import getActualRowData from "../../../../utils/getActualRowData";
-import { getAllTablesByType } from "../../../../apis/tablesApi";
+import { getAllTablesByType } from "@/app/apis/tablesApi";
 import Table from "@/app/components/letters/Table/Table";
 
 type TableDataRow = {
@@ -29,7 +29,6 @@ const SquareFootage: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [tablesData, setTablesData] = useState<any[]>([]);
   const [totalHeight, setTotalHeight] = useState<number>(0);
-
   const frontSidingRef = useRef<AgGridReact | null>(null);
   const rearSidingRef = useRef<AgGridReact | null>(null);
   const firstSideSidingRef = useRef<AgGridReact | null>(null);
@@ -38,12 +37,11 @@ const SquareFootage: React.FC = () => {
   const extraBuilding2Ref = useRef<AgGridReact | null>(null);
   const smthRef = useRef<AgGridReact | null>(null);
   const smthRef2 = useRef<AgGridReact | null>(null);
-
   useEffect(() => {
     const fetchTables = async () => {
       try {
         setIsLoading(true);
-        const res = await getAllTablesByType("siding2");
+        const res = await getAllTablesByType("siding");
         if (Array.isArray(res)) setTablesData(res);
         setIsLoading(false);
       } catch (error) {
@@ -70,8 +68,8 @@ const SquareFootage: React.FC = () => {
           ...el,
           columns: sidingColumns.map((c) =>
               c.field !== "length" && c.field !== "height"
-                  ? { ...c, hide: true }
-                  : c
+                  ? { ...c, hide: true,flex:1 }
+                  : {...c,flex:1}
           ),
           rowData: tablesData.find((table) => table.tableName === el.name)?.rows,
         };
@@ -101,7 +99,6 @@ const SquareFootage: React.FC = () => {
       };
     });
   }, [tablesData]);
-
   const calculateTotalHeightAmount = (array: TableName[]) => {
     const total = array.reduce((acc, current) => {
       return (
@@ -110,7 +107,6 @@ const SquareFootage: React.FC = () => {
     }, 0);
     setTotalHeight(total);
   };
-
   const onCellValueChanged = useCallback(
       async (params: any) => {
         const { newValue, oldValue, colDef, api, node, data } = params;

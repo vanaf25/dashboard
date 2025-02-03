@@ -37,18 +37,6 @@ export default function RootLayout({ children }: Props) {
     }));
     const publicRoutes = ["/login", "/register", "/forgot-password"];
     const pathname = usePathname();
-    /*const supabase=createClient();
-    const pathname = usePathname()
-    useEffect(() => {
-        const  check=async ()=>{
-            const { data: user } = await supabase.auth.getUser();
-            if (user?.user && !isLoggedIn) {
-                setIsLoggedIn(true);
-            }
-        }
-        check();
-    }, [supabase,pathname]);*/
-
     return (
         <MainWrapper>
             <title>System99</title>

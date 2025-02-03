@@ -13,7 +13,7 @@ const SignaturesSection: React.FC<SignaturesSectionProps> = ({
                                                                companyAddress,
                                                              }) => {
   return (
-      <Box sx={{ mb: 6 }}>
+      <Box sx={{ mb: 5,mt:5 }}>
         <Grid container spacing={4}>
           {/* Signature of Client */}
           <Grid item xs={12}>

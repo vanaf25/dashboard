@@ -1,4 +1,4 @@
-
+"use client";
 import {Box, Button} from '@mui/material';
 import React,{ReactNode} from 'react';
 import {useGetQuoteQuery} from "@/app/hooks/useQuote";
@@ -21,7 +21,7 @@ const DocumentLayout:React.FC<DocumentLayoutProps> = ({children
                                                           ,withOutHeader,pdfTitle,pdfName}) => {
     const {data, isLoading, error } = useGetQuoteQuery();
     return (
-        <Box>
+        <Box className={"forPrint"}>
             {isLoading ? <Loading/>:<Box>
                 {error ?  <Typography color={"error"}>
                 Error loading document: {(error as Error).message}</Typography>:data ? <>

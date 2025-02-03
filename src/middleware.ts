@@ -5,10 +5,15 @@ export async function middleware(req:NextRequest) {
     const res = NextResponse.next();
     const supabase=await createClient();
     const { data } = await supabase.auth.getSession();
-    console.log('req:',req.nextUrl);
-    const publicRoutes = ["/login", "/register", "/forgot-password"];
-    const isPublicRoute = publicRoutes.some((route) => req.nextUrl.pathname.startsWith(route));
-    if (!data.session && !isPublicRoute) {
+    const publicRoutes = ["/login",
+        "/register",
+        "/forgot-password",
+       /* "/quote/.*!/anotherDocuments/PunchOutOf15",
+        "/quote/.*!/anotherDocuments/PunchOutOf60"*/
+    ];
+    const isPublicRoute = publicRoutes.some((route) =>
+        new RegExp(`^${route}$`).test(req.nextUrl.pathname)
+    );    if (!data.session && !isPublicRoute) {
         return NextResponse.redirect(new URL("/login", req.url));
     }
     return res;

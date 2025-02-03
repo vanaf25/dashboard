@@ -38,7 +38,7 @@ export default function Sidebar() {
   };
 
   return (
-    <Box className={"printHide"}>
+    <Box>
       {!lgUp ? (
         <Box
           sx={{

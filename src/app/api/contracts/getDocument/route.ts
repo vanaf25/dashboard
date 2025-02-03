@@ -11,11 +11,8 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
             { status: 400 }
         );
     }
-
     try {
-        // Create the Supabase client
         const supabase = await createClient();
-
         // Fetch the document from the database
         const { data, error } = await supabase
             .from("documents")
@@ -28,7 +25,6 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
             )
             .eq("id", slug)
             .single();
-
         if (error) {
             console.error("Error fetching document:", error);
             return NextResponse.json(
