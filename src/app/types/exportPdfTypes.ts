@@ -5,6 +5,7 @@ export enum ElementType {
     SECTION = "section",
     TABLE="table",
     H4="h4",
+    IMG="img"
 }
 export  interface PDFColumn {
     field: string,
@@ -17,5 +18,6 @@ export interface PDFElem{
     content:string,
     title?:string,
     rows?:any[],
+    src?:string,
     columns?:PDFColumn[]
 }

@@ -35,7 +35,6 @@ const AdditionalWorkOrder = () => {
         {type:ElementType.H4,content:titleH6},
         {type:ElementType.P,content:paragraphs[2]}
     ]
-    console.log('ex:',exportableElements);
     const addTextField = () => {
         setTextFields([...textFields, { value: '' }]);
     };
@@ -51,7 +50,7 @@ const AdditionalWorkOrder = () => {
     };
 
     return (
-        <DocumentLayout exportElems={exportableElements} pdfName={"Additional Work Order"} pdfTitle={"Additional Work Order"}>
+        <DocumentLayout withSignature exportElems={exportableElements} pdfName={"Additional Work Order"} pdfTitle={"Additional Work Order"}>
             {/* Render text fields dynamically */}
             <Box mt={3}>
                 {textFields.map((textField, index) => (

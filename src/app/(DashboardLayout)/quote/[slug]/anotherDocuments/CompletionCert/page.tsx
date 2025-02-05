@@ -12,7 +12,7 @@ const CompletionCert = () => {
           the work assigned to us. After this completion certificate has been signed your warranty will be sent to you by email.`]
   const exs=sections.map(sec=>({type:ElementType.P,content:sec}))
     return (
-    <DocumentLayout pdfName={"CompletionCert"} exportElems={exs}  >
+    <DocumentLayout withSignature pdfName={"CompletionCert"} exportElems={exs}  >
         <Box mb={5}>
             <Paragraphs sections={sections} />
         </Box>

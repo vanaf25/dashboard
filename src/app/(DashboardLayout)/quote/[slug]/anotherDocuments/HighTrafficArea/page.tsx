@@ -13,7 +13,7 @@ const WeatherAlert = () => {
     "        cannot prevent trampling of grass."]
     const elms=sections.map(section=>({type:ElementType.P,content:section}))
   return (
-    <DocumentLayout exportElems={elms} pdfName={"HighTrafficArea"} pdfTitle={"High Traffic Area"} >
+    <DocumentLayout withSignature exportElems={elms} pdfName={"HighTrafficArea"} pdfTitle={"High Traffic Area"} >
       <Paragraphs sections={sections}/>
     </DocumentLayout>
   );

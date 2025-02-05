@@ -24,6 +24,7 @@ const SignaturePad: React.FC<SignaturePadProps> = ({ onSave }) => {
 
     return (
         <Box display="flex" flexDirection="column" alignItems="center" gap={2}>
+            <Typography variant={"h3"} gutterBottom>Leave Signature here</Typography>
             <Paper elevation={3} sx={{ padding: 2 }}>
                 <SignatureCanvas
                     ref={sigCanvas}

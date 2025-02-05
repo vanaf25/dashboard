@@ -132,7 +132,7 @@ const LearnWaver = () => {
   ];
   const p = "NOW THEREFORE, in consideration of the foregoing and the mutual promises contained herein and other good and valuable consideration, the receipt of which is hereby acknowledged and deemed to be legally sufficient and intended as legally binding, the Parties hereby agree as follows.";
   return (
-    <DocumentLayout pdfName={"LearnWaver"}
+    <DocumentLayout withSignature pdfName={"LearnWaver"}
                     exportElems={[
                         {type:ElementType.P,content:p},
                         ...sections.map(section=>({

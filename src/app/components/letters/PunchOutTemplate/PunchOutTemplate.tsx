@@ -1,13 +1,15 @@
 "use client";
 import {Typography} from '@mui/material';
 import Table from "@/app/components/letters/Table/Table";
-import type { AgGridReact as AgGridReactType } from "ag-grid-react";
+import type {AgGridReact as AgGridReactType} from "ag-grid-react";
 import SignaturesSection from "@/app/components/letters/signatureSection/signatureSection";
+import SignaturePad from "@/app/components/letters/SignaturePad/SignaturePad"
 import DocumentLayout from "@/app/components/DocumentLayout/DocumentLayout";
 import Paragraphs from "@/app/components/letters/parahraphs/Paragraphs";
 import {ElementType} from "@/app/types/exportPdfTypes";
-import React, { useMemo, useRef, useState} from "react";
+import React, {useMemo, useRef, useState} from "react";
 import getRowData from "@/app/utils/getRowData";
+
 interface PunchOutTemplateProps{
     type:15 | 60
 }
@@ -47,7 +49,7 @@ the customer agrees to take full responsibility for all work performed and hold 
         }
     }
     return (
-        <DocumentLayout exportElems={exportsElems} pdfName={`Punch Out  ${type}`}
+        <DocumentLayout withSignature exportElems={exportsElems} pdfName={`Punch Out  ${type}`}
                         pdfTitle={`Punch Out ${type}`} >
             <Typography sx={{mb:1}}>
                 {p}
