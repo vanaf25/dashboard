@@ -7,6 +7,8 @@ import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
 import "@/utils/i18n";
 import "@/app/api/index";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
+import {LocalizationProvider} from "@mui/x-date-pickers";
+import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 const queryClient = new QueryClient()
 const MyApp = ({
                    children,
@@ -16,12 +18,14 @@ const MyApp = ({
     const theme = ThemeSettings();
     return (
         <QueryClientProvider client={queryClient} >
-            <AppRouterCacheProvider options={{ enableCssLayer: true }}>
-                <ThemeProvider theme={theme}>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <AppRouterCacheProvider options={{ enableCssLayer: true }}>
+                    <ThemeProvider theme={theme}>
                         <CssBaseline />
                         {children}
-                </ThemeProvider>
-            </AppRouterCacheProvider>
+                    </ThemeProvider>
+                </AppRouterCacheProvider>
+            </LocalizationProvider>
         </QueryClientProvider>
     );
 };

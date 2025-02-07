@@ -20,7 +20,7 @@ const ReusableTable: React.FC<ReusableTableProps> = React.memo(
             rows?.length === 1
                 ? "93px"
                 : rows?.length < 4
-                    ? rows?.length * 42 + 51
+                    ? `${(rows?.length * 52)+52}px`
                     : undefined,
         marginBottom: withOutMargin ? "0px" : "30px",
       };
@@ -33,7 +33,7 @@ const ReusableTable: React.FC<ReusableTableProps> = React.memo(
                 rowData={rows}
                 columnDefs={columns}
                 ref={customRef}
-                domLayout={rows?.length > 3 ? "autoHeight" : undefined}
+                domLayout={rows?.length>3?"autoHeight":undefined}
                 {...anotherProps}
             />
           </div>

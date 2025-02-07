@@ -13,7 +13,7 @@ const BlueBlock: React.FC<BlueBlockProps> = ({ fullWidth,text }) => {
           size="small"
           id="standard-basic"
           defaultValue={text}
-          label="Standard"
+          label="Provide value"
           variant="standard"
       />
   );

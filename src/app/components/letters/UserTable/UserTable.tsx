@@ -24,7 +24,7 @@ const TableGrid: React.FC<TableGridProps> = ({ title, data }) => {
     return (
         <Box>
             {/* Table Title */}
-            <Box bgcolor="green" p={1} textAlign="center">
+            <Box bgcolor="green" sx={{borderRadius:0}} p={1} textAlign="center">
                 <Typography variant="h6" color="white">
                     {title}
                 </Typography>
@@ -69,8 +69,7 @@ const TableGrid: React.FC<TableGridProps> = ({ title, data }) => {
                                         value={row.label === "Start" ? startDate : endDate}
                                         onChange={(newValue) => {
                                             if (row.label === "Start") setStartDate(newValue);
-                                            else setEndDate(newValue);
-                                        }}
+                                            else setEndDate(newValue)}}
                                     />
                                 </DemoContainer>
                             ) : (

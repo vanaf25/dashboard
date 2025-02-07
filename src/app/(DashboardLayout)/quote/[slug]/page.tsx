@@ -32,6 +32,7 @@ const Page = () => {
         'Warranty',
         "WeatherAlert",
         "WelcomeLetter",
+        "BreachOfContract"
     ];
     return (
         <>

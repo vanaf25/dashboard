@@ -6,9 +6,9 @@ import TableWithOutHeaders from '../../../../components/letters/TableWithoutHead
 import calculateSeriesOfNumbers from '../../../../utils/calculateSeriesOfNumbers';
 import calculateTotalAmount from '../../../../utils/calculateTotalAmount';
 import ContractDetails from '../../../../components/letters/ContractDetails/ContractDetails';
-/*
 import UserDetails from '../../../../components/letters/UserDetails/UserDetails';
-*/
+import UserTable from "@/app/components/letters/UserTable/UserTable";
+
 const totalKeys = ["amount", "totalPay", "totalCost"];
 const JobCost = () => {
   const contractDetails={contractAmount:1000,materialBudget:1000,timeBonus:1000}
@@ -273,6 +273,7 @@ const JobCost = () => {
   return (
     <Box sx={{ maxWidth: 900, margin: "0 auto" }}>
       <ContractDetails {...contractDetails}/>
+      <UserDetails/>
       <Table
         columns={firstTableColumns}
         rows={firstTableRows}
@@ -299,7 +300,7 @@ const JobCost = () => {
       />
       <Box sx={{ display: "flex" }}>
         <TableWithOutHeaders
-          sx={{ width: 300, mr: 1 }}
+          sx={{ width: 300, mr: 1,borderRadius:0 }}
           rows={summaryTableRows}
         />
       </Box>

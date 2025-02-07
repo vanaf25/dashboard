@@ -67,7 +67,6 @@ const GeneratePdf: React.FC<GeneratePDFProps> = ({ elems, data, pdfTitle, withOu
                 {!withOutHeader && data && (
                     <PrintableDocumentHeader type={"quote"} customers={data?.customers} profiles={data?.profiles} />
                 )}
-
                 {elems.map((el, index) => {
                     const getStyle = () => {
                         switch (el.type) {
@@ -85,10 +84,9 @@ const GeneratePdf: React.FC<GeneratePDFProps> = ({ elems, data, pdfTitle, withOu
                                 return styles.section;
                         }
                     };
-
                     switch (el.type) {
                         case ElementType.TABLE:
-                            return <GenerateTablePDF key={index} data={el.rows as any[]} columns={el.columns} title={el.title} />;
+                            return <GenerateTablePDF key={index} data={el.rows as any[]} columns={el.columns} title={el.title} />
 
                         case ElementType.SECTION:
                             return (
@@ -132,6 +130,5 @@ const GeneratePdf: React.FC<GeneratePDFProps> = ({ elems, data, pdfTitle, withOu
             </Page>
         </Document>
     );
-};
-
+}
 export default GeneratePdf;

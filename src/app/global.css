@@ -9,7 +9,9 @@ html { overflow-y: scroll; }
 }
 }
 @layer base {img{display: initial}}
-@media print {
+
+*/
+/*@media print {
     .page-break {
         display: block;
     }
@@ -20,7 +22,6 @@ html { overflow-y: scroll; }
 .page-break {
     display: none;
 }
-*/
 @media print {
     *{
         display: none;
@@ -28,5 +29,5 @@ html { overflow-y: scroll; }
     .forPrint{
         display: block!important;
     }
-}
+}*/
 

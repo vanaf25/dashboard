@@ -23,8 +23,8 @@ const TableWithOutHeaders: React.FC<TableWithOutHeadersProps> = ({
                                                                      ...props
                                                                  }) => {
     return (
-        <TableContainer component={Paper} {...props}>
-            <Table style={{ borderCollapse: "collapse" }}>
+        <TableContainer sx={{borderRadius:0}} component={Paper} {...props}>
+            <Table style={{ borderCollapse: "collapse",borderRadius:0 }}>
                 {/* Table Body without Headers */}
                 <TableBody>
                     {rows.map((row, rowIndex) => (

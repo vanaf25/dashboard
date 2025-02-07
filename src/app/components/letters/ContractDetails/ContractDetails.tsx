@@ -8,11 +8,13 @@ const useStyles = makeStyles(() => ({
     padding: "5px",
     textAlign:"center",
     color: 'white',
+    borderRadius:0,
   },
   greyBackground: {
     backgroundColor: '#F0F0F0', // Grey background for amount cell
     padding: "5px",
     textAlign: 'center',
+    borderRadius:0,
   },
   blueText: {
     color: '#2196F3', // Blue text color for the amount
