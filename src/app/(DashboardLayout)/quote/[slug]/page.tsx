@@ -32,7 +32,10 @@ const Page = () => {
         'Warranty',
         "WeatherAlert",
         "WelcomeLetter",
-        "BreachOfContract"
+        "BreachOfContract",
+        "Invoice",
+        "JobCost",
+        "ClaimOfLien"
     ];
     return (
         <>

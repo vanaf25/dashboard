@@ -19,7 +19,7 @@ const BreachOfContract = () => {
 
     const [violationDetails, setViolationDetails] = useState("");
 
-    const handleDateChange = (field, date) => {
+    const handleDateChange = (field:any, date:any) => {
         setSelectedDates((prev) => ({ ...prev, [field]: date }));
     };
 

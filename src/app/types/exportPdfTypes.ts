@@ -1,3 +1,7 @@
+import {ListCardElem} from "@/app/components/ReactPdf/PDFListCard/PDFListCard";
+import {RefObject} from "react";
+import {AgGridReact} from "ag-grid-react";
+
 export enum ElementType {
     H3 = "h3",
     H2 = "h2",
@@ -5,19 +9,22 @@ export enum ElementType {
     SECTION = "section",
     TABLE="table",
     H4="h4",
-    IMG="img"
+    IMG="img",
+    ListCard="listCard",
 }
 export  interface PDFColumn {
     field: string,
-    flex: number,
-
+    headerName?:string,
+    flex?: number,
     [key: string]: any
 }
 export interface PDFElem{
     type:ElementType,
-    content:string,
+    content?:string,
     title?:string,
     rows?:any[],
+    tableRef?:RefObject<AgGridReact>
     src?:string,
-    columns?:PDFColumn[]
+    columns?:PDFColumn[],
+    cardListRows?:ListCardElem[]
 }

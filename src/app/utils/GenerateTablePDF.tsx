@@ -1,6 +1,8 @@
-import React from "react";
+import React, {RefObject} from "react";
 import { View, Text, StyleSheet } from "@react-pdf/renderer";
 import { PDFColumn } from "@/app/types/exportPdfTypes";
+import {AgGridReact} from "ag-grid-react";
+import getActualTableData from "@/app/utils/getActualTableData";
 
 // Styles to simulate border-collapse: collapse
 const styles = StyleSheet.create({
@@ -34,47 +36,52 @@ interface PDFTableProps {
     data: any[];
     title?: string;
     columns?: PDFColumn[];
+    tableRef?:RefObject<AgGridReact>
 }
 
-const PDFTable: React.FC<PDFTableProps> = ({ data, title, columns }) => (
-    <>
-        {title && <Text style={{ fontSize: 16, marginBottom: 10 }}>{title}</Text>}
-        <View style={styles.table}>
-            {/* Table Header */}
-            <View style={styles.tableRow}>
-                {columns?.map((col, index) => (
-                    <View
-                        style={[
-                            styles.tableColHeader,
-                            { flex: col.flex || 1 },
-                        ]}
-                        key={col.field}
-                    >
-                        <Text style={[styles.tableCellHeader, styles.tableCell]}>{col.field}</Text>
-                    </View>
-                ))}
-            </View>
-
-            {/* Table Rows */}
-            {data.map((row, rowIndex) => (
-                <View style={styles.tableRow} key={rowIndex}>
-                    {columns?.map((col, colIndex) => (
+const PDFTable: React.FC<PDFTableProps> = ({ data, title
+                                               , columns, tableRef}) =>{
+   const mappedData=tableRef ? getActualTableData(tableRef):data
+    return (
+        <>
+            {title && <Text style={{ fontSize: 16, marginBottom: 10 }}>{title}</Text>}
+            <View style={styles.table}>
+                {/* Table Header */}
+                <View style={styles.tableRow}>
+                    {columns?.map((col, index) => (
                         <View
                             style={[
-                                styles.tableCol,
+                                styles.tableColHeader,
                                 { flex: col.flex || 1 },
                             ]}
-                            key={colIndex}
+                            key={col.field}
                         >
-                            <Text style={styles.tableCell}>{typeof row[col.field] === "boolean"
-                                ? row[col.field] ? "yes" : "no"
-                                : row[col.field]}</Text>
+                            <Text style={[styles.tableCellHeader, styles.tableCell]}>{col.headerName ? col.headerName:col.field}</Text>
                         </View>
                     ))}
                 </View>
-            ))}
-        </View>
-    </>
-);
+
+                {/* Table Rows */}
+                {mappedData?.map((row, rowIndex) => (
+                    <View style={styles.tableRow} key={rowIndex}>
+                        {columns?.map((col, colIndex) => (
+                            <View
+                                style={[
+                                    styles.tableCol,
+                                    { flex: col.flex || 1 },
+                                ]}
+                                key={colIndex}
+                            >
+                                <Text style={styles.tableCell}>{typeof row[col.field] === "boolean"
+                                    ? row[col.field] ? "yes" : "no"
+                                    : row[col.field]}</Text>
+                            </View>
+                        ))}
+                    </View>
+                ))}
+            </View>
+        </>
+    )
+} ;
 
 export default PDFTable;

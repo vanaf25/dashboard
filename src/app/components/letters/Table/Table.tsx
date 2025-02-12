@@ -18,9 +18,9 @@ const ReusableTable: React.FC<ReusableTableProps> = React.memo(
       const containerStyle = {
         height:
             rows?.length === 1
-                ? "93px"
+                ? "110px"
                 : rows?.length < 4
-                    ? `${(rows?.length * 52)+52}px`
+                    ? `${(rows?.length * 50)+52}px`
                     : undefined,
         marginBottom: withOutMargin ? "0px" : "30px",
       };

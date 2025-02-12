@@ -10,19 +10,22 @@ import {PDFDownloadLink} from "@react-pdf/renderer";
 import GeneratePdf from "@/app/utils/GeneratePdf";
 import {ElementType, PDFElem} from "@/app/types/exportPdfTypes";
 import SignaturePad from "@/app/components/letters/SignaturePad/SignaturePad";
+import {PageSize} from "@react-pdf/types";
 interface DocumentLayoutProps{
     children:ReactNode  | ReactNode[],
     exportElems?:PDFElem[],
     pdfName?:string,
     withOutHeader?:boolean,
     pdfTitle?:string,
+    pageType?:PageSize,
     withSignature?:boolean
 }
 const DocumentLayout:React.FC<DocumentLayoutProps> = ({children
                                                           ,exportElems
                                                           ,withOutHeader
                                                           ,pdfTitle
-                                                          ,pdfName,withSignature}) => {
+                                                          ,pdfName,
+                                                          withSignature,pageType}) => {
     const {data, isLoading, error } = useGetQuoteQuery();
     const [signatureUrl,setSignatureUrl]=useState("");
     return (
@@ -31,9 +34,11 @@ const DocumentLayout:React.FC<DocumentLayoutProps> = ({children
                 {error ?  <Typography color={"error"}>
                 Error loading document: {(error as Error).message}</Typography>:data ? <>
                         {exportElems && <PDFDownloadLink     document={<GeneratePdf
+                            pageType={pageType}
                             pdfTitle={pdfTitle}
                             withOutHeader={withOutHeader}
-                            data={data} elems={!withSignature ?  exportElems:[...exportElems,{type:ElementType.IMG,src:signatureUrl,content:""}] } />}
+                            data={data} elems={!withSignature ?
+                            exportElems:[...exportElems,{type:ElementType.IMG,src:signatureUrl,content:""}] } />}
                                      fileName={`${pdfName}.pdf`}>
                         <Button size={"large"} fullWidth sx={{mb:2}}>Export to PDF</Button>
                     </PDFDownloadLink>}

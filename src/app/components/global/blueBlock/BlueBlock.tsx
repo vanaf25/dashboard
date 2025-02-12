@@ -4,16 +4,17 @@ import React from "react";
 interface BlueBlockProps {
   fullWidth?: boolean;
   text?:string,
+    placeholder?:string,
 }
 
-const BlueBlock: React.FC<BlueBlockProps> = ({ fullWidth,text }) => {
+const BlueBlock: React.FC<BlueBlockProps> = ({ fullWidth,text,placeholder }) => {
   return (
       <TextField
           fullWidth={fullWidth}
           size="small"
           id="standard-basic"
           defaultValue={text}
-          label="Provide value"
+          label={`${placeholder || "Provide value" }`}
           variant="standard"
       />
   );

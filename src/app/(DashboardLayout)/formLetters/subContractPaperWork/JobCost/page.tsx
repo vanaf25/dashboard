@@ -7,7 +7,6 @@ import calculateSeriesOfNumbers from '../../../../utils/calculateSeriesOfNumbers
 import calculateTotalAmount from '../../../../utils/calculateTotalAmount';
 import ContractDetails from '../../../../components/letters/ContractDetails/ContractDetails';
 import UserDetails from '../../../../components/letters/UserDetails/UserDetails';
-import UserTable from "@/app/components/letters/UserTable/UserTable";
 
 const totalKeys = ["amount", "totalPay", "totalCost"];
 const JobCost = () => {

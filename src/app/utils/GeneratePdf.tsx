@@ -3,6 +3,8 @@ import { Document, Page, StyleSheet, Text, View, Image } from '@react-pdf/render
 import { ElementType, PDFElem } from "@/app/types/exportPdfTypes";
 import PrintableDocumentHeader from "@/app/components/ReactPdf/PrintableDocumentHeader/PrintableDocumentHeader";
 import GenerateTablePDF from "@/app/utils/GenerateTablePDF";
+import PDFListCard, {ListCardElem} from "@/app/components/ReactPdf/PDFListCard/PDFListCard";
+import {PageSize} from "@react-pdf/types";
 
 export const styles = StyleSheet.create({
     page: { padding: 20, backgroundColor: "#F0F5F9", color: "#111c2d" },
@@ -53,14 +55,18 @@ export interface GeneratePDFProps {
     data?: any;
     pdfTitle?: string;
     withOutHeader?: boolean;
+    pageType?:PageSize,
+    cardListRows?:ListCardElem[]
 }
 
-const GeneratePdf: React.FC<GeneratePDFProps> = ({ elems, data, pdfTitle, withOutHeader }) => {
+const GeneratePdf: React.FC<GeneratePDFProps> = ({ elems, data, pdfTitle,
+                                                     withOutHeader
+                                                     ,cardListRows
+                                                 ,pageType }) => {
     const currentDate = new Date().toLocaleDateString();
-
     return (
         <Document>
-            <Page size="A4" style={styles.page}>
+            <Page size={pageType || `A4`} style={styles.page}>
                 <Text style={styles.bigTitle}>{data?.profiles?.companyName}</Text>
                 {pdfTitle && <Text style={styles.title}>{pdfTitle}</Text>}
 
@@ -86,7 +92,8 @@ const GeneratePdf: React.FC<GeneratePDFProps> = ({ elems, data, pdfTitle, withOu
                     };
                     switch (el.type) {
                         case ElementType.TABLE:
-                            return <GenerateTablePDF key={index} data={el.rows as any[]} columns={el.columns} title={el.title} />
+                            return <GenerateTablePDF key={index} tableRef={el.tableRef} data={el.rows as any[]}
+                                                     columns={el.columns} title={el.title} />
 
                         case ElementType.SECTION:
                             return (
@@ -95,7 +102,8 @@ const GeneratePdf: React.FC<GeneratePDFProps> = ({ elems, data, pdfTitle, withOu
                                     {el.content && <Text style={el.title ? styles.description : styles.text}>{el.content.replace(/\n\s+/g, " ")}</Text>}
                                 </View>
                             );
-
+                        case ElementType.ListCard:
+                            return <>{el.cardListRows ? <PDFListCard rows={el.cardListRows} />:<></>}</>
                         case ElementType.IMG:
                             return (
                                 <View key={index} style={styles.imageDateContainer}>
@@ -121,9 +129,9 @@ const GeneratePdf: React.FC<GeneratePDFProps> = ({ elems, data, pdfTitle, withOu
 
                         default:
                             return (
-                                <Text key={index} style={getStyle()}>
+                                <>{el.content ? <Text key={index} style={getStyle()}>
                                     {el.content.replace(/\n\s+/g, " ")}
-                                </Text>
+                                </Text>:<></>}</>
                             );
                     }
                 })}
