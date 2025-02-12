@@ -14,6 +14,7 @@ import Projects from "@/app/components/Projects/Projects";
 import {useDispatch} from "@/store/hooks";
 import {fetchProjects} from "@/store/apps/dasbhoard/dashboardSlice";
 import Loading from "@/app/(DashboardLayout)/loading";
+import Workers from "@/app/components/Workers/Workers";
 export default function Dashboard() {
     const dispatch=useDispatch();
     const [isLoading,setIsLoading]=useState(true)
@@ -44,6 +45,7 @@ export default function Dashboard() {
             </BlankCard>
             <Leads/>
             <Projects/>
+            <Workers/>
             {/*
              <BlankCard sx={{display:"flex",justifyContent:"space-between",mb:2}}>
                  <Box>
