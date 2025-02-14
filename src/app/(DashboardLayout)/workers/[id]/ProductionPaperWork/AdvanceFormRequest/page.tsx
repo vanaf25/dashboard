@@ -1,9 +1,9 @@
 "use client";
+import UnderlinedText from '@/app/components/global/UnderlinedText/UnderlinedText';
+import SignaturesSection from '@/app/components/letters/signatureSection/signatureSection';
 import { Typography } from '@mui/material';
-import UnderlinedText from '../../../../components/global/UnderlinedText/UnderlinedText';
-import BlueBlock from '../../../../components/global/blueBlock/BlueBlock';
-import SignaturesSection from '../../../../components/letters/signatureSection/signatureSection';
 import Box from '@mui/material/Box';
+import BlueBlock from "@/app/components/global/blueBlock/BlueBlock";
 
 const AdvanceFormRequest = () => {
   return (

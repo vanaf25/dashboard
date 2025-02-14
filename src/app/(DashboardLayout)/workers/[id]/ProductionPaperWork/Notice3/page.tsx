@@ -1,5 +1,6 @@
 "use client";
-import LegalLetter from '../../../../components/letters/legalLetter/LegalLetter';
+
+import LegalLetter from "@/app/components/letters/legalLetter/LegalLetter";
 
 const Notice3 = () => {
   return (

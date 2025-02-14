@@ -3,6 +3,8 @@ import Box from '@mui/material/Box';
 import { Grid, Typography } from '@mui/material';
 import CustomerDetails from "@/app/components/global/CustomerDetails/CustomerDetails";
 import WorkerLayout from "@/app/components/WorkerLayout/WorkerLayout";
+import UnderlinedText from "@/app/components/global/UnderlinedText/UnderlinedText";
+import SignaturesSection from "@/app/components/letters/signatureSection/signatureSection";
 const agreementSections2 = [
   {
     title: 'Labor Agreement',

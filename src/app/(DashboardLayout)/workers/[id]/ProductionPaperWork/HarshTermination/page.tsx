@@ -1,22 +1,11 @@
 "use client"
 import { Grid, Typography } from '@mui/material';
-import CustomerDetails from '../../../../components/global/CustomerDetails/CustomerDetails';
-import UnderlinedText from '../../../../components/global/UnderlinedText/UnderlinedText';
+import UnderlinedText from "@/app/components/global/UnderlinedText/UnderlinedText";
 
 const HarshTermination = () => {
   return (
     <div>
       <Typography variant={"h4"}>Harsch Termination</Typography>
-      <Grid container>
-        <Grid xs={6}>
-          <CustomerDetails title={"Worker info"} customer={{name:"ele",
-            address:"Adress",phone:"0990930405",email:"vanaf@gmail.com"}} />
-        </Grid>
-        <Grid xs={6}>
-          <CustomerDetails title={"Company info"} customer={{name:"ele",
-            address:"Adress",phone:"0990930405",email:"vanaf@gmail.com"}} />
-        </Grid>
-      </Grid>
       <Typography sx={{mb:1}}>
         Dear Ivan
       </Typography>

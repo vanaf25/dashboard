@@ -1,8 +1,8 @@
 "use client";
+import UnderlinedText from '@/app/components/global/UnderlinedText/UnderlinedText';
 import { Typography } from '@mui/material';
-import SignaturesSection from '../../../../components/letters/signatureSection/signatureSection';
 import Box from '@mui/material/Box';
-import UnderlinedText from '../../../../components/global/UnderlinedText/UnderlinedText';
+import SignaturesSection from "@/app/components/letters/signatureSection/signatureSection";
 const applicantStatementParagraphs = [
   "I certify that all information I have provided in order to apply for and secure work with this employer is true, complete and correct.",
   "I expressly authorize, without reservation, the employer, its representatives, employees or agents to contact and obtain information from all references (personal and professional), employers, public agencies, licensing authorities and educational institutions and to otherwise verify the accuracy of all information provided by me in this application, resume or job interview. I hereby waive any and all rights and claims I may have regarding the employer, its agents, employees or representatives, for seeking, gathering and using truthful and non-defamatory information in a lawful manner, in the employment process and all other persons, corporations or organizations for furnishing such information about me.",
