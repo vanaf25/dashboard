@@ -26,13 +26,13 @@ const CustomerDetails: React.FC<CustomerDetailsProps> = ({ customer, withOutTitl
     );
 };
 export const UserDetails:React.FC<any>=({customer,...rest})=>(<CustomerDetails customer={
-    {customer:customer.name,email:customer.email,phone:customer.phone,address:`${customer.address},
-     ${customer.city}, ${customer.state}, ${customer.zip}`}
+    {customer:customer?.name,email:customer?.email,phone:customer?.phone,address:`${customer?.address},
+     ${customer?.city}, ${customer?.state}, ${customer?.zip}`}
 } title={"Customer Information"} {...rest} />)
 export const CompanyDetails:React.FC<any>=({company,...rest})=><CustomerDetails customer={{
-companyPhone:company.phone,
-    email:company.company_email,
-    companyAddress:`${company.company_address}, ${company.city},
-     ${company.state}, ${company.zip}`,
+companyPhone:company?.phone,
+    email:company?.company_email,
+    companyAddress:`${company?.company_address}, ${company?.city},
+     ${company?.state}, ${company?.zip}`,
 }} title={"Company Details"} {...rest}  />
 export default CustomerDetails;
