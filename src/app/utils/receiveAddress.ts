@@ -1,0 +1,1 @@
+export default (profile:any)=>`${profile?.company_address},${profile?.city},${profile?.state},${profile?.zip}`

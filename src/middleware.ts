@@ -7,7 +7,8 @@ export async function middleware(req:NextRequest) {
     const { data } = await supabase.auth.getSession();
     const publicRoutes = ["/login",
         "/register",
-        "/forgot-password",
+        "/forgotPassword",
+        "/resetPassword"
        /* "/quote/.*!/anotherDocuments/PunchOutOf15",
         "/quote/.*!/anotherDocuments/PunchOutOf60"*/
     ];

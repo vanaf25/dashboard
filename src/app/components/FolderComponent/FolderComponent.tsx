@@ -11,7 +11,7 @@ type FileComponentProps = {
     name: string;
 };
 export  const FolderComponent: React.FC<FolderComponentProps> = ({ name, children }) => (
-    <Paper  variant="outlined" sx={{ p: 2, bgcolor: 'white'}}>
+    <Paper  variant="outlined" sx={{ p: 2, bgcolor: 'white',mb:2}}>
         <Box display="flex" alignItems="center" mb={children ? 2:0}>
             <Folder color="primary" sx={{ mr: 1 }} />
             <Typography variant="subtitle1" fontWeight="bold">

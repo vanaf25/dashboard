@@ -1,8 +1,4 @@
 "use client";
-import { Auth } from '@supabase/auth-ui-react'
-import {
-    ThemeSupa,
-} from '@supabase/auth-ui-shared'
 import PageContainer from "@/app/components/container/PageContainer";
 import {useSupabaseClient} from "@supabase/auth-helpers-react";
 import {Card, Grid, Stack } from '@mui/material';
@@ -12,7 +8,6 @@ import Typography from "@mui/material/Typography";
 import Link from "next/link";
 
 export default function Login2() {
-    const supabase = useSupabaseClient()
     return (
         <PageContainer title="Login Page" description="this is Sample page">
             <Box

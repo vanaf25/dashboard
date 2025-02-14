@@ -70,7 +70,7 @@ const GeneratePdf: React.FC<GeneratePDFProps> = ({ elems, data, pdfTitle,
                 <Text style={styles.bigTitle}>{data?.profiles?.companyName}</Text>
                 {pdfTitle && <Text style={styles.title}>{pdfTitle}</Text>}
 
-                {!withOutHeader && data && (
+                {!withOutHeader && data?.customers && data?.profiles &&  (
                     <PrintableDocumentHeader type={"quote"} customers={data?.customers} profiles={data?.profiles} />
                 )}
                 {elems.map((el, index) => {
