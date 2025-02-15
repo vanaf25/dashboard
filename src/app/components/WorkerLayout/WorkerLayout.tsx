@@ -21,12 +21,14 @@ interface DocumentLayoutProps{
     pdfTitle?:string,
     pageType?:PageSize,
     withSignature?:boolean
+    withCompanyName?:boolean,
 }
 const WorkerLayout:React.FC<DocumentLayoutProps> = ({children
                                                           ,exportElems
                                                           ,withOutHeader
                                                           ,pdfTitle
                                                           ,pdfName,
+                                                        withCompanyName,
                                                           withSignature,pageType}) => {
     const {data, isLoading, error } = useGetWorkerQuery();
     const [signatureUrl,setSignatureUrl]=useState("");
@@ -39,20 +41,20 @@ const WorkerLayout:React.FC<DocumentLayoutProps> = ({children
                     {exportElems && <PDFDownloadLink     document={<GeneratePdf
                         pageType={pageType}
                         pdfTitle={pdfTitle}
+                        withCompanyName={withCompanyName}
                         withOutHeader={withOutHeader}
-                        data={data}
-
+                        data={{profiles:profile,customers:{...data,name:data.fullName}}}
                         elems={!withSignature ?
                         exportElems:[...exportElems,{type:ElementType.IMG,src:signatureUrl,content:""}] } />}
                                                          fileName={`${pdfName}.pdf`}>
                         <Button size={"large"} fullWidth sx={{mb:2}}>Export to PDF</Button>
                     </PDFDownloadLink>}
-                    <DocumentHeaderLayout>
+                    {!withOutHeader && <DocumentHeaderLayout>
                         <UserDetails
                             title={"Worker info"}
-                            customer={data}/>
+                            customer={{...data,name:data.fullName}}/>
                         <CompanyDetails company={profile}/>
-                    </DocumentHeaderLayout>
+                    </DocumentHeaderLayout>}
                     {children}
 
                     {withSignature ? <Box sx={{mt:3}}>

@@ -1,5 +1,8 @@
 "use client";
-import { Paper, Typography } from '@mui/material';
+import {  Typography } from '@mui/material';
+import BlankCard from "@/app/components/shared/BlankCard";
+import WorkerLayout from "@/app/components/WorkerLayout/WorkerLayout";
+import {ElementType} from "@/app/types/exportPdfTypes";
 
 const NewWorkerExpectations = () => {
   const values = [
@@ -14,17 +17,21 @@ const NewWorkerExpectations = () => {
     "Bring your own meals and water.",
     "Follow directions without complaint or challenge."
   ];
-  return (
-    <div>
-    <Typography variant={"h4"}>Expectations</Typography>
-      <Typography>These are the expectations
+  const expectationP=`These are the expectations
         we have for all personnel
-        regardless of position or title</Typography>
-        {values.map((el,index)=><Paper
+        regardless of position or title`
+  return (
+    <WorkerLayout withOutHeader exportElems={[
+      {type:ElementType.P,content:expectationP},
+        ...values.map(value=>({type:ElementType.SECTION,content:value}))
+    ]}  pdfTitle={"New Worker Expectations"} pdfName={"New Worker Expectations"} >
+    <Typography variant={"h4"} sx={{mb:2}}>Expectations</Typography>
+      <Typography sx={{mb:1}}>{expectationP}</Typography>
+        {values.map((el,index)=><BlankCard
           sx={{p:2,width:"80%",margin:"0 auto 10px",fontSize:25,textAlign:"center"}} key={el}>
       <Typography sx={{fontSize:25}}>{index+1}. {el}</Typography>
-        </Paper>)}
-    </div>
+        </BlankCard>)}
+    </WorkerLayout>
   );
 };
 

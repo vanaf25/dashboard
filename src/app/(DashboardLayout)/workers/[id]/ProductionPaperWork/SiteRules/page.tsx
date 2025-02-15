@@ -1,5 +1,8 @@
 "use client";
 import { Paper, Typography } from '@mui/material';
+import WorkerLayout from "@/app/components/WorkerLayout/WorkerLayout";
+import BlankCard from "@/app/components/shared/BlankCard";
+import {ElementType} from "@/app/types/exportPdfTypes";
 
 const SiteRules = () => {
   const values =[
@@ -13,15 +16,19 @@ const SiteRules = () => {
     "First team member on site is required to take pictures of all 4 sides of the production.",
     "Last team member to leave site is to take pictures of all 4 sides of the production.",
     "No smoking"]
+  const p=`All rules for sites are to be fallowed at all times`
   return (
-    <div>
+    <WorkerLayout withCompanyName withOutHeader pdfName={"Site Rules"} exportElems={[
+      {type:ElementType.P,content:p},
+        ...values.map(val=>({type:ElementType.SECTION,content:val}))
+    ]} pdfTitle={"Site Rules"}>
       <Typography sx={{mb:2,textAlign:"center"}} variant={"h4"}>Site Rules</Typography>
       <Typography sx={{mb:2,textAlign:"center"}}>All rules for sites are to be fallowed at all times</Typography>
-      {values.map((el,index)=><Paper
-        sx={{p:2,width:"80%",margin:"0 auto 10px",fontSize:25,textAlign:"center"}} key={el}>
+      {values.map((el,index)=><BlankCard
+        sx={{p:2,margin:"0 auto 10px",fontSize:25,textAlign:"center"}} key={el}>
         <Typography sx={{fontSize:25}}>{index+1}. {el}</Typography>
-      </Paper>)}
-    </div>
+      </BlankCard>)}
+    </WorkerLayout>
   );
 };
 

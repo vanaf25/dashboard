@@ -56,18 +56,19 @@ export interface GeneratePDFProps {
     pdfTitle?: string;
     withOutHeader?: boolean;
     pageType?:PageSize,
-    cardListRows?:ListCardElem[]
+    cardListRows?:ListCardElem[],
+    withCompanyName?:boolean
 }
 
 const GeneratePdf: React.FC<GeneratePDFProps> = ({ elems, data, pdfTitle,
-                                                     withOutHeader
-                                                     ,cardListRows
+                                                     withOutHeader,
+                                                     withCompanyName
                                                  ,pageType }) => {
     const currentDate = new Date().toLocaleDateString();
     return (
         <Document>
             <Page size={pageType || `A4`} style={styles.page}>
-                <Text style={styles.bigTitle}>{data?.profiles?.companyName}</Text>
+                {(!withOutHeader || withCompanyName) &&  <Text style={styles.bigTitle}>{data?.profiles?.companyName}</Text>}
                 {pdfTitle && <Text style={styles.title}>{pdfTitle}</Text>}
 
                 {!withOutHeader && data?.customers && data?.profiles &&  (
