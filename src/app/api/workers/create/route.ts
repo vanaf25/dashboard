@@ -5,7 +5,7 @@ export async function POST(req:NextRequest) {
     const supabase=await createClient();
     const { data:user, error:authError } = await supabase.auth.getUser()
     const userId = user?.user?.id;
-    const { fullName, email, phone, address } = await req.json();
+    const { fullName, email, phone, address,...rest } = await req.json();
 
 
     if (authError || !userId) {
@@ -32,6 +32,7 @@ export async function POST(req:NextRequest) {
             phone,
             address,
             company_id: profile.id,
+            ...rest,
         },
     ]).select();
 

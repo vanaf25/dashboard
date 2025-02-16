@@ -11,6 +11,9 @@ interface WorkerForm {
     email: string;
     phone: string;
     address: string;
+    state:string,
+    city:string,
+    zip:string;
 }
 
 // Define fields dynamically
@@ -19,6 +22,10 @@ const fields: { name: keyof WorkerForm; label: string; type: string; validation:
     { name: "email", label: "Email", type: "email", validation: { required: "Email is required" } },
     { name: "phone", label: "Phone", type: "text", validation: { required: "Phone is required" } },
     { name: "address", label: "Address", type: "text", validation: { required: "Address is required" } },
+    { name: "state", label: "State", type: "text", validation: { required: "State is required" } },
+    { name: "city", label: "City", type: "text", validation: { required: "City is required" } },
+    { name: "zip", label: "Zip", type: "text", validation: { required: "Zip is required" } },
+
 ];
 
 const Page: React.FC = () => {

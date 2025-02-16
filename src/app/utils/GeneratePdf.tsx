@@ -1,6 +1,6 @@
 import React from 'react';
-import { Document, Page, StyleSheet, Text, View, Image } from '@react-pdf/renderer';
-import { ElementType, PDFElem } from "@/app/types/exportPdfTypes";
+import {Document, Image, Page, StyleSheet, Text, View} from '@react-pdf/renderer';
+import {ElementType, PDFElem} from "@/app/types/exportPdfTypes";
 import PrintableDocumentHeader from "@/app/components/ReactPdf/PrintableDocumentHeader/PrintableDocumentHeader";
 import GenerateTablePDF from "@/app/utils/GenerateTablePDF";
 import PDFListCard, {ListCardElem} from "@/app/components/ReactPdf/PDFListCard/PDFListCard";
@@ -18,7 +18,11 @@ export const styles = StyleSheet.create({
     description: { fontSize: "10px", fontWeight: 400, color: "#111c2d" },
     text: { fontSize: 12 },
     textWithMargin: { fontSize: 12, marginBottom: "10px" },
-
+    flexContainer: {
+        display: "flex",
+        flexDirection: "row", // or "column"
+        alignItems: "center",
+    },
     // New Styles for Image & Date Block
     imageDateContainer: {
         flexDirection: "row",
@@ -87,6 +91,8 @@ const GeneratePdf: React.FC<GeneratePDFProps> = ({ elems, data, pdfTitle,
                                 return styles.h4;
                             case ElementType.IMG:
                                 return styles.image;
+                            case ElementType.FLEX:
+                                return styles.flexContainer
                             default:
                                 return styles.section;
                         }
@@ -100,7 +106,8 @@ const GeneratePdf: React.FC<GeneratePDFProps> = ({ elems, data, pdfTitle,
                             return (
                                 <View key={index} style={styles.section}>
                                     {el.title && <Text style={el.content ? styles.heading : { ...styles.heading, marginBottom: 0 }}>{el.title}</Text>}
-                                    {el.content && <Text style={el.title ? styles.description : styles.text}>{el.content.replace(/\n\s+/g, " ")}</Text>}
+                                    {typeof el?.content==="string" && <Text style={el.title ? styles.description : styles.text}>{el?.content.replace(/\n\s+/g, " ")}</Text>}
+                                    {Array.isArray(el.content) && el?.content?.map(text=><Text style={el.title ? styles.description : styles.text}>{text?.replace(/\n\s+/g, " ")}</Text>) }
                                 </View>
                             );
                         case ElementType.ListCard:
@@ -127,10 +134,15 @@ const GeneratePdf: React.FC<GeneratePDFProps> = ({ elems, data, pdfTitle,
 
                                 </View>
                             );
-
+                        case ElementType.FLEX:
+                            return <View style={getStyle()} >
+                                {el?.flexboxElems?.map(t=><Text key={index} style={styles.text}>
+                                    {t.replace(/\n\s+/g, " ")}
+                                </Text>)}
+                            </View>
                         default:
                             return (
-                                <>{el.content ? <Text key={index} style={getStyle()}>
+                                <>{typeof el?.content==="string" ? <Text key={index} style={getStyle()}>
                                     {el.content.replace(/\n\s+/g, " ")}
                                 </Text>:<></>}</>
                             );

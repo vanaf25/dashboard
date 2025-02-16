@@ -1,6 +1,8 @@
 "use client"
 import Box from '@mui/material/Box';
 import { Typography } from '@mui/material';
+import WorkerLayout from "@/app/components/WorkerLayout/WorkerLayout";
+import {ElementType} from "@/app/types/exportPdfTypes";
 
 const GoldenRules = () => {
   const sections=[{
@@ -157,12 +159,14 @@ const GoldenRules = () => {
     }
   ]
   return (
-    <div>
+    <WorkerLayout withSignature pdfName={"goldenRules"}
+                  exportElems={sections.map(el=>({type:ElementType.SECTION,title:el.title,content:el.sections}))}
+                  pdfTitle={"goldenRules"}>
       {sections.map((section,index)=><Box key={index}>
         <Typography variant={"h5"}>{section.title}</Typography>
         {section.sections.map((el,index)=><Typography key={index} sx={{mb:1}}>{el}</Typography>)}
       </Box>)}
-    </div>
+    </WorkerLayout>
   );
 };
 

@@ -10,6 +10,7 @@ export enum ElementType {
     TABLE="table",
     H4="h4",
     IMG="img",
+    FLEX="flex",
     ListCard="listCard",
 }
 export  interface PDFColumn {
@@ -20,7 +21,8 @@ export  interface PDFColumn {
 }
 export interface PDFElem{
     type:ElementType,
-    content?:string,
+    flexboxElems?:string[]
+    content?:string |  string[],
     title?:string,
     rows?:any[],
     tableRef?:RefObject<AgGridReact>
