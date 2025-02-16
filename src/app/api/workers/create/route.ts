@@ -34,7 +34,7 @@ export async function POST(req:NextRequest) {
             company_id: profile.id,
             ...rest,
         },
-    ]).select();
+    ]).select().single();
 
     if (error) {
         return Response.json({ error: error.message }, { status: 400 });

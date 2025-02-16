@@ -3,7 +3,18 @@
 import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import axios from "axios";
-import { TextField, Button, Box, Typography, Alert, CircularProgress } from "@mui/material";
+import {
+    TextField,
+    Button,
+    Box,
+    Typography,
+    Alert,
+    CircularProgress,
+    Grid,
+} from "@mui/material";
+import BlankCard from "@/app/components/shared/BlankCard";
+import { useRouter } from "next/navigation";
+import {useQueryClient} from "@tanstack/react-query";
 
 // Define TypeScript interface for form inputs
 interface WorkerForm {
@@ -11,9 +22,10 @@ interface WorkerForm {
     email: string;
     phone: string;
     address: string;
-    state:string,
-    city:string,
-    zip:string;
+    state: string;
+    city: string;
+    zip: string;
+    id?: string;
 }
 
 // Define fields dynamically
@@ -25,7 +37,6 @@ const fields: { name: keyof WorkerForm; label: string; type: string; validation:
     { name: "state", label: "State", type: "text", validation: { required: "State is required" } },
     { name: "city", label: "City", type: "text", validation: { required: "City is required" } },
     { name: "zip", label: "Zip", type: "text", validation: { required: "Zip is required" } },
-
 ];
 
 const Page: React.FC = () => {
@@ -33,6 +44,8 @@ const Page: React.FC = () => {
     const [loading, setLoading] = useState(false);
     const [successMessage, setSuccessMessage] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
+    const router = useRouter();
+    const queryClient = useQueryClient();
 
     const onSubmit: SubmitHandler<WorkerForm> = async (data) => {
         setLoading(true);
@@ -40,9 +53,18 @@ const Page: React.FC = () => {
         setErrorMessage("");
 
         try {
-            const response = await axios.post<{ message: string }>("/api/workers/create", data);
+            const response = await axios.post<{ message: string; worker: WorkerForm }>("/api/workers/create", data);
             setSuccessMessage(response.data.message);
-            reset(); // Reset form after success
+            reset();
+            const worker=response?.data?.worker
+            console.log('response:',worker);
+            if(worker){
+                const oldData = queryClient.getQueryData<WorkerForm[]>(["workers"]);
+                if (oldData) {
+                    queryClient.setQueryData(["workers"], [...oldData, worker]);
+                }
+                if(worker.id) router.push(`/workers/${worker?.id}`)
+            }
         } catch (error: any) {
             setErrorMessage(error.response?.data?.error || "Something went wrong");
         } finally {
@@ -51,38 +73,40 @@ const Page: React.FC = () => {
     };
 
     return (
-        <Box sx={{ maxWidth: 400, mx: "auto", mt: 5, p: 3, border: "1px solid #ccc", borderRadius: 2 }}>
+        <BlankCard sx={{ maxWidth: 800, mx: "auto", mt: 5, p: 3, border: "1px solid #ccc", borderRadius: 2 }}>
             <Typography variant="h5" mb={2}>Add Worker</Typography>
 
-            {successMessage && <Alert severity="success">{successMessage}</Alert>}
-            {errorMessage && <Alert severity="error">{errorMessage}</Alert>}
+            {successMessage ? <Alert severity="success">{successMessage}</Alert>:<></>}
+            {errorMessage ? <Alert severity="error">{errorMessage}</Alert>:<></>}
 
             <form onSubmit={handleSubmit(onSubmit)}>
-                {fields.map(({ name, label, type, validation }) => (
-                    <TextField
-                        key={name}
-                        label={label}
-                        type={type}
-                        fullWidth
-                        margin="normal"
-                        {...register(name, validation)}
-                        error={!!errors[name]}
-                        helperText={errors[name]?.message}
-                    />
-                ))}
+                <Grid container spacing={2}>
+                    {fields.map(({ name, label, type, validation }) => (
+                        <Grid item xs={12} sm={6} key={name}>
+                            <TextField
+                                label={label}
+                                type={type}
+                                fullWidth
+                                {...register(name, validation)}
+                                error={!!errors[name]}
+                                helperText={errors[name]?.message}
+                            />
+                        </Grid>
+                    ))}
+                </Grid>
 
                 <Button
                     type="submit"
                     variant="contained"
                     color="primary"
                     fullWidth
-                    sx={{ mt: 2 }}
+                    sx={{ mt: 3 }}
                     disabled={loading}
                 >
                     {loading ? <CircularProgress size={24} /> : "Submit"}
                 </Button>
             </form>
-        </Box>
+        </BlankCard>
     );
 };
 
