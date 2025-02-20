@@ -2,7 +2,6 @@
 import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import Box from '@mui/material/Box';
 import Table from "@/app/components/letters/Table/Table";
-import InvoiceHeader from "@/app/(DashboardLayout)/formLetters/accounting/InvoiceHeader";
 import TableWithOutHeaders from "@/app/components/letters/TableWithoutHeaders/TableWithOutHeaders";
 import calculateSeriesOfNumbers from "@/app/utils/calculateSeriesOfNumbers";
 import calculateTotalAmount from "@/app/utils/calculateTotalAmount";

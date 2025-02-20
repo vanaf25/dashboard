@@ -104,10 +104,10 @@ const GeneratePdf: React.FC<GeneratePDFProps> = ({ elems, data, pdfTitle,
 
                         case ElementType.SECTION:
                             return (
-                                <View key={index} style={styles.section}>
+                                <View key={index} style={{...styles.section,...(!el.content ?  el?.additionalStyling ?? {}:{})}}>
                                     {el.title && <Text style={el.content ? styles.heading : { ...styles.heading, marginBottom: 0 }}>{el.title}</Text>}
-                                    {typeof el?.content==="string" && <Text style={el.title ? styles.description : styles.text}>{el?.content.replace(/\n\s+/g, " ")}</Text>}
-                                    {Array.isArray(el.content) && el?.content?.map(text=><Text style={el.title ? styles.description : styles.text}>{text?.replace(/\n\s+/g, " ")}</Text>) }
+                                    {typeof el?.content==="string" ? <Text style={el.title ? styles.description : styles.text}>{el?.content.replace(/\n\s+/g, " ")}</Text>:""}
+                                    {Array.isArray(el.content) ? el?.content?.map(text=><Text style={el.title ? styles.description : styles.text}>{text?.replace(/\n\s+/g, " ")}</Text>):"" }
                                 </View>
                             );
                         case ElementType.ListCard:
@@ -148,6 +148,7 @@ const GeneratePdf: React.FC<GeneratePDFProps> = ({ elems, data, pdfTitle,
                             );
                     }
                 })}
+
             </Page>
         </Document>
     );

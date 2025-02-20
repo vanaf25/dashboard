@@ -42,6 +42,7 @@ interface PDFTableProps {
 const PDFTable: React.FC<PDFTableProps> = ({ data, title
                                                , columns, tableRef}) =>{
    const mappedData=tableRef ? getActualTableData(tableRef):data
+    console.log('mappedData:',mappedData);
     return (
         <>
             {title && <Text style={{ fontSize: 16, marginBottom: 10 }}>{title}</Text>}

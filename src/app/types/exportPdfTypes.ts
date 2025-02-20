@@ -19,8 +19,10 @@ export  interface PDFColumn {
     flex?: number,
     [key: string]: any
 }
+export type AdditionalStyling={[key:string]:string | number }
 export interface PDFElem{
     type:ElementType,
+    additionalStyling?:AdditionalStyling,
     flexboxElems?:string[]
     content?:string |  string[],
     title?:string,

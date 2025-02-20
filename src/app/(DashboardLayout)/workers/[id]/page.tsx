@@ -33,7 +33,16 @@ const Page = () => {
         'SiteRules',
         'Termination'
     ];
-
+    const salesManager=[
+        'Back Charge Notice',
+        'Comission Structure',
+        'Missed Lead',
+        'Missed Sales Goal',
+        'New Client Questions',
+        "Location ID Pics"
+    ]
+    const safetyPaperWork= ["IncidentReport","SafetyInspiration","SafetyViolation"]
+    const subContractPaperWork=["SubContract","PointOfContact","Termination"]
     const { id } = useParams();
     const {data,isLoading}=useGetWorkerQuery()
     return (
@@ -51,6 +60,24 @@ const Page = () => {
                 <FolderComponent name={"Production Paper Work"}>
                     {productionPaperWork.map(doc=><Link key={doc}
                                                         href={`${id}/ProductionPaperWork/${doc.replace(/\s+/g, '')}`}>
+                        <FileComponent name={doc}/>
+                    </Link>)}
+                </FolderComponent>
+                <FolderComponent name={"Sales Manager"}>
+                    {salesManager.map(doc=><Link key={doc}
+                                                        href={`${id}/salesManager/${doc.replace(/\s+/g, '')}`}>
+                        <FileComponent name={doc}/>
+                    </Link>)}
+                </FolderComponent>
+                <FolderComponent name={"Safety Paper Work"}>
+                    {safetyPaperWork.map(doc=><Link key={doc}
+                                                 href={`${id}/safetyPaperWork/${doc.replace(/\s+/g, '')}`}>
+                        <FileComponent name={doc}/>
+                    </Link>)}
+                </FolderComponent>
+                <FolderComponent name={"subContractPaperWork"}>
+                    {subContractPaperWork.map(doc=><Link key={doc}
+                                                    href={`${id}/subContractPaperWork/${doc.replace(/\s+/g, '')}`}>
                         <FileComponent name={doc}/>
                     </Link>)}
                 </FolderComponent>
