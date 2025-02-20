@@ -26,7 +26,7 @@ const NewClientQuestions = () => {
   return (
     <div>
       <Typography variant={"h4"}>New Client Questions</Typography>
-      <RenovationRequestForm/>
+      <RenovationRequestForm onUpdate={()=>{}}/>
       <Paragraphs sections={customerProcessSteps}/>
     </div>
   );
