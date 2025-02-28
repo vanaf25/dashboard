@@ -3,9 +3,9 @@ import FormCreator from "@/app/components/system99/calculations/Form/Form";
 
 const StuccoWallCovering = () => {
   const inputFields = [
-    { label: "Wall Length (LF)", name: "L", id: "wall-length" },
-    { label: "Wall Height (LF)", name: "W", id: "wall-height" },
-    { label: "Basecoat Coverage Area (SF)", name: "T", id: "basecoat-coverage" }
+    { label: "Wall Length (LF)", name: "L", id: "WallLength",default:true, },
+    { label: "Wall Height (LF)", name: "W", id: "WallHeight",default:true, },
+    { label: "Basecoat Coverage Area (SF)", name: "T", id: "basecoatCoverage" }
   ];
   const result = [
     { id: 'Basecoat80lbQuantity', value: 0, label: 'Basecoat 80lb Quantity (ea)' },

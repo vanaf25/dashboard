@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { Paper } from '@mui/material';
 import Link from 'next/link';
@@ -15,7 +16,7 @@ const Links: React.FC<LinksProps> = ({ links, to }) => {
                   sx={{ p: 2, width: "80%", margin: "0 auto 10px", fontSize: 25, textAlign: "center" }}
                   key={el}
               >
-                <Link href={`/${to}/${el}`} passHref>
+                <Link href={`/${to}/${el?.replace(/[\s?'’]/g, '')}`} passHref>
                   {el}
                 </Link>
               </Paper>
@@ -24,5 +25,4 @@ const Links: React.FC<LinksProps> = ({ links, to }) => {
       </div>
   );
 };
-
 export default Links;

@@ -1,50 +1,22 @@
 "use client"
-import React, { useState } from 'react';
-import { useSearchParams } from "next/navigation";
+import React from 'react';
 import { useForm } from "react-hook-form";
 import { Box, Button, MenuItem, Paper, TextField, Typography } from "@mui/material";
-import Card from '../Cards/Card/Card';
-import DefaultCalculationValues from "@/app/components/DefaultCalculationValues/DefaultCalculationValues";
+import {useRouter} from "next/navigation";
 
-interface FormCreatorProps {
+interface GlobalFormCreator {
     url: string;
-    result: { id: string; value: number; label: string }[];
-    inputFields: { label: string; name: string; id: string;default?:boolean, type?: string; options?: number[] }[];
+    inputFields: { label: string; name: string; id?: string; type?: string; options?: number[] }[];
 }
 
-const FormCreator: React.FC<FormCreatorProps> = ({ inputFields, result, url }) => {
+const GlobalFormCreator: React.FC<GlobalFormCreator> = ({ inputFields, url }) => {
     const { register, handleSubmit } = useForm();
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [isSubmitted, setIsSubmitted] = useState(false);
-    const [resultFields, setResultFields] = useState(result);
-    const searchParams = useSearchParams();
-
+    const router=useRouter();
     const onSubmit = async (data: any) => {
-        setIsSubmitting(true);
         try {
-            const paramsObject = Object.fromEntries(searchParams.entries());
-            const defaultData=Object.fromEntries(Object.entries(paramsObject).map(el=>{
-                const finded=inputFields.find(item=>el[0]===item.id)
-                if(finded) return [finded.name,el[1]]
-                return el
-            }));
-            console.log('paramsObject:',defaultData);
-            const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}${url}`, {
-                method: "POST",
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({...data,...defaultData}),
-            });
-            const res = await response.json();
-            setIsSubmitting(false);
-            setIsSubmitted(true);
-            setResultFields(prevState =>
-                prevState.map(el => ({
-                    ...el,
-                    value: res[el.id] !== undefined ? res[el.id] : el.value,
-                }))
-            );
+            const queryParams = new URLSearchParams(data).toString();
+            router.push(`${url}/calculators?${queryParams}`);
         } catch (error) {
-            setIsSubmitting(false);
             console.error("Error submitting form:", error);
         }
     };
@@ -55,7 +27,6 @@ const FormCreator: React.FC<FormCreatorProps> = ({ inputFields, result, url }) =
     };
     return (
         <>
-            <DefaultCalculationValues/>
             <Paper
                 onSubmit={handleSubmit(onSubmit)}
                 component="form"
@@ -66,7 +37,7 @@ const FormCreator: React.FC<FormCreatorProps> = ({ inputFields, result, url }) =
                 <Typography variant="h5" sx={{ textAlign: "center", mb: 1 }}>
                     {url}
                 </Typography>
-                {inputFields.filter(el=>!el.default).map((field, index) =>
+                {inputFields.map((field, index) =>
                     field.type === "select" ? (
                         <TextField
                             key={index}
@@ -98,15 +69,14 @@ const FormCreator: React.FC<FormCreatorProps> = ({ inputFields, result, url }) =
                     )
                 )}
                 <Box>
-                    <Button fullWidth disabled={isSubmitting} type="submit" variant="contained">
-                        {isSubmitting ? "Pending..." : "Calculate"}
+                    <Button fullWidth  type="submit" variant="contained">
+                        { "Submit"}
                     </Button>
                 </Box>
             </Paper>
 
-            {isSubmitted && <Card resultFields={resultFields} />}
         </>
     );
 };
 
-export default FormCreator;
+export default GlobalFormCreator;

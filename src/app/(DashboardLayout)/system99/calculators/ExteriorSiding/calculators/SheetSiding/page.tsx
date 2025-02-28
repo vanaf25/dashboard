@@ -3,8 +3,8 @@ import FormCreator from "@/app/components/system99/calculations/Form/Form";
 
 const SheetSiding = () => {
   const inputFields = [
-    { label: "Wall Height (LF)", name: "A", id: "outlined-basic4" },
-    { label: "Wall Length (LF)", name: "B", id: "outlined-basic5" },
+    { label: "Wall Height (LF)", name: "A", id: "WallHeight",default:true},
+    { label: "Wall Length (LF)", name: "B", id: "WallLength",default:true},
   ];
   const result = [
     { id: 'WallAreaSF', value: 0, label: 'Wall Area (SF)' },

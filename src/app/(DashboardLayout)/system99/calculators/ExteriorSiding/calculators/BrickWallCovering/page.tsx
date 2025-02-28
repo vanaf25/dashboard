@@ -1,9 +1,10 @@
 "use client";
 import FormCreator from "@/app/components/system99/calculations/Form/Form";
+import DefaultCalculationValues from "@/app/components/DefaultCalculationValues/DefaultCalculationValues";
 const Page = () => {
   const inputFields = [
-    { label: "Wall Length (LF)", name: "L", id: "wall-length"},
-    { label: "Wall Height (LF)", name: "W", id: "wall-height",},
+    { label: "Wall Length (LF)", name: "L", id: "WallLength",default:true},
+    { label: "Wall Height (LF)", name: "W", id: "WallHeight",default:true},
     {label: "Brick Area(si)",    name: "S",id:"brick"}
   ];
   const result = [
@@ -15,7 +16,8 @@ const Page = () => {
   ];
   return (
     <div>
-    <FormCreator inputFields={inputFields} result={result} url={"brickWallCovering"}/>
+    <FormCreator inputFields={inputFields}
+                 result={result} url={"brickWallCovering"}/>
     </div>
   );
 };

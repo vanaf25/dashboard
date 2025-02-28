@@ -1,11 +1,12 @@
 "use client"
 import FormCreator from "@/app/components/system99/calculations/Form/Form";
+import DefaultCalculationValues from "@/app/components/DefaultCalculationValues/DefaultCalculationValues";
 
 const PlankSiding = () => {
   const inputFields = [
-    { label: "Wall Length (LF)", name: "A", id: "outlined-basic1" },
-    { label: "Wall Height (LF)", name: "B", id: "outlined-basic2" },
-    { label: "Reveal Height (li)", name: "R", id: "outlined-basic3" },
+    { label: "Wall Length (LF)", name: "A", id: "WallLength",default:true, },
+    { label: "Wall Height (LF)", name: "B", id: "WallHeight",default:true},
+    { label: "Reveal Height (li)", name: "R", id: "RevealHeight" },
   ];
   const result = [
     { id: 'WallHeight', value: 0, label: 'Wall Height (li)' },

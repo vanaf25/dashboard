@@ -3,10 +3,10 @@ import FormCreator from "@/app/components/system99/calculations/Form/Form";
 
 const HomeWrap = () => {
   const inputFields = [
-    { label: "Wall Length", name: "A", id: "outlined-basic1" },
-    { label: "Wall Width", name: "B", id: "outlined-basic2" },
-    { label: "Trim Length", name: "L", id: "outlined-basic3" },
-    { label: "Trim Width", name: "M", id: "outlined-basic4" }
+    { label: "Wall Length", name: "A", id: "WallLength",default:true },
+    { label: "Wall Width", name: "B", id: "WallWidth" },
+    { label: "Trim Length", name: "L", id: "TrimLength" },
+    { label: "Trim Width", name: "M", id: "TrimWidth" }
   ];
   const result = [
     { id: 'ThermoplasticWrapRollQuantity', value: 0, label: 'Thermoplastic Wrap Roll Quantity (ea)' },
