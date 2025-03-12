@@ -1,4 +1,14 @@
+import { Metadata } from "next";
 import DefaultCalculationValues from "@/app/components/DefaultCalculationValues/DefaultCalculationValues";
+import CleverLinks from "@/app/components/CleverLinks/CleverLinks";
+import BrickWallCovering from "@/app/(DashboardLayout)/system99/calculators/ExteriorSiding/calculators/BrickWallCovering/BrickWallCovering";
+import CalculationValues from "@/app/components/CalculationValues/CalculationValues";
+import { Card, Typography, Grid } from "@mui/material";
+import SheetSiding from "@/app/components/calculators/SheetSiding/SheetSiding";
+import StuccoWallCovering from "@/app/components/calculators/StuccoWallCovering/StuccoWallCovering";
+import Corners from "@/app/components/calculators/Corners/Corners";
+import PlankSiding from "@/app/components/calculators/PlankSiding/PlankSiding";
+import VinylSiding from "@/app/components/calculators/VinylSiding/VinylSiding";
 import DefaultCalculators from "@/app/components/DefaultCalculators/DefaultCalculators";
 interface PageProps {
     searchParams: Record<string, string | string[]>; // Explicitly typing searchParams
@@ -33,12 +43,25 @@ const Page = async ({ searchParams }: PageProps) => {
         "Brick Wall Covering",
         "Stucco wall covering",
     ];
-
+    const calculatorsComponents = [
+         <PlankSiding />,
+        <StuccoWallCovering /> ,
+       <VinylSiding /> ,
+         <BrickWallCovering /> ,
+          <Corners /> ,
+    ];
 
     return (
         <>
             <DefaultCalculationValues additionalValues={data.basicValues} />
-            <DefaultCalculators calculators={data.calculators}/>
+         <DefaultCalculators calculators={data.calculators}/>
+            <Grid container spacing={2}>
+                {calculatorsComponents.map((calc, index) => (
+                    <Grid item xs={12} sm={6} key={index}>
+                            {calc}
+                    </Grid>
+                ))}
+            </Grid>
         </>
     );
 };
