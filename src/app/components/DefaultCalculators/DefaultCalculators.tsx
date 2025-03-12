@@ -1,3 +1,4 @@
+"use client";
 import React from 'react';
 import {Card, Grid, Typography} from "@mui/material";
 import CalculationValues from "@/app/components/CalculationValues/CalculationValues";
