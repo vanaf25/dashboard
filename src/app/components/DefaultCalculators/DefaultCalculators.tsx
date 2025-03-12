@@ -5,6 +5,7 @@ interface DefaultCalculatorsProps{
     calculators:{name:string,values:any}[]
 }
 const DefaultCalculators:React.FC<DefaultCalculatorsProps> = ({calculators}) => {
+    console.log('calculators:',calculators);
     return (
         <Grid container sx={{mb:2}} spacing={2}>
             {calculators?.map((el: any, index: number) => (
