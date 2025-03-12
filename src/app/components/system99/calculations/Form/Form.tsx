@@ -8,12 +8,14 @@ import DefaultCalculationValues from "@/app/components/DefaultCalculationValues/
 
 interface FormCreatorProps {
     url: string;
+    withOutDefaultValues?:boolean,
     result: { id: string; value: number; label: string }[];
-    inputFields: { label: string; name: string; id: string;default?:boolean, type?: string; options?: number[] }[];
+    inputFields: { label: string; name: string; id: string;default?:boolean, type?: string; options?: any[] }[];
 }
 
-const FormCreator: React.FC<FormCreatorProps> = ({ inputFields, result, url }) => {
-    const { register, handleSubmit } = useForm();
+const FormCreator: React.FC<FormCreatorProps> = ({
+                                                     inputFields, result, url,withOutDefaultValues }) => {
+    const { register, handleSubmit,} = useForm();
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [resultFields, setResultFields] = useState(result);
@@ -55,7 +57,6 @@ const FormCreator: React.FC<FormCreatorProps> = ({ inputFields, result, url }) =
     };
     return (
         <>
-            <DefaultCalculationValues/>
             <Paper
                 onSubmit={handleSubmit(onSubmit)}
                 component="form"

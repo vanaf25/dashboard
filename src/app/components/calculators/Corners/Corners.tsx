@@ -1,6 +1,6 @@
 "use client"
 import FormCreator from "@/app/components/system99/calculations/Form/Form";
-const Page = () => {
+const Corners = () => {
   const inputFields = [
     { label: "Corner Height (LF)", name: "H", id: "outlined-basic1" },
     { label: "Corner Quantity (ea)", name: "Q", id: "outlined-basic2" },
@@ -18,4 +18,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default Corners;

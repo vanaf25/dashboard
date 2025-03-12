@@ -4,6 +4,7 @@ import GlobalFormCreator from "@/app/components/GlobalFormCreator/GlobalFormCrea
 const Page = () => {
     return (
         <div>
+
            <GlobalFormCreator inputFields={
                [{label:"Provide Wall Length",name:"WallLength"},
                    {label:"Provide Wall Height",name:"WallHeight"}]

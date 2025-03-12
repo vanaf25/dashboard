@@ -7,7 +7,7 @@ import BlankCard from "@/app/components/shared/BlankCard";
 
 const SubcontractorForm = () => {
   const [formData, setFormData] = useState([
-    { name: "subcontractorNamePageName", label: "Subcontractor Name (Page Name)", value: "" },
+    { name: "subcontractorNamePageName", label: "Subcontractor Name (BrickWallCovering Name)", value: "" },
     { name: "addressPhysical", label: "Address: Physical", value: "" },
     { name: "mailingAddress", label: "Mailing Address", value: "" },
     { name: "phoneOfficeMWF", label: "Phone-Office (MWF)", value: "" },

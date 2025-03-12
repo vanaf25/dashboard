@@ -10,7 +10,7 @@ import AuthForgotPassword from "../../authForms/AuthForgotPassword";
 export default function ForgotPassword2() {
   return (
     <PageContainer
-      title="Forgot Password Page"
+      title="Forgot Password BrickWallCovering"
       description="this is Sample page"
     >
       <Box

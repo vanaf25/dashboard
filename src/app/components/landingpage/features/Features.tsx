@@ -43,7 +43,7 @@ const featuresData: FeaturesType[] = [
   {
     icon: <IconArchive width={30} height={30} strokeWidth={1.5} />,
     color: "secondary",
-    title: "65+ Page Templates",
+    title: "65+ BrickWallCovering Templates",
     subtext: "Yes, we have 4 demos & 65+ Pages per demo to make it easier.",
   },
   {
@@ -55,8 +55,8 @@ const featuresData: FeaturesType[] = [
   {
     icon: <IconTag width={30} height={30} strokeWidth={1.5} />,
     color: "error",
-    title: "Page Ui",
-    subtext: "Its been made with Page Ui and full responsive layout.",
+    title: "BrickWallCovering Ui",
+    subtext: "Its been made with BrickWallCovering Ui and full responsive layout.",
   },
   {
     icon: <IconDiamond width={30} height={30} strokeWidth={1.5} />,

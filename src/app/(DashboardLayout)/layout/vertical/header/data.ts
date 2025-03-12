@@ -160,7 +160,7 @@ interface LinkType {
 const pageLinks: LinkType[] = [
   {
     href: "/theme-pages/pricing",
-    title: "Page Page",
+    title: "BrickWallCovering BrickWallCovering",
   },
   {
     href: "/auth/auth1/login",
@@ -172,7 +172,7 @@ const pageLinks: LinkType[] = [
   },
   {
     href: "/404",
-    title: "404 Error Page",
+    title: "404 Error BrickWallCovering",
   },
   {
     href: "/apps/note",

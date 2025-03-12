@@ -17,7 +17,7 @@ export default function Login() {
   const customizer = useSelector((state: AppState) => state.customizer);
 
   return (
-    <PageContainer title="Login Page" description="this is Sample page">
+    <PageContainer title="Login BrickWallCovering" description="this is Sample page">
       <Box display="flex" alignItems="center">
         <Box
           position="relative"

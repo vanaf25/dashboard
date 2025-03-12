@@ -67,7 +67,7 @@ export default function RootLayout({ children }: Props) {
                                 customizer.isLayout === "boxed" ? "lg" : "100%!important",
                         }}
                     >
-                        {/* Page Content */}
+                        {/* BrickWallCovering Content */}
                         <Box sx={{ minHeight: "calc(100vh - 170px)", py: { sm: 3 } }}>
                             {children}
                         </Box>

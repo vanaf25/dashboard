@@ -18,7 +18,7 @@ export default function Register() {
   const customizer = useSelector((state: AppState) => state.customizer);
 
   return (
-    <PageContainer title="Register Page" description="this is Sample page">
+    <PageContainer title="Register BrickWallCovering" description="this is Sample page">
       <Box display="flex" alignItems="center">
         <Box
           position="relative"

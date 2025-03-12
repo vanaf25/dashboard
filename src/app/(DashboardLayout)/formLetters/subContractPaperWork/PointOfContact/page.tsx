@@ -3,7 +3,7 @@ import { useForm, Controller } from "react-hook-form";
 import { Box, Grid, TextField, Button, Typography } from "@mui/material";
 
 const formFields = [
-  "Subcontractor Name (Page Name)",
+  "Subcontractor Name (BrickWallCovering Name)",
   "Address: Physical",
   "Mailing Address",
   "Phone-Office (MWF)",

@@ -21,7 +21,7 @@ type TableDataRow = {
 type TableName = {
   name: string | null;
   ref: React.MutableRefObject<AgGridReact | null>;
-  columns: any[]; // Specify the column definition type if using a predefined type from `ag-grid-react`
+  columns: any[];
   rowData: TableDataRow[] | undefined;
 };
 
@@ -112,7 +112,8 @@ const SquareFootage: React.FC = () => {
         const { newValue, oldValue, colDef, api, node, data } = params;
         if (newValue <= 0) {
           api.getRowNode(node.id)?.setDataValue(colDef.field, oldValue);
-        } else {
+        }
+        else {
           if (colDef.field === "height") {
             calculateTotalHeightAmount(tableNames);
           }
@@ -121,7 +122,6 @@ const SquareFootage: React.FC = () => {
       },
       [tableNames]
   );
-
   return (
       <>
         {isLoading ? (
@@ -154,8 +154,7 @@ const SquareFootage: React.FC = () => {
                               columns={name.columns}
                               rows={name.rowData as TableDataRow[]}
                               customRef={name.ref}
-                              domLayout="autoHeight"
-                          />
+                              domLayout="autoHeight"/>
                       </Box>
                     </Grid>
                 ))}

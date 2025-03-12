@@ -11,7 +11,7 @@ import AuthRegister from "../../authForms/AuthRegister";
 
 export default function Register2() {
   return (
-    <PageContainer title="Register Page" description="this is Sample page">
+    <PageContainer title="Register BrickWallCovering" description="this is Sample page">
       <Box
         sx={{
           position: "relative",

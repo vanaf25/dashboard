@@ -6,7 +6,7 @@ const PlankSiding = () => {
   const inputFields = [
     { label: "Wall Length (LF)", name: "A", id: "WallLength",default:true, },
     { label: "Wall Height (LF)", name: "B", id: "WallHeight",default:true},
-    { label: "Reveal Height (li)", name: "R", id: "RevealHeight" },
+    {label:"Reveal Height",name:"R",id:"Height",type:"select",options: [4,7,10.5]}
   ];
   const result = [
     { id: 'WallHeight', value: 0, label: 'Wall Height (li)' },

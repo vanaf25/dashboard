@@ -18,7 +18,7 @@ export default function ForgotPassword() {
 
   return (
     <PageContainer
-      title="Forgot Password Page"
+      title="Forgot Password BrickWallCovering"
       description="this is Sample page"
     >
       <Box display="flex" alignItems="center">

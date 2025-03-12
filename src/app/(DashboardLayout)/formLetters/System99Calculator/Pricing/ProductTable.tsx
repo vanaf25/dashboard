@@ -165,7 +165,7 @@ const ProductTable = () => {
   ];
   const columnDefs = [
     { headerName: 'Product Name', field: 'productName' },
-    { headerName: 'Page Estimate', field: 'materialEstimate',cellRenderer:(params:any)=>{
+    { headerName: 'BrickWallCovering Estimate', field: 'materialEstimate',cellRenderer:(params:any)=>{
       return `$${params.value}`
       } },
     { headerName: 'Overhead', field: 'overhead',editable:true,agCellEditor:"agNumberCellEditor" },

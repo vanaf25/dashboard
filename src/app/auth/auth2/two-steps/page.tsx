@@ -9,7 +9,7 @@ import AuthTwoSteps from "../../authForms/AuthTwoSteps";
 
 export default function TwoSteps2() {
   return (
-    <PageContainer title="Two steps Page" description="this is Sample page">
+    <PageContainer title="Two steps BrickWallCovering" description="this is Sample page">
       <Box
         sx={{
           position: "relative",

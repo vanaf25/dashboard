@@ -16,7 +16,7 @@ export default function TwoSteps() {
   const customizer = useSelector((state: AppState) => state.customizer);
 
   return (
-    <PageContainer title="Two Steps Page" description="this is Sample page">
+    <PageContainer title="Two Steps BrickWallCovering" description="this is Sample page">
       <Box display="flex" alignItems="center">
         <Box
           position="relative"

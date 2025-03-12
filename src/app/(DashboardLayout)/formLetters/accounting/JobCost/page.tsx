@@ -85,7 +85,7 @@ const Page = () => {
   // Мемоизация колонок и строк для каждой таблицы
   const firstTableColumns = useMemo(() => [
     { field: 'supplierName', editable: true, headerName: 'Supplier Name' },
-    { field: 'description', editable: true, headerName: 'Description of Page Used' },
+    { field: 'description', editable: true, headerName: 'Description of BrickWallCovering Used' },
     { field: 'date', cellDataType: "date",
       valueFormatter: (params:any) => {
         const date = new Date(params.value);
