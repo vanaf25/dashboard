@@ -9,6 +9,7 @@ import StuccoWallCovering from "@/app/components/calculators/StuccoWallCovering/
 import Corners from "@/app/components/calculators/Corners/Corners";
 import PlankSiding from "@/app/components/calculators/PlankSiding/PlankSiding";
 import VinylSiding from "@/app/components/calculators/VinylSiding/VinylSiding";
+import DefaultCalculators from "@/app/components/DefaultCalculators/DefaultCalculators";
 interface PageProps {
     searchParams: Record<string, string | string[]>; // Explicitly typing searchParams
 }
@@ -47,18 +48,7 @@ const Page = async ({ searchParams }: PageProps) => {
     return (
         <>
             <DefaultCalculationValues additionalValues={data.basicValues} />
-            <Grid container sx={{mb:2}} spacing={2}>
-                {data?.calculators?.map((el: any, index: number) => (
-                    <Grid item xs={12} sm={6} key={index}>
-                        <Card sx={{ p: 2 }}>
-                            <Typography variant="h4" textAlign="center" gutterBottom>
-                                {el.name}
-                            </Typography>
-                            <CalculationValues values={el.values} />
-                        </Card>
-                    </Grid>
-                ))}
-            </Grid>
+            <DefaultCalculators calculators={data.calculators}/>
         </>
     );
 };
