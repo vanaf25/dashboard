@@ -42,36 +42,9 @@ const Page = async ({ searchParams }: PageProps) => {
         "Brick Wall Covering",
         "Stucco wall covering",
     ];
-    const calculatorsComponents = [
-         <PlankSiding />,
-        <StuccoWallCovering /> ,
-       <VinylSiding /> ,
-         <BrickWallCovering /> ,
-          <Corners /> ,
-    ];
-
     return (
         <>
             <DefaultCalculationValues additionalValues={data.basicValues} />
-            <Grid container sx={{mb:2}} spacing={2}>
-                {data?.calculators?.map((el: any, index: number) => (
-                    <Grid item xs={12} sm={6} key={index}>
-                        <Card sx={{ p: 2 }}>
-                            <Typography variant="h4" textAlign="center" gutterBottom>
-                                {el.name}
-                            </Typography>
-                            <CalculationValues values={el.values} />
-                        </Card>
-                    </Grid>
-                ))}
-            </Grid>
-            <Grid container spacing={2}>
-                {calculatorsComponents.map((calc, index) => (
-                    <Grid item xs={12} sm={6} key={index}>
-                            {calc}
-                    </Grid>
-                ))}
-            </Grid>
         </>
     );
 };
