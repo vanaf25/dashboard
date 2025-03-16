@@ -158,6 +158,16 @@ const SquareFootage: React.FC = () => {
                     </Typography>
                   </Alert>
               ):<>
+                <Alert severity="info" sx={{ mb: 2 }}>
+                  <Typography variant={"h3"}>
+                    To Edit Table data db click on cell and after providing a value press Tab(Then you will
+                    start edit next cell)
+                    Or press Enter
+                  </Typography>
+                  <Typography variant={"h3"}>
+                    If You want cancell editing click esc
+                  </Typography>
+                </Alert>
                 <Grid sx={{ mb: 2 }} container spacing={2}>
                   {tableNames.map((name,index) => (
                       <Grid item xs={12} md={4} sm={6} key={index}>
