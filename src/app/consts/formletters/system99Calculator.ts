@@ -1,5 +1,4 @@
 import { ValueGetterParams } from 'ag-grid-community';
-
 export const sidingColumns = [
   {
     headerName: 'Length',
@@ -15,6 +14,7 @@ export const sidingColumns = [
     field: 'height',
     editable: true,
   },
+
   {
     headerName: "Height (inches) (C)",
     field: "height_in_inches",

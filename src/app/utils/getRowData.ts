@@ -4,11 +4,12 @@ interface RowData {
     [key: string]: any;
 }
 
-export default  (api: GridApi | null, rowIndex: number): RowData => {
+export default  (api: GridApi | null, rowIndex: number  | null) : RowData => {
     const row: RowData = {};
 
-    if (api) {
-        api.forEachNode((rowNode: IRowNode<any>, index: number) => {
+    if (api && rowIndex!==null) {
+        if(rowIndex===0) console.log('finded!');
+        api.forEachNode((rowNode: IRowNode<any>) => {
             if (rowNode.rowIndex === rowIndex) {
                 const columns: Column<any>[] | null = api.getColumns();
                 if (columns) {

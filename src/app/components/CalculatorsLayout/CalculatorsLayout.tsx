@@ -1,20 +1,15 @@
 "use client"
 import React from 'react';
 import {Grid} from "@mui/material";
-import PlankSiding from "@/app/components/calculators/PlankSiding/PlankSiding";
-import StuccoWallCovering from "@/app/components/calculators/StuccoWallCovering/StuccoWallCovering";
-import VinylSiding from "@/app/components/calculators/VinylSiding/VinylSiding";
-import BrickWallCovering
-    from "@/app/(DashboardLayout)/system99/calculators/ExteriorSiding/calculators/BrickWallCovering/BrickWallCovering";
-import Corners from "@/app/components/calculators/Corners/Corners";
+import VinylSiding from "@/app/components/calculators/ExteriorSiding/VinylSiding/VinylSiding";
+import Corners from "@/app/components/calculators/ExteriorSiding/Corners/Corners";
+import ExteriorPaint from "@/app/components/calculators/ExteriorSiding/ExteriorPaint/ExteriorPaint";
 
 const CalculatorsLayout = () => {
     const calculatorsComponents = [
-        <PlankSiding />,
-        <StuccoWallCovering /> ,
         <VinylSiding /> ,
-        <BrickWallCovering /> ,
         <Corners /> ,
+        <ExteriorPaint/>
     ];
 
     return (

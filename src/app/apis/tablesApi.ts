@@ -29,14 +29,10 @@ export const getAllRowsByType = async (type: string): Promise<RowData[] | ErrorR
         return { error: 'Some error happened' };
     }
 };
-export const getAllTablesByType = async (type: string): Promise<TableData[] | ErrorResponse> => {
-    try {
-        const res: AxiosResponse<TableData[]> = await axiosInstance.get(`tables/${type}`);
-        return res.data;
-    } catch (e) {
-        return { error: 'Some error happened' };
-    }
-};
+export const getAllTablesByType = async (type: string): Promise<TableData[]> => {
+    const res: AxiosResponse<TableData[]> = await axiosInstance.get(`tables/${type}`);
+    return res.data;
+}
 
 export const createTable = async (data: CreateTableDto): Promise<TableData | ErrorResponse> => {
     try {

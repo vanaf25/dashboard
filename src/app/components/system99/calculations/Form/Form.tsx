@@ -5,46 +5,36 @@ import { useForm } from "react-hook-form";
 import { Box, Button, MenuItem, Paper, TextField, Typography } from "@mui/material";
 import Card from '../Cards/Card/Card';
 import DefaultCalculationValues from "@/app/components/DefaultCalculationValues/DefaultCalculationValues";
+import CalculationValues from "@/app/components/CalculationValues/CalculationValues";
+import BlankCard from "@/app/components/shared/BlankCard";
 
 interface FormCreatorProps {
     url: string;
     withOutDefaultValues?:boolean,
-    result: { id: string; value: number; label: string }[];
     inputFields: { label: string; name: string; id: string;default?:boolean, type?: string; options?: any[] }[];
 }
 
 const FormCreator: React.FC<FormCreatorProps> = ({
-                                                     inputFields, result, url,withOutDefaultValues }) => {
+                                                     inputFields, url,withOutDefaultValues }) => {
     const { register, handleSubmit,} = useForm();
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSubmitted, setIsSubmitted] = useState(false);
-    const [resultFields, setResultFields] = useState(result);
+    const [resultFields, setResultFields] = useState({});
     const searchParams = useSearchParams();
 
     const onSubmit = async (data: any) => {
         setIsSubmitting(true);
         try {
             const paramsObject = Object.fromEntries(searchParams.entries());
-            const defaultData=Object.fromEntries(Object.entries(paramsObject).map(el=>{
-                const finded=inputFields.find(item=>el[0]===item.id)
-                if(finded) return [finded.name,el[1]]
-                return el
-            }));
-            console.log('paramsObject:',defaultData);
             const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}${url}`, {
                 method: "POST",
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({...data,...defaultData}),
+                body: JSON.stringify({...data,...paramsObject}),
             });
             const res = await response.json();
             setIsSubmitting(false);
             setIsSubmitted(true);
-            setResultFields(prevState =>
-                prevState.map(el => ({
-                    ...el,
-                    value: res[el.id] !== undefined ? res[el.id] : el.value,
-                }))
-            );
+            setResultFields(res);
         } catch (error) {
             setIsSubmitting(false);
             console.error("Error submitting form:", error);
@@ -105,7 +95,9 @@ const FormCreator: React.FC<FormCreatorProps> = ({
                 </Box>
             </Paper>
 
-            {isSubmitted && <Card resultFields={resultFields} />}
+            {isSubmitted && <BlankCard sx={{p:2}}>
+                <CalculationValues values={resultFields}/>
+            </BlankCard>}
         </>
     );
 };

@@ -2,10 +2,8 @@
 import FormCreator from "@/app/components/system99/calculations/Form/Form";
 const VinylSiding = () => {
   const inputFields = [
-    { label: "Wall Length (LF)", name: "A", id: "WallLength",default:true},
-    { label: "Wall Height (LF)", name: "B", id: "WallHeight",default:true},
-    { label: "Vinyl Coverage Height (li)", name: "M", id: "VinylCoverageHeight" },
-    { label: "Starter/Frieze Size Length (LF)", name: "N", id: "StarterSizeLength" }
+    { label: "Vinyl Coverage Height (li)", name: "V", id: "VinylCoverageHeight" },
+    { label: "Starter/Frieze Size Length (LF)", name: "F", id: "StarterSizeLength" }
   ];
   const result = [
     { id: 'Siding12InchCoverageQuantity', value: 0, label: 'Siding 12" Coverage Quantity (ea)' },
@@ -15,7 +13,7 @@ const VinylSiding = () => {
   ];
   return (
     <div>
-    <FormCreator inputFields={inputFields} result={result} url={"vinylSiding"}/>
+    <FormCreator inputFields={inputFields} result={result} url={"exteriorSiding/vinylSiding"}/>
     </div>
   );
 };

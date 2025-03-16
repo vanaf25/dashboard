@@ -1,14 +1,15 @@
 import React from 'react';
 import GlobalFormCreator from "@/app/components/GlobalFormCreator/GlobalFormCreator";
+import SquareFootage from "@/app/(DashboardLayout)/formLetters/System99Calculator/Messurments/SquareFootage";
 
 const Page = () => {
     return (
         <div>
-
-           <GlobalFormCreator inputFields={
-               [{label:"Provide Wall Length",name:"WallLength"},
-                   {label:"Provide Wall Height",name:"WallHeight"}]
-           } url={"ExteriorSiding"} />
+            <SquareFootage/>
+           {/*<GlobalFormCreator inputFields={
+               [{label:"Provide Wall Length",name:"wallLength"},
+                   {label:"Provide Wall Height",name:"wallHeight"}]
+           } url={"ExteriorSiding"} />*/}
         </div>
     );
 };

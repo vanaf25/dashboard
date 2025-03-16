@@ -5,11 +5,11 @@ interface RowData {
   [key: string]: any;
 }
 
-export default async (api: GridApi | null, rowIndex: number, rowId: string,withOutResponse?:boolean): Promise<RowData> => {
+export default async (api: GridApi | null, rowIndex: number, rowId?: string,withOutResponse?:boolean): Promise<RowData> => {
   const row: RowData = {};
 
   if (api) {
-    api.forEachNode((rowNode: IRowNode<any>, index: number) => {
+    api.forEachNode((rowNode: IRowNode<any>) => {
       if (rowNode.rowIndex === rowIndex) {
         const columns: Column<any>[] | null = api.getColumns();
         if (columns) {
@@ -23,6 +23,6 @@ export default async (api: GridApi | null, rowIndex: number, rowId: string,withO
   }
 
   console.log('actualData:', row);
- if(!withOutResponse) await updateRowChanged(rowId, { ...row });
+ if(!withOutResponse && rowId) await updateRowChanged(rowId, { ...row });
   return row;
 };
