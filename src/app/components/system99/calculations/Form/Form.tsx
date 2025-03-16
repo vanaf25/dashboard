@@ -11,6 +11,7 @@ import BlankCard from "@/app/components/shared/BlankCard";
 interface FormCreatorProps {
     url: string;
     withOutDefaultValues?:boolean,
+    result?:any
     inputFields: { label: string; name: string; id: string;default?:boolean, type?: string; options?: any[] }[];
 }
 
