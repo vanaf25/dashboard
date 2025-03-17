@@ -68,7 +68,7 @@ const Page = () => {
         setTotalInvoiceAmount(calculateTotalAmount(invoiceTableRef, "amount"));
         if (invoiceTableRef?.current?.api) {
             const rowData = getRowData(invoiceTableRef?.current?.api, e.rowIndex);
-            setActualRowData(prevState => prevState.map(row => row.num === rowData.num ? rowData : row));
+            setActualRowData(prevState => prevState.map((row,index) => index ==e.rowIndex ? rowData : row));
         }
     };
 
