@@ -1,4 +1,5 @@
-import { ValueGetterParams } from 'ag-grid-community';
+import { ValueGetterParams } from 'ag-grid-community'
+const valueParser = (params: any) => params.newValue === "" ? 0 : params.newValue;
 export const sidingColumns = [
   {
     headerName: 'Length',
@@ -6,6 +7,7 @@ export const sidingColumns = [
     cellEditor: 'agNumberCellEditor',
     field: 'length',
     editable: true,
+    valueParser: valueParser,
   },
   {
     headerName: 'Height',
@@ -13,8 +15,8 @@ export const sidingColumns = [
     cellEditor: 'agNumberCellEditor',
     field: 'height',
     editable: true,
+    valueParser: valueParser
   },
-
   {
     headerName: "Height (inches) (C)",
     field: "height_in_inches",

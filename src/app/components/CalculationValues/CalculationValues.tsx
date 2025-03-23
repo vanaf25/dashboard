@@ -1,7 +1,7 @@
 import React from 'react';
 import { List, ListItem, Typography} from "@mui/material";
 interface CalculationValues{
-    values?:{[key:string]:string}
+    values?:{[key:string]:any}
 }
 const CalculationValues:React.FC<CalculationValues> = ({values}) => {
     const additionalParamsArray=Object.entries(values  || {})

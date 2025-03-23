@@ -14,6 +14,7 @@ interface ErrorResponse {
 type RowData=any
 interface TableData {
     tableName:string,
+    id:number,
     rows:any[]}
 interface CreateTableDto{
     name: string;
@@ -52,3 +53,11 @@ export const updateRowChanged = async (rowId: string, data: any): Promise<AxiosR
         return { error: 'Some error happened' };
     }
 };
+export const addRow=async (tableId:number)=>{
+    const res: AxiosResponse = await axiosInstance.post(`tables/createRow`, {tableId});
+    return res?.data;
+}
+export const deleteRow=async (rowId:number)=>{
+    const res: AxiosResponse = await axiosInstance.delete(`tables/deleteRow/${rowId}`, );
+    return res;
+}
