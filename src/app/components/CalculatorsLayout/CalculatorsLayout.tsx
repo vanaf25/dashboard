@@ -2,12 +2,10 @@
 import React from 'react';
 import {Grid} from "@mui/material";
 import Corners from "@/app/components/calculators/ExteriorSiding/Corners/Corners";
-import ExteriorPaint from "@/app/components/calculators/ExteriorSiding/ExteriorPaint/ExteriorPaint";
 
 const CalculatorsLayout = () => {
     const calculatorsComponents = [
         <Corners /> ,
-        <ExteriorPaint/>
     ];
 
     return (
