@@ -26,14 +26,14 @@ const Corners: React.FC<{initialCalculating:()=>void}> = ({initialCalculating}) 
     const { data: tablesData = []  } = getTablesQuery("corners")
     const defaultColumns=useMemo(()=>([
         {
-            headerName: 'corners 12 feet and under',
+            headerName: '12 feet and under',
             field: 'length12',
             flex: 1,
             cellEditor: 'agNumberCellEditor',
             editable: true,
         },
         {
-            headerName: 'Corners between 12 & 24 long',
+            headerName: 'between 12 & 24 long',
             field: 'length12_24',
             flex: 1,
             cellEditor: 'agNumberCellEditor',
