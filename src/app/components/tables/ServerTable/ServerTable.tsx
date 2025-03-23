@@ -5,7 +5,6 @@ import Table from "@/app/components/letters/Table/Table";
 import { ColDef } from "ag-grid-community";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { addRow, updateRowChanged, deleteRow } from "@/app/apis/tablesApi";
-import { AxiosError } from "axios";
 import getRowData from "@/app/utils/getRowData";
 
 type TableData = {
@@ -19,16 +18,16 @@ type TableData = {
 interface ServerTableProps {
     table: TableData;
     onCellValueHandler: () => void;
+    queryKeys:string[]
 }
 
-const ServerTable: React.FC<ServerTableProps> = ({ table, onCellValueHandler }) => {
+const ServerTable: React.FC<ServerTableProps> = ({ table, onCellValueHandler,queryKeys }) => {
     const queryClient = useQueryClient();
-
     const updateRowMutation = useMutation({
         mutationFn: ({ id, rowData }: { id: string; rowData: any }) => updateRowChanged(id, rowData),
         onSuccess: (updatedRow, variables) => {
             const { id, rowData } = variables;
-            queryClient.setQueryData(["sidingTables"], (oldTables: TableData[] | undefined) => {
+            queryClient.setQueryData(queryKeys, (oldTables: TableData[] | undefined) => {
                 if (!oldTables) return oldTables;
                 return oldTables.map((table) => ({
                     ...table,
@@ -37,32 +36,30 @@ const ServerTable: React.FC<ServerTableProps> = ({ table, onCellValueHandler }) 
             });
         },
     });
-
     const { isPending, mutate: addRowMutate } = useMutation({
         mutationFn: addRow,
         onSuccess: (data, tableId) => {
-            queryClient.setQueryData(["sidingTables"], (oldTables: TableData[] | undefined) => {
+            queryClient.setQueryData(queryKeys, (oldTables: TableData[] | undefined) => {
                 if (!oldTables) return oldTables;
                 return oldTables.map((table) => {
                     if (table.id === tableId) {
                         const gridApi = table?.ref?.current?.api;
                         if (gridApi) {
                             gridApi?.applyTransaction({
-                                add: [{ id: data.id, length: 0, height: 0 }],
+                                add: [data],
                             });
                         }
-                        return { ...table, rows: [...table.rows, {id:data.id,length:0,height:0}] };
+                        return { ...table, rows: [...table.rows, data] };
                     }
                     return table;
                 });
             });
         },
     });
-
-    const { mutate: deleteRowMutate, isPending: isDeleting } = useMutation({
+    const { mutate: deleteRowMutate } = useMutation({
         mutationFn: (rowId: number) => deleteRow(rowId),
         onSuccess: (_, rowId) => {
-            queryClient.setQueryData(["sidingTables"], (oldTables: TableData[] | undefined) => {
+            queryClient.setQueryData(queryKeys, (oldTables: TableData[] | undefined) => {
                 if (!oldTables) return oldTables;
                 return oldTables.map((table) => ({
                     ...table,
@@ -78,18 +75,13 @@ const ServerTable: React.FC<ServerTableProps> = ({ table, onCellValueHandler }) 
         },
     });
     const [deletingRowId, setDeletingRowId] = React.useState<number | null>(null);
-
-    const addRowHandle = (tableId: number) => {
-        addRowMutate(tableId);
-    };
-
+    const addRowHandle = (tableId: number) =>addRowMutate(tableId);
     const deleteRowHandle = (rowId: number) => {
         setDeletingRowId(rowId);
         deleteRowMutate(rowId, {
-            onSettled: () => setDeletingRowId(null), // Reset state after mutation completes
+            onSettled: () => setDeletingRowId(null),
         });
     };
-
     const effectedColumns = useMemo(() => [
         ...table.columns,
         {
@@ -115,7 +107,7 @@ const ServerTable: React.FC<ServerTableProps> = ({ table, onCellValueHandler }) 
             if (newValue <= 0) {
                 api.getRowNode(node.id)?.setDataValue(colDef.field, oldValue);
             } else {
-                if (colDef.field === "height" || colDef.field === "length") {
+                if(onCellValueHandler){
                     onCellValueHandler();
                 }
                 const rowData = getRowData(api, node.rowIndex);
@@ -124,7 +116,6 @@ const ServerTable: React.FC<ServerTableProps> = ({ table, onCellValueHandler }) 
         },
         [updateRowMutation]
     );
-
     return (
         <>
             <Button disabled={isPending} fullWidth onClick={() => addRowHandle(table.id)}>

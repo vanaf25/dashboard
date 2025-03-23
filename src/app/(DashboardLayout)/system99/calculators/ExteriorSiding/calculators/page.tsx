@@ -1,7 +1,6 @@
 import { Metadata } from "next";
 import DefaultCalculationValues from "@/app/components/DefaultCalculationValues/DefaultCalculationValues";
 import DefaultCalculators from "@/app/components/DefaultCalculators/DefaultCalculators";
-import CalculatorsLayout from "@/app/components/CalculatorsLayout/CalculatorsLayout";
 interface PageProps {
     searchParams: Record<string, string | string[]>; // Explicitly typing searchParams
 }
@@ -27,7 +26,6 @@ const Page = async ({ searchParams }: PageProps) => {
         <>
             <DefaultCalculationValues additionalValues={data.basicValues} />
          <DefaultCalculators calculators={data.calculators}/>
-          <CalculatorsLayout/>
         </>
     );
 };
