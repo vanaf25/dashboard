@@ -104,7 +104,7 @@ const ServerTable: React.FC<ServerTableProps> = ({ table, onCellValueHandler,que
     const onCellValueChanged = useCallback(
         (params: any) => {
             const { newValue, oldValue, colDef, api, node, data } = params;
-            if (newValue <= 0) {
+            if (newValue < 0) {
                 api.getRowNode(node.id)?.setDataValue(colDef.field, oldValue);
             } else {
                 if(onCellValueHandler){
