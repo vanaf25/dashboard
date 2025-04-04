@@ -1,5 +1,21 @@
-export type TableData<T>= {
-    tableName: string;
-    id:number,
+import {MutableRefObject, RefObject} from "react";
+import { ColDef } from "ag-grid-community";
+
+export type TableData<T = Record<string, any>> = {
+    name: string;
+    id: number;
     rows: T[];
+};
+export type ActionTableType = {
+    name: string;
+    id: number;
+    rows: { [key: string]: any }[];
+    ref: MutableRefObject<any>;
+    columns: ColDef[];
+};
+export type TableDtoType={
+    columns:{field:string,headerName:string}[],
+    rows: { [key: string]: any }[];
+    tableName: string;
+
 }

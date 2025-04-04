@@ -12,7 +12,7 @@ import {
     InputLabel,
     FormControl,
     Select,
-    MenuItem,
+    MenuItem, Paper,
 } from '@mui/material';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
 import { useRouter } from 'next/navigation';
@@ -21,6 +21,8 @@ import { changeProject } from '@/store/apps/dasbhoard/dashboardSlice';
 import { Client } from '@/app/components/Leads/Leads';
 import { contractData } from '@/app/consts/contractData/contractData';
 import ProjectPopup from '../../ProjectPopup/ProjectPopup';
+import {MAIN_CALCULATORS} from "@/app/consts/calculators";
+import Link from "next/link";
 
 type LeadItemProps = Client & {
     onEdit: (isDateOnly?: boolean) => void;
@@ -36,10 +38,12 @@ const LeadItem: React.FC<LeadItemProps> = ({
                                                meetingDate,
                                                documents,
                                                onDelete,
+    measurements,
                                                ...rest
                                            }) => {
     const supabase = useSupabaseClient();
     const router = useRouter();
+    console.log('rest:',rest);
     const statuses: string[] = ['In Progress', 'Completed'];
     const [currentDocumentId,setCurrentDocument]=useState<string | null>(
         null)
@@ -47,7 +51,9 @@ const LeadItem: React.FC<LeadItemProps> = ({
     const [currentStatus, setCurrentStatus] = useState(status);
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const dispatch = useDispatch();
-
+    const handleCreateMeasurement=()=>{
+        
+    }
     const handleStatusChange = async (newStatus: string) => {
         setCurrentStatus(newStatus);
         setAnchorEl(null);
@@ -88,6 +94,7 @@ const LeadItem: React.FC<LeadItemProps> = ({
                 <Box
                     sx={{
                         display: 'flex',
+                        flexWrap:"wrap",
                         alignItems: 'center',
                         justifyContent: 'space-between',
                         padding: 2,
@@ -186,6 +193,36 @@ const LeadItem: React.FC<LeadItemProps> = ({
                         ) : (
                             ''
                         )}
+                        <FormControl sx={{ width: 200 }}>
+                            <InputLabel id={`quote-view-label-${id}`}>Create   Measurements</InputLabel>
+                            <Select
+                                labelId={`quote-view-label-${id}`}
+                                id={`quote-view-${id}`}
+                                defaultValue=""
+                            >
+                                    {MAIN_CALCULATORS.map(el => (
+                                            <MenuItem component={Link}
+                                                      href={`/system99/calculators/${el.replace(/[\s?'’]/g, '')}?customerId=${id}`} passHref>
+                                                {el}
+                                            </MenuItem>
+                                    ))}
+                            </Select>
+                        </FormControl>
+                        {measurements.length>0 ?  <FormControl sx={{ width: 200 }}>
+                            <InputLabel id={`quote-view-label-${id}`}>Available   Measurements</InputLabel>
+                            <Select
+                                labelId={`quote-view-label-${id}`}
+                                id={`quote-view-${id}`}
+                                defaultValue=""
+                            >
+                                {measurements.map((el,index) => (
+                                    <MenuItem component={Link}
+                                              href={`/measurements/${el.id}`} passHref>
+                                        {el.group} ({index+1})
+                                    </MenuItem>
+                                ))}
+                            </Select>
+                        </FormControl>:<></> }
                     </Box>
 
                     <Popover

@@ -16,7 +16,7 @@ export async function GET(req: NextRequest) {
 
         const { data, error } = await supabase
             .from('customers')
-            .select('*, documents (id, service)')
+            .select('*, documents (id, service), measurements(id, group, name)')
             .eq('created_by', userId)
             .filter('documents.type', 'eq', 'quote');
 

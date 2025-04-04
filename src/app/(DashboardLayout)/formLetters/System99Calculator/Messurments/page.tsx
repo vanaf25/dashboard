@@ -28,7 +28,6 @@ import SupplyLength from "./SupplyLength";
 const EditableTables = () => {
   return (
     <>
-    <SquareFootage/>
       <Size/>
     <Windows/>
       <Doors/>

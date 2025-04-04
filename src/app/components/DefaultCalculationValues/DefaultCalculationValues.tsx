@@ -11,12 +11,12 @@ interface DefaultCalculationValuesProps {
 const DefaultCalculationValues: React.FC<DefaultCalculationValuesProps> = ({
                                                                                additionalValues,
                                                                            }) => {
-    const searchParams = useSearchParams();
-    const paramsObject = Object.fromEntries(searchParams.entries());
+    /*const searchParams = useSearchParams();
+    const paramsObject = Object.fromEntries(searchParams.entries());*/
 
     return (
         <Card sx={{ p: 2, maxWidth: 400, mx: "auto", mb: 2 }}>
-            <CalculationValues values={{ ...paramsObject, ...additionalValues }} />
+            <CalculationValues values={{...additionalValues }} />
         </Card>
     );
 };

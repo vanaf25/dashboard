@@ -3,4 +3,6 @@ export  const CALCULATORS = [
     "SheetSiding", "Soffit", "PergolaShade", "FriezeBoard", "PlankSiding", "Fascia",
     "StuccoWallCovering", "BrickWallCovering", "PorchCeiling", "StairFraming", "Fencing"
 ]
+export const MAIN_CALCULATORS=["Exterior Siding","Eaves","Apture’s",
+    "Roofing","Structures","Barriers","Landscape","Interior","Utilities"]
 export const typesOfProjects=["Windows","Deck","Siding"]

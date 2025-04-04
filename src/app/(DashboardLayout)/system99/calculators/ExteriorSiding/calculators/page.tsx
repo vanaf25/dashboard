@@ -6,7 +6,6 @@ import BackButton from "@/app/components/BackButton/BackButton";
 interface PageProps {
     searchParams: Record<string, string | string[]>; // Explicitly typing searchParams
 }
-
 const fetchData = async (queryParams: Record<string, string | string[]>) => {
     const queryString = new URLSearchParams(queryParams as Record<string, string>).toString(); // Convert object to URL query string
     const url = `${process.env.NEXT_PUBLIC_BASE_URL}exteriorSiding?${queryString}`;

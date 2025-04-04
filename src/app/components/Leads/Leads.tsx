@@ -28,7 +28,9 @@ interface Document{
     id:string
     service:string,
 }
-export  type Client = FormData & { id: string; created_at: string; created_by: string,documents:Document[] };
+export  type Client = FormData & { id: string; created_at: string;
+    measurements:{id:number,name:string,group:string}[],
+    created_by: string,documents:Document[] };
 const Leads: React.FC = () => {
     const [open, setOpen] = useState(false);
     const [isDateOnly,setIsDateOnly]=useState(false);

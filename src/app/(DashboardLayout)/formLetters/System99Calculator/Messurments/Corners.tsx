@@ -6,7 +6,7 @@ import { Grid, Box } from "@mui/material";
 import { ColDef } from "ag-grid-community";
 import "ag-grid-community/styles/ag-theme-quartz.css";
 import Table from "@/app/components/letters/Table/Table";
-import ServerTable from "@/app/components/tables/ServerTable/ServerTable";
+import ServerTable from "@/app/components/tables/ActionTable/ActionTable";
 import {getTablesQuery} from "@/app/hooks/useTable";
 interface TableRow {
     id: string;

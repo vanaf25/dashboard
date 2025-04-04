@@ -25,7 +25,6 @@ interface Props {
 }
 
 export default function RootLayout({ children }: Props) {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);  // State to track login status
     // @ts-ignore
     const customizer = useSelector((state: AppState) => state.customizer);
     const theme = useTheme();

@@ -119,3 +119,22 @@ export const sidingColumns = [
     editable: false,
   },
 ];
+export const EXTERIOR_SIDING_COLUMNS=sidingColumns
+    .filter((c) => c.field === "length" || c.field === "height")
+    .map((col) => ({ ...col, flex: 1 }))
+export const CORNERS_COLUMNS=[
+  {
+    headerName: '12 feet and under',
+    field: 'length12',
+    flex: 1,
+    cellEditor: 'agNumberCellEditor',
+    editable: true,
+  },
+  {
+    headerName: 'between 12 & 24 long',
+    field: 'length12_24',
+    flex: 1,
+    cellEditor: 'agNumberCellEditor',
+    editable: true,
+  },
+]
