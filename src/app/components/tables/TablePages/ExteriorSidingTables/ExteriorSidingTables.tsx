@@ -11,10 +11,7 @@ import {ExteriorSidingService} from "@/app/caculationMath/ExteriorSiding";
 import {Box} from "@mui/system";
 
 interface ExteriorSidingTables {
-    tables:{
-        siding:TableData[],
-        corners:TableData[]
-    },
+    tables:Record<string,TablesData[]>
     queryKeys:any[],
     isClient?:boolean
 }
