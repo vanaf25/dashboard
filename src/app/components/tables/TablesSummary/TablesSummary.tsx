@@ -1,10 +1,9 @@
-import React, {useState, useEffect, SetStateAction} from 'react';
+import React, {useState, useEffect} from 'react';
 import { Grid } from "@mui/material";
 import BlankCard from "@/app/components/shared/BlankCard";
 import CalculationValues from "@/app/components/CalculationValues/CalculationValues";
 import { ActionTableType } from "@/app/types/tablesTypes";
 import Button from "@mui/material/Button";
-import Link from "next/link";
 import calculateTotalAmount from "@/app/utils/calculateTotalAmount";
 import getActualTableData from "@/app/utils/getActualTableData";
 import {MeasurementsType} from "@/app/types/measurementsTypes";
@@ -12,7 +11,6 @@ import measurementsApi from "@/app/apis/measurementApi";
 import { useMutation } from '@tanstack/react-query';
 import { useRouter, useSearchParams } from 'next/navigation';
 import {useSupabaseSession} from "@/app/hooks/useSupabaseSession";
-import {CalculationsState} from "@/app/components/tables/TablePages/ExteriorSidingTables/ExteriorSidingTables";
 import Alert from "@mui/material/Alert";
 
 interface TablesSummaryProps {
@@ -39,7 +37,6 @@ const TablesSummary: React.FC<TablesSummaryProps> = ({ tables, clientOnly
 }) => {
     const [totalValues, setTotalValues] = useState<TotalValues[]>([]);
     const router = useRouter();
-    console.log('set:',setCalculation);
     const searchParams = useSearchParams();
     const { session, loading: sessionLoading } = useSupabaseSession();
     const customerId = searchParams.get('customerId');
@@ -48,6 +45,7 @@ const TablesSummary: React.FC<TablesSummaryProps> = ({ tables, clientOnly
             if (!type || !session?.user?.id || !customerId) {
                 throw new Error('Missing required data');
             }
+            console.log('tables:',tablesData);
             const measurementData = {
                 type,
                 userId: session.user.id,

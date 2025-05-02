@@ -58,8 +58,11 @@ export interface Measurement{
 }
 export enum TablesGroup{
     SIDING="siding",
-    CORNERS="corners"
+    CORNERS="corners",
+    BARRIERS_GATES="barriers_gates",
+    BARRIERS_FENCE="barriers_fence"
 }
 export enum MeasurementsType{
+    BARRIERS="Barriers",
     EXTERIOR_SIDING="Exterior Siding"
 }

@@ -6,21 +6,22 @@ import {Loading} from "@/app/components/global/loading/Loading";
 import {Typography} from "@mui/material";
 import Alert from "@mui/material/Alert";
 import measurementsApi from "@/app/apis/measurementApi";
-import {Measurement} from "@/app/types/measurementsTypes";
+import {Measurement, MeasurementsType} from "@/app/types/measurementsTypes";
 import CalculationValues from "@/app/components/CalculationValues/CalculationValues";
 import BlankCard from "@/app/components/shared/BlankCard";
 import ExteriorSidingTables from "@/app/components/tables/TablePages/ExteriorSidingTables/ExteriorSidingTables";
 import TableNotes from "@/app/components/system99/TableNotes/TableNotes";
+import BariersTables from "@/app/components/tables/TablePages/BariersTables/BariersTables";
 
 const Page = () => {
     const { id } = useParams();
-    const queryKeys=["measurement", id]
+    const queryKeys=["measurement", id];
     const { data, isLoading, error } = useQuery<Measurement>({
         queryKey: queryKeys,
         queryFn: () => measurementsApi.getMeasurement(id as string),
         enabled: !!id,
     });
-
+    console.log('data:',data);
     return (
         <div>
             {isLoading ? <Loading/>:<>
@@ -34,7 +35,9 @@ const Page = () => {
                             <CalculationValues values={data.measurementDetails}  />
                           <TableNotes/>
                         </BlankCard>
-                        <ExteriorSidingTables queryKeys={queryKeys} tables={data.tables}/>
+                        {data.group===MeasurementsType.EXTERIOR_SIDING ?<ExteriorSidingTables queryKeys={queryKeys} tables={data.tables}/>:
+                          data.group===MeasurementsType.BARRIERS ? <BariersTables tables={data.tables} queryKeys={queryKeys} />:<></>
+                        }
                     </>}
                 </>}
             </>}
