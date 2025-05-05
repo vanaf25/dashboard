@@ -67,10 +67,26 @@ export enum TablesGroup{
     UTILITIES_KITCHEN_ITEM_REPLACEMENT = "kitchenItemReplacement",
     UTILITIES_ACCESSORY_ITEM_REPLACEMENT = "accessoryItemReplacement",
     UTILITIES_HOUSE_REPLACEMENT = "houseReplacement",
-    UTILITIES_HOUSE_ITEM_REPLACEMENT = "houseItemReplacement"
+    UTILITIES_HOUSE_ITEM_REPLACEMENT = "houseItemReplacement",
+
+    EAVES_FASCIA="eaves_fascia",
+    EAVES_SOFFIT="eaves_soffit",
+    EAVES_PORCH="eaves_porch",
+
+    // New gutter and downspout groups
+    GUTTER_FRONT = "gutter_front",
+    GUTTER_LEFT = "gutter_left",
+    GUTTER_REAR = "gutter_rear",
+    GUTTER_RIGHT = "gutter_right",
+
+    DOWNSPOUT_FRONT = "downspout_front",
+    DOWNSPOUT_LEFT = "downspout_left",
+    DOWNSPOUT_REAR = "downspout_rear",
+    DOWNSPOUT_RIGHT = "downspout_right",
 }
 export enum MeasurementsType{
     BARRIERS="Barriers",
     EXTERIOR_SIDING="Exterior Siding",
-    UTILITIES="utilities"
+    UTILITIES="utilities",
+    EAVES="eaves"
 }

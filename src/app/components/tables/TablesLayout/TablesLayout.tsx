@@ -10,10 +10,7 @@ import {ActionTableType, TableData} from "@/app/types/tablesTypes";
 import {Grid} from "@mui/material";
 import ActionTable from "@/app/components/tables/ActionTable/ActionTable";
 import {
-    BARRIERS_COLUMNS,
-    CORNERS_COLUMNS,
-    EXTERIOR_SIDING_COLUMNS,
-    UTILITIES_COLUMNS
+    COLUMNS,
 } from "@/app/consts/formletters/system99Calculator";
 import {ExteriorSidingService} from "@/app/caculationMath/ExteriorSiding";
 interface TablesLayoutProps{
@@ -32,6 +29,9 @@ const layoutRules: LayoutRulesType = {
     [TablesGroup.SIDING]: {xs:12, sm:6, md:4},
     [TablesGroup.CORNERS]: {xs:12, sm:6, md:6},
     [TablesGroup.UTILITIES_ROOM]: {xs:12, sm:6, md:6},
+    [TablesGroup.EAVES_SOFFIT]: {xs:12, sm:6, md:6},
+    [TablesGroup.EAVES_FASCIA]: {xs:12, sm:6, md:6},
+
 };
 type TablesColumnsType = {
     [K in (typeof TablesGroup)[keyof typeof TablesGroup]]?: any;
@@ -39,24 +39,11 @@ type TablesColumnsType = {
 const calculationFunctions={
     [MeasurementsType.BARRIERS]:Barriers.main.bind(Barriers),
     [MeasurementsType.EXTERIOR_SIDING]:ExteriorSidingService.getExteriorSiding.bind(ExteriorSidingService),
-    [MeasurementsType.UTILITIES]:()=>null
+    [MeasurementsType.UTILITIES]:()=>null,
+    [MeasurementsType.EAVES]:()=>null
 }
-export const tablesColumns: TablesColumnsType = {
-    [TablesGroup.SIDING]: EXTERIOR_SIDING_COLUMNS,
-    [TablesGroup.CORNERS]: CORNERS_COLUMNS,
-    [TablesGroup.BARRIERS_GATES]: BARRIERS_COLUMNS.gates,
-    [TablesGroup.BARRIERS_FENCE]: BARRIERS_COLUMNS.fence,
-    [TablesGroup.UTILITIES_ROOM]: UTILITIES_COLUMNS.rooms,
-    [TablesGroup.UTILITIES_STANDARD]: UTILITIES_COLUMNS.standardAlone,
-    [TablesGroup.UTILITIES_BATH_REPLACEMENT]: UTILITIES_COLUMNS.bathReplacement,
-    [TablesGroup.UTILITIES_BATH_ITEM_REPLACEMENT]: UTILITIES_COLUMNS.bathItemReplacement,
-    [TablesGroup.UTILITIES_KITCHEN_REPLACEMENT]: UTILITIES_COLUMNS.kitchenReplacement,
-    [TablesGroup.UTILITIES_KITCHEN_ITEM_REPLACEMENT]: UTILITIES_COLUMNS.kitchenItemReplacement,
-    [TablesGroup.UTILITIES_ACCESSORY_ITEM_REPLACEMENT]: UTILITIES_COLUMNS.accessoryItemReplacement,
-    [TablesGroup.UTILITIES_HOUSE_REPLACEMENT]: UTILITIES_COLUMNS.houseReplacement,
-    [TablesGroup.UTILITIES_HOUSE_ITEM_REPLACEMENT]: UTILITIES_COLUMNS.houseItemReplacement,
-};
-const TablesLayout:React.FC<TablesLayoutProps> = ({isClient,tables,queryKeys,measurementType}) => {
+const TablesLayout:React.FC<TablesLayoutProps> = ({isClient,tables,
+                                                      queryKeys,measurementType,}) => {
     const [calculations,setCalculations]=useState<CalculationsState | null>(null);
     const actionTables = useMemo(() => {
         return Object.fromEntries(
@@ -67,7 +54,7 @@ const TablesLayout:React.FC<TablesLayoutProps> = ({isClient,tables,queryKeys,mea
                     tablesInGroup.map(table => ({
                         ...table,
                         ref: React.createRef(),
-                        columns: JSON.parse(JSON.stringify(tablesColumns[typedGroupKey]))
+                        columns: JSON.parse(JSON.stringify(COLUMNS[typedGroupKey]))
                     }))
                 ];
             })

@@ -1,4 +1,6 @@
-import { ValueGetterParams } from 'ag-grid-community'
+import {ValueGetterParams} from 'ag-grid-community'
+import {MeasurementsType, TablesGroup} from "@/app/types/measurementsTypes";
+
 const valueParser = (params: any) => params.newValue === "" ? 0 : params.newValue;
 const selectValueParser = (params: any) => params.newValue === 0 ? "" : params.newValue;
 
@@ -146,6 +148,7 @@ export const CORNERS_COLUMNS=[
     editable: true,
   },
 ]
+
 const PLUMBING_COLUMNS = [
   {
     headerName: 'Length',
@@ -195,8 +198,9 @@ const PLUMBING_COLUMNS = [
     },
   },
 ];
+
 export const BARRIERS_COLUMNS={
-  fence:[
+  [TablesGroup.BARRIERS_FENCE]:[
     {
       headerName: 'Length',
       cellDataType: 'number',
@@ -219,7 +223,7 @@ export const BARRIERS_COLUMNS={
       editable: true,
     }
   ],
-  gates: [
+  [TablesGroup.BARRIERS_GATES]: [
     {
       headerName: 'Gate Quantity',
       cellDataType: 'number',
@@ -240,46 +244,46 @@ export const BARRIERS_COLUMNS={
     }
   ]
 }
-export const UTILITIES_COLUMNS ={
-  rooms:[
+export const UTILITIES_COLUMNS = {
+  [TablesGroup.UTILITIES_ROOM]: [
     {
       headerName: 'Length',
       field: 'length',
       editable: true,
-      flex:1,
+      flex: 1,
       type: 'numberColumn',
-      cellEditor:"agNumberCellEditor"
+      cellEditor: "agNumberCellEditor",
     },
     {
       headerName: 'Width',
-      flex:1,
+      flex: 1,
       field: 'width',
       editable: true,
       type: 'numberColumn',
-      cellEditor:"agNumberCellEditor"
+      cellEditor: "agNumberCellEditor",
     },
     {
       headerName: 'Height',
       field: 'height',
       editable: true,
       type: 'numberColumn',
-      flex:1,
-      cellEditor:"agNumberCellEditor"
+      flex: 1,
+      cellEditor: "agNumberCellEditor",
     },
   ],
-  standardAlone:[
+  [TablesGroup.UTILITIES_STANDARD]: [
     {
       headerName: 'Quantity',
       field: 'quantity',
       editable: true,
-      flex:1,
+      flex: 1,
       type: 'numberColumn',
       cellEditor: 'agNumberCellEditor',
     },
     {
       headerName: 'Service',
       field: 'service',
-      flex:1,
+      flex: 1,
       editable: true,
       cellEditor: 'agSelectCellEditor',
       cellEditorParams: {
@@ -294,44 +298,44 @@ export const UTILITIES_COLUMNS ={
       },
     },
   ],
-  bathReplacement:PLUMBING_COLUMNS,
-  bathItemReplacement:REPLACEMENT_COLUMNS,
-  kitchenReplacement:PLUMBING_COLUMNS,
- kitchenItemReplacement: [
-   {
-     headerName: 'Quantity',
-     field: 'quantity',
-     editable: true,
-     cellEditor: 'agNumberCellEditor',
-   },
-   {
-     headerName: 'Item',
-     field: 'item',
-     editable: true,
-     cellEditor: 'agSelectCellEditor',
-     cellEditorParams: {
-       values: ['sink', 'Ice maker', 'water filter', 'fixtures'],
-     }
-   }
- ],
- accessoryItemReplacement:[
-   {
-     headerName: 'Quantity',
-     field: 'quantity',
-     editable: true,
-     cellEditor: 'agNumberCellEditor',
-   },
-   {
-     headerName: 'Item',
-     field: 'item',
-     editable: true,
-     cellEditor: 'agSelectCellEditor',
-     cellEditorParams: {
-       values: ['water heater', 'whole house water filter', 'hose bib'],
-     },
-   },
- ],
-  houseReplacement:[
+  [TablesGroup.UTILITIES_BATH_REPLACEMENT]: PLUMBING_COLUMNS,
+  [TablesGroup.UTILITIES_BATH_ITEM_REPLACEMENT]: REPLACEMENT_COLUMNS,
+  [TablesGroup.UTILITIES_KITCHEN_REPLACEMENT]: PLUMBING_COLUMNS,
+  [TablesGroup.UTILITIES_KITCHEN_ITEM_REPLACEMENT]: [
+    {
+      headerName: 'Quantity',
+      field: 'quantity',
+      editable: true,
+      cellEditor: 'agNumberCellEditor',
+    },
+    {
+      headerName: 'Item',
+      field: 'item',
+      editable: true,
+      cellEditor: 'agSelectCellEditor',
+      cellEditorParams: {
+        values: ['sink', 'Ice maker', 'water filter', 'fixtures'],
+      },
+    },
+  ],
+  [TablesGroup.UTILITIES_ACCESSORY_ITEM_REPLACEMENT]: [
+    {
+      headerName: 'Quantity',
+      field: 'quantity',
+      editable: true,
+      cellEditor: 'agNumberCellEditor',
+    },
+    {
+      headerName: 'Item',
+      field: 'item',
+      editable: true,
+      cellEditor: 'agSelectCellEditor',
+      cellEditorParams: {
+        values: ['water heater', 'whole house water filter', 'hose bib'],
+      },
+    },
+  ],
+  [TablesGroup.UTILITIES_HOUSE_REPLACEMENT]: [
     {
       headerName: 'Length',
       field: 'length',
@@ -358,37 +362,211 @@ export const UTILITIES_COLUMNS ={
       cellEditorParams: {
         values: [
           'install new system',
-          "replace existing system",
-          "replace air handler and condensor only"
+          'replace existing system',
+          'replace air handler and condensor only',
         ],
       },
     },
   ],
- houseItemReplacement:[
-   {
-     headerName: 'Quantity',
-     field: 'quantity',
-     editable: true,
-     cellEditor: 'agNumberCellEditor',
-   },
-   {
-     headerName: 'Service',
-     field: 'service',
-     editable: true,
-     cellEditor: 'agSelectCellEditor',
-     valueGetter:selectValueGetter,
-     valueParser:selectValueParser,
-     cellEditorParams: {
-       values: [
-         'replace rejesters',
-         "add 25ft of line",
-         "replace plenum",
-         "replace termostat",
-         "replace blower motor",
-         "clean system",
-         'replace water lines only'
-       ],
-     },
-   },
- ]
+  [TablesGroup.UTILITIES_HOUSE_ITEM_REPLACEMENT]: [
+    {
+      headerName: 'Quantity',
+      field: 'quantity',
+      editable: true,
+      cellEditor: 'agNumberCellEditor',
+    },
+    {
+      headerName: 'Service',
+      field: 'service',
+      editable: true,
+      cellEditor: 'agSelectCellEditor',
+      valueGetter: selectValueGetter,
+      valueParser: selectValueParser,
+      cellEditorParams: {
+        values: [
+          'replace rejesters',
+          'add 25ft of line',
+          'replace plenum',
+          'replace termostat',
+          'replace blower motor',
+          'clean system',
+          'replace water lines only',
+        ],
+      },
+    },
+  ],
+};
+export const GUTTER_COLUMNS=[
+  {
+    headerName: 'Length',
+    field: 'length',
+    editable: true,
+    type: 'numberColumn',
+    flex: 1,
+    cellEditor: 'agNumberCellEditor',
+  },
+  {
+    headerName: 'Inside Corners',
+    field: 'insideCorners',
+    editable: true,
+    type: 'numberColumn',
+    flex: 1,
+    cellEditor: 'agNumberCellEditor',
+  },
+  {
+    headerName: 'Outside Corners',
+    field: 'outsideCorners',
+    editable: true,
+    type: 'numberColumn',
+    flex: 1,
+    cellEditor: 'agNumberCellEditor',
+  },
+  {
+    headerName: 'End Caps',
+    field: 'endCaps',
+    editable: true,
+    type: 'numberColumn',
+    flex: 1,
+    cellEditor: 'agNumberCellEditor',
+  },
+  {
+    headerName: 'Left, Right or Pair',
+    field: 'orientation',
+    editable: true,
+    flex: 1,
+    cellEditor: 'agSelectCellEditor',
+    cellEditorParams: {
+      values: ['Left', 'Right', 'Pair'],
+    },
+  },
+];
+export const DOWNSPOUT_COLUMNS=[
+  {
+    headerName: 'Length',
+    field: 'length',
+    editable: true,
+    type: 'numberColumn',
+    flex: 1,
+    cellEditor: 'agNumberCellEditor',
+  },
+  {
+    headerName: 'A Elbow',
+    field: 'aElbow',
+    editable: true,
+    type: 'numberColumn',
+    flex: 1,
+    cellEditor: 'agNumberCellEditor',
+  },
+  {
+    headerName: 'B Elbow',
+    field: 'bElbow',
+    editable: true,
+    type: 'numberColumn',
+    flex: 1,
+    cellEditor: 'agNumberCellEditor',
+  },
+  {
+    headerName: '30 degree elbow',
+    field: 'thirtyDegreeElbow',
+    editable: true,
+    type: 'numberColumn',
+    flex: 1,
+    cellEditor: 'agNumberCellEditor',
+  },
+  {
+    headerName: 'Drain Tile Connect',
+    field: 'drainTileConnect',
+    editable: true,
+    type: 'numberColumn',
+    flex: 1,
+    cellEditor: 'agNumberCellEditor',
+  },
+]
+export const EAVES_COLUMNS={
+    [TablesGroup.EAVES_SOFFIT]:[
+        {
+            headerName: 'Length',
+            field: 'length',
+            editable: true,
+          flex:1,
+            cellEditor: 'agNumberCellEditor',
+        },
+        {
+            headerName: 'Size',
+            field: 'size',
+            editable: true,
+            flex:1,
+            cellEditor: 'agSelectCellEditor',
+            cellEditorParams: {
+                values: ['6', '8', '10', '12'],
+            },
+        }
+    ],
+    [TablesGroup.EAVES_FASCIA]:[
+        {
+            headerName: 'Length',
+            field: 'length',
+          flex:1,
+            editable: true,
+            cellEditor: 'agNumberCellEditor',
+        },
+        {
+        headerName: 'Size',
+        field: 'size', flex:1,
+        editable: true,
+        cellEditor: 'agSelectCellEditor',
+        cellEditorParams: {
+            values: ['12 or less', '18', '24', '36', '48'],
+        },
+    },],
+    [TablesGroup.EAVES_PORCH]:[
+      {
+        headerName: 'Location',
+        field: 'location',
+        editable: true,
+        cellEditor: "agTextCellEditor",
+        flex: 1,
+      },
+      {
+        headerName: 'Length',
+        field: 'length',
+        editable: true,
+        type: 'numberColumn',
+        flex: 1,
+        cellEditor: 'agNumberCellEditor',
+      },
+      {
+        headerName: 'Width',
+        field: 'width',
+        editable: true,
+        type: 'numberColumn',
+        flex: 1,
+        cellEditor: 'agNumberCellEditor',
+      },
+      {
+        headerName: 'Height',
+        field: 'height',
+        editable: true,
+        flex: 1,
+        cellEditor: 'agSelectCellEditor',
+        cellEditorParams: {
+          values: ['1st story', '2nd story', '3rd story'],
+        },
+      },
+    ],
+    [TablesGroup.GUTTER_FRONT]:GUTTER_COLUMNS,
+  [TablesGroup.GUTTER_LEFT]:GUTTER_COLUMNS,
+  [TablesGroup.GUTTER_REAR]:GUTTER_COLUMNS,
+  [TablesGroup.GUTTER_RIGHT]:GUTTER_COLUMNS,
+  [TablesGroup.DOWNSPOUT_FRONT]:DOWNSPOUT_COLUMNS,
+  [TablesGroup.DOWNSPOUT_LEFT]:DOWNSPOUT_COLUMNS,
+  [TablesGroup.DOWNSPOUT_REAR]:DOWNSPOUT_COLUMNS,
+  [TablesGroup.DOWNSPOUT_RIGHT]:DOWNSPOUT_COLUMNS,
+}
+export const COLUMNS={
+    ...EAVES_COLUMNS,
+    ...UTILITIES_COLUMNS,
+    ...BARRIERS_COLUMNS,
+  [TablesGroup.SIDING]: EXTERIOR_SIDING_COLUMNS,
+  [TablesGroup.CORNERS]: CORNERS_COLUMNS,
 }
