@@ -52,17 +52,25 @@ export interface Measurement{
         clientName: string;
     };
     group:string,
-    tables:{
-        [key:string]:TableData[]
-    }
+    tables:Record<string,TableData[]>
 }
 export enum TablesGroup{
     SIDING="siding",
     CORNERS="corners",
     BARRIERS_GATES="barriers_gates",
-    BARRIERS_FENCE="barriers_fence"
+    BARRIERS_FENCE="barriers_fence",
+    UTILITIES_ROOM="utilities_room",
+    UTILITIES_STANDARD="utilities_standard",
+    UTILITIES_BATH_REPLACEMENT = "bathReplacement",
+    UTILITIES_BATH_ITEM_REPLACEMENT = "bathItemReplacement",
+    UTILITIES_KITCHEN_REPLACEMENT = "kitchenReplacement",
+    UTILITIES_KITCHEN_ITEM_REPLACEMENT = "kitchenItemReplacement",
+    UTILITIES_ACCESSORY_ITEM_REPLACEMENT = "accessoryItemReplacement",
+    UTILITIES_HOUSE_REPLACEMENT = "houseReplacement",
+    UTILITIES_HOUSE_ITEM_REPLACEMENT = "houseItemReplacement"
 }
 export enum MeasurementsType{
     BARRIERS="Barriers",
-    EXTERIOR_SIDING="Exterior Siding"
+    EXTERIOR_SIDING="Exterior Siding",
+    UTILITIES="utilities"
 }

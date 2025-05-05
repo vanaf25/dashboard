@@ -1,8 +1,9 @@
 "use client"
 import React, {useMemo} from 'react';
 import {TableData} from "@/app/types/tablesTypes";
-import ExteriorSidingTables from "@/app/components/tables/TablePages/ExteriorSidingTables/ExteriorSidingTables";
-import {TablesGroup} from "@/app/types/measurementsTypes";
+import {MeasurementsType, TablesGroup} from "@/app/types/measurementsTypes";
+import TablesLayout from "@/app/components/tables/TablesLayout/TablesLayout";
+
 const tableNames = [
     "Front SIDING",
     "Rear SIDING",
@@ -31,7 +32,7 @@ const Page = () => {
     const tableData=useMemo(()=>({siding:initialSidingTables,corners:initialCornersTable}),[])
     return (
         <div>
-            <ExteriorSidingTables queryKeys={[]} isClient tables={tableData} />
+            <TablesLayout measurementType={MeasurementsType.EXTERIOR_SIDING} queryKeys={[]} isClient tables={tableData} />
         </div>
     );
 };

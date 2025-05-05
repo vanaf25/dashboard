@@ -1,8 +1,8 @@
 "use client";
 import React, {useMemo} from 'react';
 import {TableData} from "@/app/types/tablesTypes";
-import BarriersTables from "@/app/components/tables/TablePages/BariersTables/BariersTables";
-import {TablesGroup} from "@/app/types/measurementsTypes";
+import {MeasurementsType, TablesGroup} from "@/app/types/measurementsTypes";
+import TablesLayout from "@/app/components/tables/TablesLayout/TablesLayout";
 
 const Page = () => {
     const initialFenceData=useMemo(()=>Array.from({length: 3}, () => ({length: 0, height: 0,corners:0,id:Math.random()})),[]);
@@ -16,7 +16,7 @@ const Page = () => {
         [TablesGroup.BARRIERS_FENCE]:initialFenceTable,[TablesGroup.BARRIERS_GATES]:initialGateTable}),[])
     return (
         <div>
-            <BarriersTables tables={tableData} isClient queryKeys={[]}/>
+            <TablesLayout measurementType={MeasurementsType.BARRIERS} isClient queryKeys={[]} tables={tableData} />
         </div>
     );
 };

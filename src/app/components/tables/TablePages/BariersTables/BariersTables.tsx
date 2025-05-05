@@ -9,7 +9,6 @@ import {Box} from "@mui/system";
 import DefaultCalculationValues from "@/app/components/DefaultCalculationValues/DefaultCalculationValues";
 import DefaultCalculators from "@/app/components/DefaultCalculators/DefaultCalculators";
 import {CalculationsState} from "@/app/components/tables/TablePages/ExteriorSidingTables/ExteriorSidingTables";
-import {ExteriorSidingService} from "@/app/caculationMath/ExteriorSiding";
 import {Barriers} from "@/app/caculationMath/Barriers";
 interface ExteriorSidingTables {
     tables:Record<string,TableData[]>
@@ -21,9 +20,6 @@ const BarriersTablesComponent:React.FC<ExteriorSidingTables> = ({tables,queryKey
     const barriersTable:ActionTableType[]=useMemo(()=>(tables[TablesGroup.BARRIERS_GATES].map(el=>({...el,columns:JSON.parse(JSON.stringify(BARRIERS_COLUMNS.gates)),ref:React.createRef()}))),[])
     const mergedArray=useMemo(()=>([...fenceTable,...barriersTable]),[fenceTable,barriersTable])
     const [calculations,setCalculations]=useState<CalculationsState | null>(null);
-    useEffect(()=>{
-        console.log('calc:',calculations);
-    },[calculations]);
     return (
         <div>
             <Grid sx={{ mb: 2 }} container spacing={2}>

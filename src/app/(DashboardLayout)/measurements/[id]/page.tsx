@@ -9,9 +9,8 @@ import measurementsApi from "@/app/apis/measurementApi";
 import {Measurement, MeasurementsType} from "@/app/types/measurementsTypes";
 import CalculationValues from "@/app/components/CalculationValues/CalculationValues";
 import BlankCard from "@/app/components/shared/BlankCard";
-import ExteriorSidingTables from "@/app/components/tables/TablePages/ExteriorSidingTables/ExteriorSidingTables";
 import TableNotes from "@/app/components/system99/TableNotes/TableNotes";
-import BariersTables from "@/app/components/tables/TablePages/BariersTables/BariersTables";
+import TablesLayout from "@/app/components/tables/TablesLayout/TablesLayout";
 
 const Page = () => {
     const { id } = useParams();
@@ -35,9 +34,7 @@ const Page = () => {
                             <CalculationValues values={data.measurementDetails}  />
                           <TableNotes/>
                         </BlankCard>
-                        {data.group===MeasurementsType.EXTERIOR_SIDING ?<ExteriorSidingTables queryKeys={queryKeys} tables={data.tables}/>:
-                          data.group===MeasurementsType.BARRIERS ? <BariersTables tables={data.tables} queryKeys={queryKeys} />:<></>
-                        }
+                        <TablesLayout tables={data.tables} isClient={false} measurementType={data.group} queryKeys={queryKeys}/>
                     </>}
                 </>}
             </>}

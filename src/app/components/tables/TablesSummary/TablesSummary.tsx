@@ -145,7 +145,7 @@ const TablesSummary: React.FC<TablesSummaryProps> = ({ tables, clientOnly
                     headerName: column.headerName
                 }))
             }));
-
+            console.log('tables:',tablesWithActualData)
             createMeasurement(tablesWithActualData);
         }
     };
@@ -198,7 +198,7 @@ const TablesSummary: React.FC<TablesSummaryProps> = ({ tables, clientOnly
             container
             spacing={2}
             justifyContent="center"
-            sx={{ maxWidth: 700, mx: "auto" }}
+            sx={{ maxWidth: 700, mx: "auto",mt:2 }}
         >
             <Grid item xs={12} sm={6}>
                 <BlankCard sx={{ p: 2, width: "100%" }}>
