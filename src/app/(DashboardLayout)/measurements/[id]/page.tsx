@@ -34,7 +34,7 @@ const Page = () => {
                             <CalculationValues values={data.measurementDetails}  />
                           <TableNotes/>
                         </BlankCard>
-                        <TablesLayout tables={data.tables} isClient={false} measurementType={data.group} queryKeys={queryKeys}/>
+                        <TablesLayout tables={data.tables} isClient={false} measurementType={data.group as MeasurementsType} queryKeys={queryKeys}/>
                     </>}
                 </>}
             </>}
