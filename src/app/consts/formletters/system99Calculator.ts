@@ -569,10 +569,136 @@ export const EAVES_COLUMNS={
   [TablesGroup.DOWNSPOUT_REAR]:DOWNSPOUT_COLUMNS,
   [TablesGroup.DOWNSPOUT_RIGHT]:DOWNSPOUT_COLUMNS,
 }
+
+const serviceOptions = ["drywall", "flooring", "tile", "paint"];
+const closetServiceOptions = ["paint", "replace"];
+const trimServiceOptions = ["paint", "stain", "replace"];
+
+export const INTERIOR_COLUMNS = {
+  [TablesGroup.INTERIOR_ROOM]: [
+    {
+      headerName: 'Length',
+      field: 'length',
+      editable: true,
+      flex: 1,
+      cellEditor: 'agNumberCellEditor',
+    },
+    {
+      headerName: 'Width',
+      field: 'width',
+      editable: true,
+      flex: 1,
+      cellEditor: 'agNumberCellEditor',
+    },
+    {
+      headerName: 'Height',
+      field: 'height',
+      editable: true,
+      flex: 1,
+      cellEditor: 'agNumberCellEditor',
+    },
+    {
+      headerName: 'Service',
+      field: 'service',
+      editable: true,
+      flex: 1,
+      cellEditor: 'agSelectCellEditor',
+      cellEditorParams: {
+        values: serviceOptions,
+      },
+    }
+  ],
+  [TablesGroup.INTERIOR_TRIM_CASING]: [
+    {
+      headerName: 'Base board length',
+      field: 'baseBoardLength',
+      editable: true,
+      flex: 1,
+      cellEditor: 'agNumberCellEditor',
+    },
+    {
+      headerName: 'Chair rail length',
+      field: 'chairRailLength',
+      editable: true,
+      flex: 1,
+      cellEditor: 'agNumberCellEditor',
+    },
+    {
+      headerName: 'Crown Molding length',
+      field: 'crownMoldingLength',
+      editable: true,
+      flex: 1,
+      cellEditor: 'agNumberCellEditor',
+    },
+    {
+      headerName: 'Service',
+      field: 'service',
+      editable: true,
+      flex: 1,
+      cellEditor: 'agSelectCellEditor',
+      cellEditorParams: {
+        values: trimServiceOptions,
+      },
+    }
+  ],
+  [TablesGroup.INTERIOR_DOOR_WINDOW]: [
+    {
+      headerName: 'Size of door or window',
+      field: 'size',
+      editable: true,
+      flex: 1,
+      cellEditor: 'agTextCellEditor',
+    },
+    {
+      headerName: 'Service',
+      field: 'service',
+      editable: true,
+      flex: 1,
+      cellEditor: 'agSelectCellEditor',
+      cellEditorParams: {
+        values: trimServiceOptions,
+      },
+    }
+  ],
+  [TablesGroup.INTERIOR_CLOSET]: [
+    {
+      headerName: 'Length',
+      field: 'length',
+      editable: true,
+      flex: 1,
+      cellEditor: 'agNumberCellEditor',
+    },
+    {
+      headerName: 'Width',
+      field: 'width',
+      editable: true,
+      flex: 1,
+      cellEditor: 'agNumberCellEditor',
+    },
+    {
+      headerName: 'Height',
+      field: 'height',
+      editable: true,
+      flex: 1,
+      cellEditor: 'agNumberCellEditor',
+    },
+    {
+      headerName: 'Service',
+      field: 'service',
+      editable: true,
+      flex: 1,
+      cellEditor: 'agSelectCellEditor',
+      cellEditorParams: {
+        values: closetServiceOptions,
+      },
+    }
+  ]
+};
 export const COLUMNS={
     ...EAVES_COLUMNS,
     ...UTILITIES_COLUMNS,
     ...BARRIERS_COLUMNS,
+    ...INTERIOR_COLUMNS,
   [TablesGroup.SIDING]: EXTERIOR_SIDING_COLUMNS,
   [TablesGroup.CORNERS]: CORNERS_COLUMNS,
 }

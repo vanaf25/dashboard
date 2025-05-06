@@ -38,7 +38,8 @@ const calculationFunctions={
     [MeasurementsType.BARRIERS]:Barriers.main.bind(Barriers),
     [MeasurementsType.EXTERIOR_SIDING]:ExteriorSidingService.getExteriorSiding.bind(ExteriorSidingService),
     [MeasurementsType.UTILITIES]:()=>null,
-    [MeasurementsType.EAVES]:()=>null
+    [MeasurementsType.EAVES]:()=>null,
+    [MeasurementsType.INTERIOR]:()=>null
 }
 interface CalculationsState{
     basicValues:any,

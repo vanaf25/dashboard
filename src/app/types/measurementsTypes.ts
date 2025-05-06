@@ -59,6 +59,7 @@ export enum TablesGroup{
     CORNERS="corners",
     BARRIERS_GATES="barriers_gates",
     BARRIERS_FENCE="barriers_fence",
+
     UTILITIES_ROOM="utilities_room",
     UTILITIES_STANDARD="utilities_standard",
     UTILITIES_BATH_REPLACEMENT = "bathReplacement",
@@ -83,10 +84,16 @@ export enum TablesGroup{
     DOWNSPOUT_LEFT = "downspout_left",
     DOWNSPOUT_REAR = "downspout_rear",
     DOWNSPOUT_RIGHT = "downspout_right",
+
+    INTERIOR_ROOM = "interior_room",
+    INTERIOR_TRIM_CASING = "interior_trim_casing",
+    INTERIOR_DOOR_WINDOW = "interior_door_window",
+    INTERIOR_CLOSET = "interior_closet"
 }
 export enum MeasurementsType{
     BARRIERS="Barriers",
     EXTERIOR_SIDING="Exterior Siding",
     UTILITIES="utilities",
-    EAVES="eaves"
+    EAVES="eaves",
+    INTERIOR="interior"
 }
