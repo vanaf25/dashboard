@@ -5,12 +5,11 @@ import {MeasurementsType, TablesGroup} from "@/app/types/measurementsTypes";
 import {Box} from "@mui/system";
 import DefaultCalculationValues from "@/app/components/DefaultCalculationValues/DefaultCalculationValues";
 import DefaultCalculators from "@/app/components/DefaultCalculators/DefaultCalculators";
-import {CalculationsState} from "@/app/components/tables/TablePages/ExteriorSidingTables/ExteriorSidingTables";
 import {ActionTableType, TableData} from "@/app/types/tablesTypes";
 import {Grid} from "@mui/material";
 import ActionTable from "@/app/components/tables/ActionTable/ActionTable";
 import {
-    COLUMNS,
+    COLUMNS
 } from "@/app/consts/formletters/system99Calculator";
 import {ExteriorSidingService} from "@/app/caculationMath/ExteriorSiding";
 interface TablesLayoutProps{
@@ -31,7 +30,6 @@ const layoutRules: LayoutRulesType = {
     [TablesGroup.UTILITIES_ROOM]: {xs:12, sm:6, md:6},
     [TablesGroup.EAVES_SOFFIT]: {xs:12, sm:6, md:6},
     [TablesGroup.EAVES_FASCIA]: {xs:12, sm:6, md:6},
-
 };
 type TablesColumnsType = {
     [K in (typeof TablesGroup)[keyof typeof TablesGroup]]?: any;
@@ -41,6 +39,10 @@ const calculationFunctions={
     [MeasurementsType.EXTERIOR_SIDING]:ExteriorSidingService.getExteriorSiding.bind(ExteriorSidingService),
     [MeasurementsType.UTILITIES]:()=>null,
     [MeasurementsType.EAVES]:()=>null
+}
+interface CalculationsState{
+    basicValues:any,
+    calculators:any,
 }
 const TablesLayout:React.FC<TablesLayoutProps> = ({isClient,tables,
                                                       queryKeys,measurementType,}) => {
