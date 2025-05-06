@@ -1,7 +1,13 @@
 import {ValueGetterParams} from 'ag-grid-community'
-import {MeasurementsType, TablesGroup} from "@/app/types/measurementsTypes";
+import {TablesGroup} from "@/app/types/measurementsTypes";
+const valueParser = (params: any) => params.newValue === "" ? 0 : Number(params.newValue);
 
-const valueParser = (params: any) => params.newValue === "" ? 0 : params.newValue;
+const applyNumberValueParser = (columns: any[]) =>
+    columns.map((col) =>
+        col.cellEditor === 'agNumberCellEditor' && !col.valueParser
+            ? { ...col, valueParser }
+            : col
+    );
 const selectValueParser = (params: any) => params.newValue === 0 ? "" : params.newValue;
 
 const selectValueGetter = (params: ValueGetterParams) => {
@@ -498,7 +504,7 @@ export const EAVES_COLUMNS={
             flex:1,
             cellEditor: 'agSelectCellEditor',
             cellEditorParams: {
-                values: ['6', '8', '10', '12'],
+                values: ['6ft', '8ft', '10ft', '12ft'],
             },
         }
     ],
@@ -516,7 +522,7 @@ export const EAVES_COLUMNS={
         editable: true,
         cellEditor: 'agSelectCellEditor',
         cellEditorParams: {
-            values: ['12 or less', '18', '24', '36', '48'],
+            values: ['12 or less', '18ft', '24ft', '36ft', '48ft'],
         },
     },],
     [TablesGroup.EAVES_PORCH]:[
