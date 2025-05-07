@@ -30,6 +30,7 @@ const ActionTable: React.FC<ActionTableProps> = ({ table, onCellValueHandler,
             }
         }
     };
+    console.log(table.rows)
     const updateGridAddRowHandle=(serverData?:any)=>{
         const defaultRow=table.columns.reduce((obj, item) => {
             if(item.field){
@@ -57,7 +58,7 @@ const ActionTable: React.FC<ActionTableProps> = ({ table, onCellValueHandler,
                     return {...oldData,tables:{
                             ...oldData.tables,
                             [tableKey]:oldData.tables[tableKey].map(table=>{
-                                return {...table,rows:table.rows.map((row) => (row.id === id ? { ...row, ...rowData } : row)),
+                                return {...table,rows:table?.rows?.map((row) => (row.id === id ? { ...row, ...rowData } : row)),
                                 }
                             })
                         }}
@@ -77,7 +78,7 @@ const ActionTable: React.FC<ActionTableProps> = ({ table, onCellValueHandler,
                             [tableKey]:oldData.tables[tableKey].map(table=>{
                                 if(table.id===tableId){
                                     updateGridAddRowHandle(data)
-                                    return { ...table, rows: [...table.rows, data] };
+                                    return { ...table, rows: [...(table?.rows ? table.rows:[]), data] };
                                 }
                                 return table
                             })
@@ -111,7 +112,7 @@ const ActionTable: React.FC<ActionTableProps> = ({ table, onCellValueHandler,
                     return {...oldData,tables:{
                             ...oldData.tables,
                             [tableKey]:oldData.tables[tableKey].map(table=>{
-                             return {...table,rows:table.rows.filter((row) => row.id !== rowId),
+                             return {...table,rows:table?.rows?.filter((row) => row.id !== rowId),
                             }
                             })
                         }}

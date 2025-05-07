@@ -3,12 +3,14 @@ import { ColDef } from "ag-grid-community";
 
 export type TableData<T = Record<string, any>> = {
     name: string;
-    id: number;
-    rows: T[];
+    id?: number;
+    group?:string;
+    rows?: T[];
 };
 export type ActionTableType = {
     name: string;
     id: number;
+    group?:string;
     rows: { [key: string]: any }[];
     ref: MutableRefObject<any>;
     columns: ColDef[];

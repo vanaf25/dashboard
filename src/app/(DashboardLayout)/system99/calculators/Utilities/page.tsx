@@ -137,7 +137,7 @@ const Page = () => {
 
     // Combined table data
     const tableData = useMemo(() => ({
-        [TablesGroup.UTILITIES_ROOM]: initialRoomTables,
+        [TablesGroup.UTILITIES_ROOM]: roomNames.map(el=>({name:el})),
         [TablesGroup.UTILITIES_STANDARD]: initialStandardTables,
         [TablesGroup.UTILITIES_BATH_REPLACEMENT]: bathReplacementTables,
         [TablesGroup.UTILITIES_BATH_ITEM_REPLACEMENT]: bathItemReplacementTables,

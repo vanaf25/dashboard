@@ -12,6 +12,7 @@ import {
     COLUMNS
 } from "@/app/consts/formletters/system99Calculator";
 import {ExteriorSidingService} from "@/app/caculationMath/ExteriorSiding";
+import generateBlankRows from "@/app/utils/tables/generateBlankRows";
 interface TablesLayoutProps{
     isClient:boolean
     tables:Record<string,TableData[]>,
@@ -48,20 +49,24 @@ interface CalculationsState{
 const TablesLayout:React.FC<TablesLayoutProps> = ({isClient,tables,
                                                       queryKeys,measurementType,}) => {
     const [calculations,setCalculations]=useState<CalculationsState | null>(null);
-    const actionTables = useMemo(() => {
+    const actionTables:Record<string, ActionTableType[]> = useMemo(() => {
         return Object.fromEntries(
             Object.entries(tables).map(([groupKey, tablesInGroup]) => {
                 const typedGroupKey = groupKey as keyof TablesColumnsType;
+                const columns=COLUMNS[typedGroupKey]
                 return [
                     groupKey,
                     tablesInGroup.map(table => ({
                         ...table,
+                        id:table.id ? table.id:Math.random(),
+                        group:table.group ? table.group:groupKey,
+                        rows:table.rows ? table.rows:JSON.parse(JSON.stringify(generateBlankRows(columns,3))),
                         ref: React.createRef(),
-                        columns: JSON.parse(JSON.stringify(COLUMNS[typedGroupKey]))
+                        columns: JSON.parse(JSON.stringify(columns))
                     }))
                 ];
             })
-        ) as Record<TablesGroup, ActionTableType[]>;
+        )
     }, [tables]);
     const mergedArray: ActionTableType[] = useMemo(() =>
             Object.values(actionTables).flat(),
