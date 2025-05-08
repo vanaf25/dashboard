@@ -31,6 +31,7 @@ const layoutRules: LayoutRulesType = {
     [TablesGroup.UTILITIES_ROOM]: {xs:12, sm:6, md:6},
     [TablesGroup.EAVES_SOFFIT]: {xs:12, sm:6, md:6},
     [TablesGroup.EAVES_FASCIA]: {xs:12, sm:6, md:6},
+    [TablesGroup.LANDSCAPING_YARD]:{xs:12,sm:6,md:6},
 };
 type TablesColumnsType = {
     [K in (typeof TablesGroup)[keyof typeof TablesGroup]]?: any;
@@ -40,7 +41,8 @@ const calculationFunctions={
     [MeasurementsType.EXTERIOR_SIDING]:ExteriorSidingService.getExteriorSiding.bind(ExteriorSidingService),
     [MeasurementsType.UTILITIES]:()=>null,
     [MeasurementsType.EAVES]:()=>null,
-    [MeasurementsType.INTERIOR]:()=>null
+    [MeasurementsType.INTERIOR]:()=>null,
+    [MeasurementsType.LANDSCAPING]:()=>null
 }
 interface CalculationsState{
     basicValues:any,

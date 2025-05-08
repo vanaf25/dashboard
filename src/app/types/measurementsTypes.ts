@@ -88,12 +88,21 @@ export enum TablesGroup{
     INTERIOR_ROOM = "interior_room",
     INTERIOR_TRIM_CASING = "interior_trim_casing",
     INTERIOR_DOOR_WINDOW = "interior_door_window",
-    INTERIOR_CLOSET = "interior_closet"
+    INTERIOR_CLOSET = "interior_closet",
+
+    LANDSCAPING_YARD="landscaping_yard",
+    LANDSCAPING_FLOWER_BEDS="landscaping_flower_beds",
+    LANDSCAPING_SCRUBS="landscaping_scrubs",
+    LANDSCAPING_TREES="landscaping_trees",
+    LANDSCAPING_IRRIGATION = "irrigation",
+    LANDSCAPING_EXCAVATE_GRASS = "excavate_grass",
+    LANDSCAPING_LAWN_MOWING = "lawn_mowing",
 }
 export enum MeasurementsType{
     BARRIERS="Barriers",
     EXTERIOR_SIDING="Exterior Siding",
     UTILITIES="utilities",
     EAVES="eaves",
-    INTERIOR="interior"
+    INTERIOR="interior",
+    LANDSCAPING="landscaping"
 }

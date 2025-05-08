@@ -4,5 +4,5 @@ export  const CALCULATORS = [
     "StuccoWallCovering", "BrickWallCovering", "PorchCeiling", "StairFraming", "Fencing"
 ]
 export const MAIN_CALCULATORS=["Exterior Siding","Eaves","Apture’s",
-    "Roofing","Structures","Barriers","Landscape","Interior","Utilities"]
+    "Roofing","Structures","Barriers","Landscaping","Interior","Utilities"]
 export const typesOfProjects=["Windows","Deck","Siding"]
