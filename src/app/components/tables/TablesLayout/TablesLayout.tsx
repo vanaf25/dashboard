@@ -45,7 +45,8 @@ const calculationFunctions={
     [MeasurementsType.INTERIOR]:()=>null,
     [MeasurementsType.LANDSCAPING]:()=>null,
     [MeasurementsType.ROOF]:()=>null,
-    [MeasurementsType.STRUCTURES]:()=>null
+    [MeasurementsType.STRUCTURES]:()=>null,
+    [MeasurementsType.APERTURES]:()=>null
 }
 interface CalculationsState{
     basicValues:any,
