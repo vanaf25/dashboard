@@ -3,7 +3,6 @@ import {INTERIOR_COLUMNS} from "@/app/consts/formletters/interiorColumns";
 import {EAVES_COLUMNS} from "@/app/consts/formletters/eavesColumns";
 import {UTILITIES_COLUMNS} from "@/app/consts/formletters/utilitiesColumns";
 import {BARRIERS_COLUMNS} from "@/app/consts/formletters/barriersColumns";
-import {CORNERS_COLUMNS, EXTERIOR_SIDING_COLUMNS} from "@/app/consts/formletters/exteriorSidingColumns";
 import {LANDSCAPING_COLUMNS} from "@/app/consts/formletters/landscapingColumns";
 import {ROOFS_COLUMNS} from "@/app/consts/formletters/roofsColumns";
 import {STRUCTURES_COLUMNS} from "@/app/consts/formletters/structuresColumns";
@@ -132,6 +131,25 @@ export const sidingColumns = [
         editable: false,
     },
 ];
+export const EXTERIOR_SIDING_COLUMNS=sidingColumns
+    .filter((c) => c.field === "length" || c.field === "height")
+    .map((col) => ({ ...col, flex: 1 }))
+export const CORNERS_COLUMNS=[
+    {
+        headerName: '12 feet and under',
+        field: 'length12',
+        flex: 1,
+        cellEditor: 'agNumberCellEditor',
+        editable: true,
+    },
+    {
+        headerName: 'between 12 & 24 long',
+        field: 'length12_24',
+        flex: 1,
+        cellEditor: 'agNumberCellEditor',
+        editable: true,
+    },
+]
 export const COLUMNS={
     ...EAVES_COLUMNS,
     ...UTILITIES_COLUMNS,
