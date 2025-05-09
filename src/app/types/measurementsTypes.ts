@@ -97,6 +97,20 @@ export enum TablesGroup{
     LANDSCAPING_IRRIGATION = "irrigation",
     LANDSCAPING_EXCAVATE_GRASS = "excavate_grass",
     LANDSCAPING_LAWN_MOWING = "lawn_mowing",
+
+    ROOF_MAIN="roof_main",
+    ROOF_ASSORYS="roof_assorys",
+
+    STRUCTURES_COVERED="structures_covered",
+    STRUCTURES_CONCRETE="structures_concrete",
+    STRUCTURES_EXCAVATION="structures_excavation",
+    STRUCTURES_BUILDING_WALL="structures_building_wall",
+    STRUCTURES_DECK_MEASUREMENTS="structures_deck_measurements",
+    STRUCTURES_DECK_STAIRS="structures_deck_stairs",
+
+    APERTURES_WINDOWS="apertures_windows",
+    APERTURES_DOORS="apertures_doors",
+
 }
 export enum MeasurementsType{
     BARRIERS="Barriers",
@@ -104,5 +118,8 @@ export enum MeasurementsType{
     UTILITIES="utilities",
     EAVES="eaves",
     INTERIOR="interior",
-    LANDSCAPING="landscaping"
+    LANDSCAPING="landscaping",
+    ROOF="roof",
+    STRUCTURES="structures",
+    APERTURES="apertures"
 }

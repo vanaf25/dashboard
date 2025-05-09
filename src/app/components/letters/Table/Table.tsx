@@ -21,12 +21,12 @@ const ReusableTable: React.FC<ReusableTableProps> = React.memo(
             activeMode === "light" ? "ag-theme-quartz" : "ag-theme-alpine-dark";
 
         const containerStyle = {
-            height:
+           /* height:
                 rows?.length === 1
                     ? "110px"
                     : rows?.length < 4
                         ? `${rows?.length * 50 + 52}px`
-                        : undefined,
+                        : undefined,*/
             marginBottom: withOutMargin ? "0px" : "30px",
         };
 
@@ -36,7 +36,7 @@ const ReusableTable: React.FC<ReusableTableProps> = React.memo(
                     rowData={rows}
                     columnDefs={columns}
                     ref={customRef}
-                    domLayout={rows?.length > 3 ? "autoHeight" : undefined}
+                    domLayout={"autoHeight"}
                     {...anotherProps}
                 />
             </div>

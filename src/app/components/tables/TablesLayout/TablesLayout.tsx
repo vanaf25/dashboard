@@ -32,6 +32,7 @@ const layoutRules: LayoutRulesType = {
     [TablesGroup.EAVES_SOFFIT]: {xs:12, sm:6, md:6},
     [TablesGroup.EAVES_FASCIA]: {xs:12, sm:6, md:6},
     [TablesGroup.LANDSCAPING_YARD]:{xs:12,sm:6,md:6},
+    [TablesGroup.ROOF_MAIN]:{xs:12,sm:6,md:6}
 };
 type TablesColumnsType = {
     [K in (typeof TablesGroup)[keyof typeof TablesGroup]]?: any;
@@ -42,7 +43,9 @@ const calculationFunctions={
     [MeasurementsType.UTILITIES]:()=>null,
     [MeasurementsType.EAVES]:()=>null,
     [MeasurementsType.INTERIOR]:()=>null,
-    [MeasurementsType.LANDSCAPING]:()=>null
+    [MeasurementsType.LANDSCAPING]:()=>null,
+    [MeasurementsType.ROOF]:()=>null,
+    [MeasurementsType.STRUCTURES]:()=>null
 }
 interface CalculationsState{
     basicValues:any,
