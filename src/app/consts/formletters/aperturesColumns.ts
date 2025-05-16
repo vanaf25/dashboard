@@ -13,8 +13,7 @@ export const APERTURES_COLUMNS= {
         flex: 1,
         cellEditor: "agTextCellEditor",
     },
-      generateNumberColumn("quantity"),
-      GENERAL_WIDTH_COLUMN,
+      generateNumberColumn("quantity"), GENERAL_WIDTH_COLUMN,
       GENERAL_HEIGHT_COLUMN,
         {
             headerName: "Type",
@@ -149,3 +148,4 @@ export const APERTURES_COLUMNS= {
         },
     ]
 }
+console.log('columns:',APERTURES_COLUMNS);

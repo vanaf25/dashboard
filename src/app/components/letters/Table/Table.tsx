@@ -20,23 +20,24 @@ const ReusableTable: React.FC<ReusableTableProps> = React.memo(
         const themeClass =
             activeMode === "light" ? "ag-theme-quartz" : "ag-theme-alpine-dark";
 
-        const containerStyle = {
-           /* height:
+       /* const containerStyle = {
+           /!* height:
                 rows?.length === 1
                     ? "110px"
                     : rows?.length < 4
                         ? `${rows?.length * 50 + 52}px`
-                        : undefined,*/
-            marginBottom: withOutMargin ? "0px" : "30px",
-        };
+                        : undefined,*!/
+            marginBottom: withOutMargin ? "0px" : "0px",
+        };*/
 
         return (
-            <div className={themeClass} style={containerStyle}>
+            <div className={themeClass}>
                 <AgGridReact
                     rowData={rows}
                     columnDefs={columns}
                     ref={customRef}
                     domLayout={"autoHeight"}
+                    singleClickEdit={true}
                     {...anotherProps}
                 />
             </div>

@@ -1,30 +1,17 @@
 import {TablesGroup} from "@/app/types/measurementsTypes";
-const serviceOptions = ["drywall", "flooring", "tile", "paint"];
+import {
+    GENERAL_HEIGHT_COLUMN,
+    GENERAL_LENGTH_COLUMN,
+    GENERAL_WIDTH_COLUMN
+} from "@/app/consts/formletters/columnsUtils";
+const serviceOptions = ["drywall", "flooring", "tile", "paint","celling","insulation"];
 const closetServiceOptions = ["paint", "replace"];
 const trimServiceOptions = ["paint", "stain", "replace"];
 export const INTERIOR_COLUMNS = {
     [TablesGroup.INTERIOR_ROOM]: [
-        {
-            headerName: 'Length',
-            field: 'length',
-            editable: true,
-            flex: 1,
-            cellEditor: 'agNumberCellEditor',
-        },
-        {
-            headerName: 'Width',
-            field: 'width',
-            editable: true,
-            flex: 1,
-            cellEditor: 'agNumberCellEditor',
-        },
-        {
-            headerName: 'Height',
-            field: 'height',
-            editable: true,
-            flex: 1,
-            cellEditor: 'agNumberCellEditor',
-        },
+        GENERAL_LENGTH_COLUMN,
+        GENERAL_WIDTH_COLUMN,
+        GENERAL_HEIGHT_COLUMN,
         {
             headerName: 'Service',
             field: 'service',

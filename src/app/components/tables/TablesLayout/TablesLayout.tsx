@@ -1,75 +1,64 @@
-import React, {useMemo, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import TablesSummary from "@/app/components/tables/TablesSummary/TablesSummary";
-import {Barriers} from "@/app/caculationMath/Barriers";
 import {MeasurementsType, TablesGroup} from "@/app/types/measurementsTypes";
 import {Box} from "@mui/system";
 import DefaultCalculationValues from "@/app/components/DefaultCalculationValues/DefaultCalculationValues";
 import DefaultCalculators from "@/app/components/DefaultCalculators/DefaultCalculators";
-import {ActionTableType, TableData} from "@/app/types/tablesTypes";
+import {
+    ActionTableType,
+    TableData, TableProperty,
+    TablesColumnsType, TablesPropertiesIntegrated,
+} from "@/app/types/tablesTypes";
 import {Grid} from "@mui/material";
 import ActionTable from "@/app/components/tables/ActionTable/ActionTable";
 import {
     COLUMNS
 } from "@/app/consts/formletters/system99Calculator";
-import {ExteriorSidingService} from "@/app/caculationMath/ExteriorSiding";
 import generateBlankRows from "@/app/utils/tables/generateBlankRows";
+import {calculationFunctions, LayoutRules, TablesProperties} from "@/app/consts/tables/tables";
 interface TablesLayoutProps{
     isClient:boolean
     tables:Record<string,TableData[]>,
     queryKeys:any[]
     measurementType:MeasurementsType
 }
-type LayoutRule = { xs: number; sm: number; md: number };
-type LayoutRulesType = {
-    [K in (typeof TablesGroup)[keyof typeof TablesGroup]]?: LayoutRule;
-};
-const layoutRules: LayoutRulesType = {
-    [TablesGroup.BARRIERS_GATES]: {xs:12, sm:12, md:12},
-    [TablesGroup.BARRIERS_FENCE]: {xs:12, sm:12, md:12},
-    [TablesGroup.SIDING]: {xs:12, sm:6, md:4},
-    [TablesGroup.CORNERS]: {xs:12, sm:6, md:6},
-    [TablesGroup.UTILITIES_ROOM]: {xs:12, sm:6, md:6},
-    [TablesGroup.EAVES_SOFFIT]: {xs:12, sm:6, md:6},
-    [TablesGroup.EAVES_FASCIA]: {xs:12, sm:6, md:6},
-    [TablesGroup.LANDSCAPING_YARD]:{xs:12,sm:6,md:6},
-    [TablesGroup.ROOF_MAIN]:{xs:12,sm:6,md:6}
-};
-type TablesColumnsType = {
-    [K in (typeof TablesGroup)[keyof typeof TablesGroup]]?: any;
-};
-const calculationFunctions={
-    [MeasurementsType.BARRIERS]:Barriers.main.bind(Barriers),
-    [MeasurementsType.EXTERIOR_SIDING]:ExteriorSidingService.getExteriorSiding.bind(ExteriorSidingService),
-    [MeasurementsType.UTILITIES]:()=>null,
-    [MeasurementsType.EAVES]:()=>null,
-    [MeasurementsType.INTERIOR]:()=>null,
-    [MeasurementsType.LANDSCAPING]:()=>null,
-    [MeasurementsType.ROOF]:()=>null,
-    [MeasurementsType.STRUCTURES]:()=>null,
-    [MeasurementsType.APERTURES]:()=>null
-}
+
 interface CalculationsState{
     basicValues:any,
     calculators:any,
 }
+
 const TablesLayout:React.FC<TablesLayoutProps> = ({isClient,tables,
                                                       queryKeys,measurementType,}) => {
     const [calculations,setCalculations]=useState<CalculationsState | null>(null);
+    const [properties,setProperties]=useState<TablesPropertiesIntegrated[]>([])
+
     const actionTables:Record<string, ActionTableType[]> = useMemo(() => {
         return Object.fromEntries(
             Object.entries(tables).map(([groupKey, tablesInGroup]) => {
                 const typedGroupKey = groupKey as keyof TablesColumnsType;
                 const columns=COLUMNS[typedGroupKey]
+               /* setProperties(prevState =>({...prevState,[typedGroupKey]
+                        :TablesProperties[typedGroupKey]?.map(el=>({name:el.name,value:""}))}) )*/
                 return [
                     groupKey,
-                    tablesInGroup.map(table => ({
+                    tablesInGroup.map(table => {
+                        const tableId=table.id ? table.id:Math.random()
+                        const selectedProperties=TablesProperties[typedGroupKey]?.map(el=>({...el,
+                            value:table.properties?.find(prop=>el.name===prop.name)?.value || ""}))
+                            if(selectedProperties){
+                            setProperties(prevState =>([...prevState,{tableId,properties:selectedProperties}]))
+                        }
+                            return {
                         ...table,
-                        id:table.id ? table.id:Math.random(),
+                        id:tableId,
                         group:table.group ? table.group:groupKey,
                         rows:table.rows ? table.rows:JSON.parse(JSON.stringify(generateBlankRows(columns,3))),
                         ref: React.createRef(),
                         columns: JSON.parse(JSON.stringify(columns))
-                    }))
+                    }
+                    }
+                    )
                 ];
             })
         )
@@ -78,27 +67,35 @@ const TablesLayout:React.FC<TablesLayoutProps> = ({isClient,tables,
             Object.values(actionTables).flat(),
         [actionTables]
     );
+    useEffect(()=>{
+        console.log('properties:',properties);
+    },[properties])
     return (
         <div>
             {Object.entries(actionTables).map(tableGroup=>{
-                const groupKey=tableGroup[0] as keyof typeof layoutRules
-                return (<Grid sx={{ mb: 2 }} container spacing={2}>
+                const groupKey=tableGroup[0] as keyof typeof LayoutRules
+                return (<Grid key={groupKey} sx={{ mb: 2 }} container spacing={2}>
                     {tableGroup[1].map((table) => {
                         return (
                             <Grid
                                 item
-                                xs={layoutRules[groupKey]?.xs || 12}
-                                md={layoutRules[groupKey]?.md || 12}
-                                sm={layoutRules[groupKey]?.sm || 12}
+                                xs={LayoutRules[groupKey]?.xs || 12}
+                                md={LayoutRules[groupKey]?.md || 12}
+                                sm={LayoutRules[groupKey]?.sm || 12}
                                 key={table.id}
                             >
-                                <ActionTable isClient={isClient} tableKey={tableGroup[0]} queryKeys={queryKeys} table={table}/>
+                                <ActionTable isClient={isClient}
+                                             setProperties={setProperties}
+                                             properties={properties.find(el=>el.tableId===table.id)?.properties  || []}
+                                             tableKey={tableGroup[0]}
+                                             queryKeys={queryKeys} table={table}/>
                             </Grid>
                         );
                     })}
                 </Grid>)
             })}
             <TablesSummary tables={mergedArray}
+                           properties={properties}
                            setCalculation={(values)=>setCalculations(calculationFunctions[measurementType](values as any))}
                            clientOnly={isClient} type={measurementType} />
             {calculations && <Box sx={{mt:2}}>

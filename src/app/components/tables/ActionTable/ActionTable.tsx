@@ -1,4 +1,4 @@
-import React, { MutableRefObject, useCallback, useMemo } from "react";
+import React, {useCallback, useMemo } from "react";
 import Button from "@mui/material/Button";
 import TableName from "@/app/components/letters/TableName/TableName";
 import Table from "@/app/components/letters/Table/Table";
@@ -6,11 +6,17 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { addRow, updateRowChanged, deleteRow } from "@/app/apis/tablesApi";
 import getRowData from "@/app/utils/getRowData";
 import {Measurement} from "@/app/types/measurementsTypes";
-import {ActionTableType} from "@/app/types/tablesTypes";
-
+import {ActionTableType, TableProperty, TablesPropertiesIntegrated} from "@/app/types/tablesTypes";
+import {Box} from "@mui/material";
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
+import CircularProgress from '@mui/material/CircularProgress';
+import TablePropertyFormCreator from "@/app/components/TablePropertyFormCreator/TablePropertyFormCreator";
 
 interface ActionTableProps {
     table: ActionTableType;
+    properties:TableProperty[],
+    setProperties:React.Dispatch<React.SetStateAction<TablesPropertiesIntegrated[]>>,
     onCellValueHandler?: () => void;
     queryKeys:string[]
     tableKey?:string,
@@ -18,7 +24,7 @@ interface ActionTableProps {
 }
 
 const ActionTable: React.FC<ActionTableProps> = ({ table, onCellValueHandler,
-                                                     queryKeys,tableKey,isClient }) => {
+                                                     queryKeys,tableKey,isClient,properties,setProperties }) => {
     const updateGridDeleteHandle = (rowId: number) => {
         const gridApi = table?.ref?.current?.api;
         if (gridApi) {
@@ -30,7 +36,6 @@ const ActionTable: React.FC<ActionTableProps> = ({ table, onCellValueHandler,
             }
         }
     };
-    console.log(table.rows)
     const updateGridAddRowHandle=(serverData?:any)=>{
         const defaultRow=table.columns.reduce((obj, item) => {
             if(item.field){
@@ -118,8 +123,6 @@ const ActionTable: React.FC<ActionTableProps> = ({ table, onCellValueHandler,
                         }}
                 }
             });
-            // Remove from Grid API
-
         },
     });
     const [deletingRowId, setDeletingRowId] = React.useState<number | null>(null);
@@ -128,7 +131,6 @@ const ActionTable: React.FC<ActionTableProps> = ({ table, onCellValueHandler,
         else addRowMutate(tableId);
     };
     const deleteRowHandle = (rowId: number) => {
-        console.log('rowId:',rowId);
         if(!isClient){
             setDeletingRowId(rowId);
             deleteRowMutate(rowId, {
@@ -140,19 +142,21 @@ const ActionTable: React.FC<ActionTableProps> = ({ table, onCellValueHandler,
     const effectedColumns = useMemo(() => [
         ...table.columns,
         {
-            headerName: "Actions",
+            headerName: "Delete",
             field: "delete",
             flex: 0.7,
             cellRenderer: (params: any) => (
-                <Button
-                    variant="contained"
+                <IconButton
                     color="error"
-                    size="small"
                     onClick={() => deleteRowHandle(params.data.id)}
                     disabled={deletingRowId === params.data.id}
                 >
-                    {deletingRowId === params.data.id ? "Deleting..." : "Delete"}
-                </Button>
+                    {deletingRowId === params.data.id ? (
+                        <CircularProgress size={24} color="inherit" />
+                    ) : (
+                        <DeleteIcon />
+                    )}
+                </IconButton>
             ),
         },
     ], [table.columns, deletingRowId]);
@@ -169,25 +173,41 @@ const ActionTable: React.FC<ActionTableProps> = ({ table, onCellValueHandler,
                     const rowData = getRowData(api, node.rowIndex);
                     updateRowMutation.mutate({ id: data.id, rowData });
                 }
-
             }
         },
-        [updateRowMutation]
-    );
+        [updateRowMutation])
+    const updatePropertiesHandle=(name:string,value:string)=>{
+        setProperties(prevState =>(prevState.map(el=>{
+            if(el.tableId===table.id){
+                return {...el,properties:el.properties.map(p=>{
+                        if(p.name===name) return {...p,value}
+                        return p
+                    })
+                }
+            }
+            return el
+        })))
+    }
     return (
         <>
-            <Button disabled={isPending} fullWidth onClick={() => addRowHandle(table.id)}>
-                {isPending ? "Adding..." : "Add blank row"}
-            </Button>
+            {properties?.length ? <TablePropertyFormCreator
+                onChangeHandler={updatePropertiesHandle}
+                inputFields={properties}/>:<></>}
             {table.name && <TableName>{table.name}</TableName>}
-            <Table
-                onCellValueChanged={onCellValueChanged}
-                columns={effectedColumns}
-                rows={table.rows}
-                customRef={table.ref}
-                getRowId={(params) => String(params.data.id)}
-                domLayout="autoHeight"
-            />
+            <Box sx={{mb:3}}>
+                <Table
+                    onCellValueChanged={onCellValueChanged}
+                    columns={effectedColumns}
+                    rows={table.rows}
+                    customRef={table.ref}
+                    getRowId={(params) => String(params.data.id)}
+                    domLayout="autoHeight"
+                />
+                <Button disabled={isPending} sx={{borderRadius:0}} fullWidth onClick={() => addRowHandle(table.id)}>
+                    {isPending ? "Adding..." : "Add blank row"}
+                </Button>
+            </Box>
+
         </>
     );
 };

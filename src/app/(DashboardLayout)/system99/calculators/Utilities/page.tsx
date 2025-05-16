@@ -17,147 +17,17 @@ const roomNames = [
 ];
 
 const Page = () => {
-    const generateRoomData = () => Array.from({length: 3}, () => ({
-        length: 0,
-        height: 0,
-        width: 0,
-        id: Math.random()
-    }));
-
-    const generateStandardData = () => Array.from({length: 3}, () => ({
-        quantity: 0,
-        service: "",
-        id: Math.random()
-    }));
-    const generateReplacementData = () => Array.from({length: 3}, () => ({
-        quantity: 0,
-        item: "",
-        id: Math.random()
-    }));
-    const generateHouseReplacementData = () => Array.from({length: 3}, () => ({
-        length: 0,
-        width: 0,
-        height: 0,
-        service: "",
-        id: Math.random()
-    }));
-    const generateHouseItemReplacementData = () => Array.from({length: 3}, () => ({
-        quantity: 0,
-        service: "",
-        id: Math.random()
-    }));
-    const initialRoomTables: TableData[] = useMemo(() => (
-        roomNames.map((name) => ({
-            name,
-            rows: generateRoomData(),
-            id: Math.random(),
-            group: TablesGroup.UTILITIES_ROOM
-        }))
-    ), []);
-
-    // Standard tables
-    const initialStandardTables: TableData[] = useMemo(() => ([
-        {
-            id: Math.random(),
-            name: "Stand alone service",
-            rows: generateStandardData(),
-            group: TablesGroup.UTILITIES_STANDARD
-        }
-    ]), []);
-
-    // Bath replacement tables
-    const bathReplacementTables: TableData[] = useMemo(() => ([
-        {
-            id: Math.random(),
-            name: "Bath Replacement",
-            rows: generateRoomData(),
-            group: TablesGroup.UTILITIES_BATH_REPLACEMENT
-        }
-    ]), []);
-
-    // Bath item replacement tables
-    const bathItemReplacementTables: TableData[] = useMemo(() => ([
-        {
-            id: Math.random(),
-            name: "Bath Item Replacement",
-            rows: generateReplacementData(),
-            group: TablesGroup.UTILITIES_BATH_ITEM_REPLACEMENT
-        }
-    ]), []);
-
-    // Kitchen replacement tables
-    const kitchenReplacementTables: TableData[] = useMemo(() => ([
-        {
-            id: Math.random(),
-            name: "Kitchen Replacement",
-            rows: generateRoomData(),
-            group: TablesGroup.UTILITIES_KITCHEN_REPLACEMENT
-        }
-    ]), []);
-
-    // Kitchen item replacement tables
-    const kitchenItemReplacementTables: TableData[] = useMemo(() => ([
-        {
-            id: Math.random(),
-            name: "Kitchen Item Replacement",
-            rows: generateReplacementData(),
-            group: TablesGroup.UTILITIES_KITCHEN_ITEM_REPLACEMENT
-        }
-    ]), []);
-
-    // Accessory item replacement tables
-    const accessoryItemReplacementTables: TableData[] = useMemo(() => ([
-        {
-            id: Math.random(),
-            name: "Accessory Item Replacement",
-            rows: generateReplacementData(),
-            group: TablesGroup.UTILITIES_ACCESSORY_ITEM_REPLACEMENT
-        }
-    ]), []);
-
-    // House replacement tables
-    const houseReplacementTables: TableData[] = useMemo(() => ([
-        {
-            id: Math.random(),
-            name: "House Replacement",
-            rows: generateHouseReplacementData(),
-            group: TablesGroup.UTILITIES_HOUSE_REPLACEMENT
-        }
-    ]), []);
-
-    // House item replacement tables
-    const houseItemReplacementTables: TableData[] = useMemo(() => ([
-        {
-            id: Math.random(),
-            name: "House Item Replacement",
-            rows: generateHouseItemReplacementData(),
-            group: TablesGroup.UTILITIES_HOUSE_ITEM_REPLACEMENT
-        }
-    ]), []);
-
-    // Combined table data
     const tableData = useMemo(() => ({
-        [TablesGroup.UTILITIES_ROOM]: roomNames.map(el=>({name:el})),
-        [TablesGroup.UTILITIES_STANDARD]: initialStandardTables,
-        [TablesGroup.UTILITIES_BATH_REPLACEMENT]: bathReplacementTables,
-        [TablesGroup.UTILITIES_BATH_ITEM_REPLACEMENT]: bathItemReplacementTables,
-        [TablesGroup.UTILITIES_KITCHEN_REPLACEMENT]: kitchenReplacementTables,
-        [TablesGroup.UTILITIES_KITCHEN_ITEM_REPLACEMENT]: kitchenItemReplacementTables,
-        [TablesGroup.UTILITIES_ACCESSORY_ITEM_REPLACEMENT]: accessoryItemReplacementTables,
-        [TablesGroup.UTILITIES_HOUSE_REPLACEMENT]: houseReplacementTables,
-        [TablesGroup.UTILITIES_HOUSE_ITEM_REPLACEMENT]: houseItemReplacementTables
-    }), [
-        initialRoomTables,
-        initialStandardTables,
-        bathReplacementTables,
-        bathItemReplacementTables,
-        kitchenReplacementTables,
-        kitchenItemReplacementTables,
-        accessoryItemReplacementTables,
-        houseReplacementTables,
-        houseItemReplacementTables
-    ]);
-
+        [TablesGroup.UTILITIES_ROOM]: roomNames.map((name) => ({ name })),
+        [TablesGroup.UTILITIES_STANDARD]: [{ name: "Stand alone service" }],
+        [TablesGroup.UTILITIES_BATH_REPLACEMENT]: [{ name: "Bath Replacement" }],
+        [TablesGroup.UTILITIES_BATH_ITEM_REPLACEMENT]: [{ name: "Bath Item Replacement" }],
+        [TablesGroup.UTILITIES_KITCHEN_REPLACEMENT]: [{ name: "Kitchen Replacement" }],
+        [TablesGroup.UTILITIES_KITCHEN_ITEM_REPLACEMENT]: [{ name: "Kitchen Item Replacement" }],
+        [TablesGroup.UTILITIES_ACCESSORY_ITEM_REPLACEMENT]: [{ name: "Accessory Item Replacement" }],
+        [TablesGroup.UTILITIES_HOUSE_REPLACEMENT]: [{ name: "House Replacement" }],
+        [TablesGroup.UTILITIES_HOUSE_ITEM_REPLACEMENT]: [{ name: "House Item Replacement" }],
+    }), []);
     return (
         <div>
             <TablesLayout

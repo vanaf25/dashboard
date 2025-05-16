@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { Grid } from "@mui/material";
 import BlankCard from "@/app/components/shared/BlankCard";
 import CalculationValues from "@/app/components/CalculationValues/CalculationValues";
-import { ActionTableType } from "@/app/types/tablesTypes";
+import {ActionTableType, TablesPropertiesIntegrated} from "@/app/types/tablesTypes";
 import Button from "@mui/material/Button";
 import calculateTotalAmount from "@/app/utils/calculateTotalAmount";
 import getActualTableData from "@/app/utils/getActualTableData";
@@ -17,8 +17,8 @@ interface TablesSummaryProps {
     tables: ActionTableType[];
     clientOnly?: boolean;
     type?: MeasurementsType;
-    setCalculation: (params:Record<string,number>)=>void
-
+    setCalculation: (params:Record<string,number>)=>void;
+    properties:TablesPropertiesIntegrated[]
 }
 interface TotalValues{
     key:string,
@@ -33,7 +33,7 @@ const transformTotalValues = (values: TotalValues[],isKey?:boolean): Record<stri
 };
 const TablesSummary: React.FC<TablesSummaryProps> = ({ tables, clientOnly
                                                          , type,
-                                                         setCalculation
+                                                         setCalculation,properties
 }) => {
     const [totalValues, setTotalValues] = useState<TotalValues[]>([]);
     const router = useRouter();
@@ -128,15 +128,14 @@ const TablesSummary: React.FC<TablesSummaryProps> = ({ tables, clientOnly
         };
     }, [tables]);
     const saveMeasurementsHandle = () => {
-        console.log(clientOnly);
-        console.log(!sessionLoading);
-        console.log(type);
-        console.log(customerId);
-        console.log(session?.user?.id);
         if (clientOnly && !sessionLoading  && type && customerId && session?.user?.id) {
-            console.log('going!!!');
+            console.log('tables:',tables);
             const tablesWithActualData = tables.map(el => ({
                 ...el,
+                properties:properties.find(p=>{
+                 return p.tableId===el.id
+                })?.properties.map(p=>{
+                    return {name:p.name,value:p.value}}),
                 rows: getActualTableData(el.ref),
                 ref: undefined,
                 id: undefined,

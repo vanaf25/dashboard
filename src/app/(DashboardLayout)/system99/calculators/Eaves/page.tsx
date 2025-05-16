@@ -17,15 +17,23 @@ const roomNames = [
 
 const Page = () => {
     const tableData: Record<string, { name: string }[]> = useMemo(() => ({
-        [TablesGroup.UTILITIES_ROOM]: roomNames.map(name => ({ name })),
-        [TablesGroup.UTILITIES_STANDARD]: [{ name: "Stand alone service" }],
-        [TablesGroup.UTILITIES_BATH_REPLACEMENT]: [{ name: "Bath Replacement" }],
-        [TablesGroup.UTILITIES_BATH_ITEM_REPLACEMENT]: [{ name: "Bath Item Replacement" }],
-        [TablesGroup.UTILITIES_KITCHEN_REPLACEMENT]: [{ name: "Kitchen Replacement" }],
-        [TablesGroup.UTILITIES_KITCHEN_ITEM_REPLACEMENT]: [{ name: "Kitchen Item Replacement" }],
-        [TablesGroup.UTILITIES_ACCESSORY_ITEM_REPLACEMENT]: [{ name: "Accessory Item Replacement" }],
-        [TablesGroup.UTILITIES_HOUSE_REPLACEMENT]: [{ name: "House Replacement" }],
-        [TablesGroup.UTILITIES_HOUSE_ITEM_REPLACEMENT]: [{ name: "House Item Replacement" }],
+        [TablesGroup.EAVES_SOFFIT]: [
+            "Front Soffit",
+            "Left Soffit",
+            "Rear Soffit",
+            "Right Soffit"
+        ].map(name => ({ name })),
+        [TablesGroup.EAVES_FASCIA]:["Front Fascia", "Left Fascia",
+            "Rear Fascia", "Right Fascia"].map(el=>({name:el})),
+        [TablesGroup.EAVES_PORCH]:[{name:"Porch Ceiling"}],
+        [TablesGroup.GUTTER_FRONT]: [{ name: "Gutter Front" }],
+        [TablesGroup.DOWNSPOUT_FRONT]: [{ name: "Downspout Front" }],
+        [TablesGroup.GUTTER_LEFT]: [{ name: "Left Gutter" }],
+        [TablesGroup.DOWNSPOUT_LEFT]: [{ name: "Downspout Left" }],
+        [TablesGroup.GUTTER_REAR]: [{ name: "Rear Gutter" }],
+        [TablesGroup.DOWNSPOUT_REAR]: [{ name: "Downspout Rear" }],
+        [TablesGroup.GUTTER_RIGHT]: [{ name: "Right Gutter" }],
+        [TablesGroup.DOWNSPOUT_RIGHT]: [{ name: "Downspout Right" }],
     }), []);
 
     return (
