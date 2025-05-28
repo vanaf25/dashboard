@@ -13,7 +13,6 @@ import {
 import { Icon } from "@iconify/react";
 import Notifications from "./Notification";
 import Profile from "./Profile";
-import Cart from "./Cart";
 import Search from "./Search";
 import Language from "./Language";
 import { AppState } from "@/store/store";

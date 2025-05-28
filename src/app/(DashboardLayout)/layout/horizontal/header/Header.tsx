@@ -11,7 +11,6 @@ import { useSelector, useDispatch } from "@/store/hooks";
 import { toggleMobileSidebar } from "@/store/customizer/CustomizerSlice";
 import { IconMenu2 } from "@tabler/icons-react";
 import Notifications from "../../vertical/header/Notification";
-import Cart from "../../vertical/header/Cart";
 import Profile from "../../vertical/header/Profile";
 import Search from "../../vertical/header/Search";
 import Language from "../../vertical/header/Language";
@@ -79,7 +78,6 @@ export default function Header() {
           {/* ------------------------------------------- */}
           {/* Ecommerce Dropdown */}
           {/* ------------------------------------------- */}
-          <Cart />
           {/* ------------------------------------------- */}
           {/* End Ecommerce Dropdown */}
           {/* ------------------------------------------- */}
