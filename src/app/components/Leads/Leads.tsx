@@ -4,11 +4,9 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
-import { useSupabaseClient } from "@supabase/auth-helpers-react";
-
 import LeadItem from "@/app/components/Leads/LeadItem/LeadItem";
 import {useDispatch, useSelector} from "@/store/hooks";
-import {addProject, changeProject, deleteProject} from "@/store/apps/dashboard/dashboardSlice";
+import {deleteProject} from "@/store/apps/dashboard/dashboardSlice";
 import LeadPopupForm from "@/app/components/Leads/LeadPopupForm/LeadPopupForm";
 import {createClient} from "@/lib/supabase";
 
