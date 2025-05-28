@@ -7,7 +7,6 @@ interface Params extends ICellEditorParams {
 
 export default (params: any): void => {
   const { newValue, oldValue } = params;
-  console.log('oldValue:', oldValue);
   if(params?.api.getRowNode){
     if (newValue <= 0 ) {
       // @ts-ignore

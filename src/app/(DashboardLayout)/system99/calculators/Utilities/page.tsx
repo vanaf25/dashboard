@@ -7,10 +7,7 @@ import TablesLayout from "@/app/components/tables/TablesLayout/TablesLayout";
 const roomNames = [
     "Living Room",
     "Dining Room",
-    "Bed Room 1",
-    "Bed Room 2",
-    "Bed Room 3",
-    "Bed Room 4",
+    "Bed Rooms",
     "Hall",
     "Bath",
     "Kitchen"

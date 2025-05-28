@@ -4,11 +4,11 @@ import Box from '@mui/material/Box';
 import Table from "@/app/components/letters/Table/Table";
 import TableWithOutHeaders from "@/app/components/letters/TableWithoutHeaders/TableWithOutHeaders";
 import calculateSeriesOfNumbers from "@/app/utils/calculateSeriesOfNumbers";
-import calculateTotalAmount from "@/app/utils/calculateTotalAmount";
+import calculateTotalAmount from "@/app/utils/tables/calculateTotalAmount";
 import DocumentLayout from "@/app/components/DocumentLayout/DocumentLayout";
 import type {AgGridReact as AgGridReactType} from "ag-grid-react/dist/types/src/agGridReact";
 import {ElementType, PDFElem} from "@/app/types/exportPdfTypes";
-import getActualTableData from "@/app/utils/getActualTableData";
+import getActualTableData from "@/app/utils/tables/getActualTableData";
 import {TextField, Typography} from "@mui/material";
 
 const totalKeys = ["amount", "totalPay", "totalCost"];

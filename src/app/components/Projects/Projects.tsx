@@ -6,7 +6,7 @@ import ProjectCard from "@/app/components/Projects/ProjectCard/ProjectCard";
 import axios from 'axios';
 import CircularProgress from '@mui/material/CircularProgress';
 import {useUser} from "@supabase/auth-helpers-react";
-import ProjectPopup from "@/app/components/ProjectPopup/ProjectPopup";
+import ProjectPopup from "@/app/components/Projects/ProjectPopup/ProjectPopup";
 import CreateProjectPopup from "@/app/components/CreateProjectPopup/CreateProjectPopup";
 
 const Projects = () => {

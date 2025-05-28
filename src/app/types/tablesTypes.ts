@@ -8,6 +8,7 @@ export type TableData<T = Record<string, any>> = {
     id?: number;
     group?:string;
     rows?: T[];
+    customProperties?:TableProperty[],
     properties?:{id:number,name:string,value:string}[]
 };
 export type ActionTableType = {

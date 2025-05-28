@@ -6,7 +6,7 @@ import Link from "next/link";
 import {useGetWorkerQuery} from "@/app/hooks/useWorkers";
 import {useParams} from "next/navigation";
 import Loading from "@/app/(DashboardLayout)/loading";
-import WorkerCard from "@/app/components/WorkerCard/WorkerCard";
+import WorkerCard from "@/app/components/Workers/WorkerCard/WorkerCard";
 
 const Page = () => {
     const anotherDocuments = [

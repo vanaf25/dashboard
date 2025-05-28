@@ -2,6 +2,7 @@
 import React, {useMemo} from 'react';
 import {MeasurementsType, TablesGroup} from "@/app/types/measurementsTypes";
 import TablesLayout from "@/app/components/tables/TablesLayout/TablesLayout";
+import {roofPitchOptions} from "@/app/consts/tables/tables";
 
 const Page = () => {
     const tableData=useMemo(()=>({
@@ -10,7 +11,10 @@ const Page = () => {
           "Shed",
           "Porch",
           "Pergola"
-      ].map(el=>({name:el})),
+      ].map(el=>({name:el,customProperties:el==="Pergola" ?
+        [{name:"roofPitch",
+            label:"Roof Pitch",
+            type:"select",options:roofPitchOptions}]:undefined})),
       [TablesGroup.STRUCTURES_CONCRETE]:[{name:"Concrete Patio, Side Walk, Drive Way"}],
       [TablesGroup.STRUCTURES_EXCAVATION]:[{name:"Excavation"}],
       [TablesGroup.STRUCTURES_BUILDING_WALL]:[{name:"Building wall"}],

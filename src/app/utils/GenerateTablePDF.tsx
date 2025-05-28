@@ -2,7 +2,7 @@ import React, {RefObject} from "react";
 import { View, Text, StyleSheet } from "@react-pdf/renderer";
 import { PDFColumn } from "@/app/types/exportPdfTypes";
 import {AgGridReact} from "ag-grid-react";
-import getActualTableData from "@/app/utils/getActualTableData";
+import getActualTableData from "@/app/utils/tables/getActualTableData";
 
 // Styles to simulate border-collapse: collapse
 const styles = StyleSheet.create({

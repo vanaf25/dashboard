@@ -4,7 +4,7 @@ import TableName from "@/app/components/letters/TableName/TableName";
 import Table from "@/app/components/letters/Table/Table";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { addRow, updateRowChanged, deleteRow } from "@/app/apis/tablesApi";
-import getRowData from "@/app/utils/getRowData";
+import getRowData from "@/app/utils/tables/getRowData";
 import {Measurement} from "@/app/types/measurementsTypes";
 import {ActionTableType, TableProperty, TablesPropertiesIntegrated} from "@/app/types/tablesTypes";
 import {Box} from "@mui/material";

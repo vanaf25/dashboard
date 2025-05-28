@@ -1,12 +1,21 @@
 import React, {useEffect, useMemo, useState} from 'react';
+import {
+    Accordion,
+    AccordionSummary,
+    AccordionDetails,
+    Typography,
+} from "@mui/material";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+
+
 import TablesSummary from "@/app/components/tables/TablesSummary/TablesSummary";
-import {MeasurementsType, TablesGroup} from "@/app/types/measurementsTypes";
+import {MeasurementsType} from "@/app/types/measurementsTypes";
 import {Box} from "@mui/system";
 import DefaultCalculationValues from "@/app/components/DefaultCalculationValues/DefaultCalculationValues";
 import DefaultCalculators from "@/app/components/DefaultCalculators/DefaultCalculators";
 import {
     ActionTableType,
-    TableData, TableProperty,
+    TableData,
     TablesColumnsType, TablesPropertiesIntegrated,
 } from "@/app/types/tablesTypes";
 import {Grid} from "@mui/material";
@@ -44,7 +53,8 @@ const TablesLayout:React.FC<TablesLayoutProps> = ({isClient,tables,
                     groupKey,
                     tablesInGroup.map(table => {
                         const tableId=table.id ? table.id:Math.random()
-                        const selectedProperties=TablesProperties[typedGroupKey]?.map(el=>({...el,
+                        const currentProperties=table.customProperties || TablesProperties[typedGroupKey]
+                        const selectedProperties=currentProperties?.map(el=>({...el,
                             value:table.properties?.find(prop=>el.name===prop.name)?.value || ""}))
                             if(selectedProperties){
                             setProperties(prevState =>([...prevState,{tableId,properties:selectedProperties}]))
@@ -67,41 +77,60 @@ const TablesLayout:React.FC<TablesLayoutProps> = ({isClient,tables,
             Object.values(actionTables).flat(),
         [actionTables]
     );
-    useEffect(()=>{
-        console.log('properties:',properties);
-    },[properties])
     return (
         <div>
-            {Object.entries(actionTables).map(tableGroup=>{
-                const groupKey=tableGroup[0] as keyof typeof LayoutRules
-                return (<Grid key={groupKey} sx={{ mb: 2 }} container spacing={2}>
-                    {tableGroup[1].map((table) => {
-                        return (
-                            <Grid
-                                item
-                                xs={LayoutRules[groupKey]?.xs || 12}
-                                md={LayoutRules[groupKey]?.md || 12}
-                                sm={LayoutRules[groupKey]?.sm || 12}
-                                key={table.id}
-                            >
-                                <ActionTable isClient={isClient}
-                                             setProperties={setProperties}
-                                             properties={properties.find(el=>el.tableId===table.id)?.properties  || []}
-                                             tableKey={tableGroup[0]}
-                                             queryKeys={queryKeys} table={table}/>
+            {Object.entries(actionTables).map(([groupKey, tables]) => {
+                const layout = LayoutRules[groupKey as keyof typeof LayoutRules];
+                return (
+                    <Accordion>
+                        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                            <Typography variant="h6" fontWeight="bold">
+                                {groupKey}
+                            </Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <Grid container spacing={2}>
+                                {tables.map((table) => (
+                                    <Grid
+                                        item
+                                        xs={layout?.xs || 12}
+                                        sm={layout?.sm || 12}
+                                        md={layout?.md || 12}
+                                        key={table.id}
+                                    >
+                                        <ActionTable
+                                            isClient={isClient}
+                                            setProperties={setProperties}
+                                            properties={
+                                                properties.find((el) => el.tableId === table.id)?.properties || []
+                                            }
+                                            tableKey={groupKey}
+                                            queryKeys={queryKeys}
+                                            table={table}
+                                        />
+                                    </Grid>
+                                ))}
                             </Grid>
-                        );
-                    })}
-                </Grid>)
+                        </AccordionDetails>
+                    </Accordion>
+                );
             })}
-            <TablesSummary tables={mergedArray}
-                           properties={properties}
-                           setCalculation={(values)=>setCalculations(calculationFunctions[measurementType](values as any))}
-                           clientOnly={isClient} type={measurementType} />
-            {calculations && <Box sx={{mt:2}}>
-                <DefaultCalculationValues additionalValues={calculations.basicValues} />
-                <DefaultCalculators calculators={calculations.calculators}/>
-            </Box>}
+            <TablesSummary
+                tables={mergedArray}
+                properties={properties}
+                setCalculation={(values) =>
+                    setCalculations(calculationFunctions[measurementType](values as any))
+                }
+                clientOnly={isClient}
+                type={measurementType}
+            />
+
+            {calculations && (
+                <Box sx={{mt: 2}}>
+                    <DefaultCalculationValues additionalValues={calculations.basicValues}/>
+                    <DefaultCalculators calculators={calculations.calculators}/>
+                </Box>
+            )}
         </div>
     );
 };

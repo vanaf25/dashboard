@@ -31,7 +31,7 @@ export  const calculationFunctions={
     [MeasurementsType.APERTURES]:()=>null
 }
 
-const roofPitchOptions=["Low Pitch",
+export const roofPitchOptions=["Low Pitch",
     "4/12 Pitch",
     "6/12 Pitch",
     "8/12 Pitch",
@@ -55,5 +55,4 @@ export  const TablesProperties:TalesPropertiesType={
     ],
     [TablesGroup.APERTURES_DOORS]:AperturesProperties,
     [TablesGroup.APERTURES_WINDOWS]:AperturesProperties,
-    [TablesGroup.ROOF_MAIN]:[{name:"roofPitch",label:"Roof Pitch",type:"select",options:roofPitchOptions}]
 }

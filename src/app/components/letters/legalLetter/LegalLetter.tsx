@@ -8,8 +8,8 @@ import {ElementType} from "@/app/types/exportPdfTypes";
 interface LegalLetterProps {
     title?: string;
     name?: string | number;
-    letterText?: string; // Optional letter text
-    paragraphs?: string[]; // Optional array of paragraphs
+    letterText?: string;
+    paragraphs?: string[];
 }
 
 const LegalLetter: React.FC<LegalLetterProps> = ({ title, letterText, paragraphs }) => {

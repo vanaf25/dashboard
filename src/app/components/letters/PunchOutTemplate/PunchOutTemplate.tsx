@@ -8,7 +8,7 @@ import DocumentLayout from "@/app/components/DocumentLayout/DocumentLayout";
 import Paragraphs from "@/app/components/letters/parahraphs/Paragraphs";
 import {ElementType} from "@/app/types/exportPdfTypes";
 import React, {useMemo, useRef, useState} from "react";
-import getRowData from "@/app/utils/getRowData";
+import getRowData from "@/app/utils/tables/getRowData";
 
 interface PunchOutTemplateProps{
     type:15 | 60

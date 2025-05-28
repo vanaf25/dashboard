@@ -20,7 +20,7 @@ import { useDispatch } from '@/store/hooks';
 import { changeProject } from '@/store/apps/dasbhoard/dashboardSlice';
 import { Client } from '@/app/components/Leads/Leads';
 import { contractData } from '@/app/consts/contractData/contractData';
-import ProjectPopup from '../../ProjectPopup/ProjectPopup';
+import ProjectPopup from '@/app/components/Projects/ProjectPopup/ProjectPopup';
 import {MAIN_CALCULATORS} from "@/app/consts/calculators";
 import Link from "next/link";
 
@@ -202,8 +202,8 @@ const LeadItem: React.FC<LeadItemProps> = ({
                             >
                                     {MAIN_CALCULATORS.map(el => (
                                             <MenuItem component={Link}
-                                                      href={`/system99/calculators/${el.replace(/[\s?'’]/g, '')}?customerId=${id}`} passHref>
-                                                {el}
+                                                      href={`/system99/calculators/${el.key}?customerId=${id}`} passHref>
+                                                {el.label}
                                             </MenuItem>
                                     ))}
                             </Select>

@@ -9,7 +9,7 @@ import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import LeadItem from "@/app/components/Leads/LeadItem/LeadItem";
 import {useDispatch, useSelector} from "@/store/hooks";
 import {addProject, changeProject, deleteProject} from "@/store/apps/dasbhoard/dashboardSlice";
-import LeadPopupForm from "@/app/components/LeadPopupForm/LeadPopupForm";
+import LeadPopupForm from "@/app/components/Leads/LeadPopupForm/LeadPopupForm";
 import {createClient} from "@/lib/supabase";
 
 export interface FormData {

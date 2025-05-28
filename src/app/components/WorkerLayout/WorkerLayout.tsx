@@ -1,7 +1,6 @@
 "use client";
 import {Box, Button} from '@mui/material';
 import React, {ReactNode, useState} from 'react';
-import {useGetQuoteQuery} from "@/app/hooks/useQuote";
 import Loading from "@/app/(DashboardLayout)/loading";
 import Typography from "@mui/material/Typography";
 import {PDFDownloadLink} from "@react-pdf/renderer";

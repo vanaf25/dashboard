@@ -1,5 +1,10 @@
 import {TablesGroup} from "@/app/types/measurementsTypes";
-
+import {GENERAL_LENGTH_COLUMN, GENERAL_WIDTH_COLUMN} from "@/app/consts/formletters/columnsUtils";
+const roofPitchOptions=["Low Pitch",
+    "4/12 Pitch",
+    "6/12 Pitch",
+    "8/12 Pitch",
+    "10/12 Pitch"]
 export const ROOFS_COLUMNS={
     [TablesGroup.ROOF_MAIN]:[
         {
@@ -9,20 +14,18 @@ export const ROOFS_COLUMNS={
             flex: 1,
             cellEditor: "agTextCellEditor",
         },
+        GENERAL_LENGTH_COLUMN,
+        GENERAL_WIDTH_COLUMN,
         {
-            headerName: "Length",
-            field: "length",
+            headerName: "Roof pitch ",
+            field: "roofPitch",
             editable: true,
             flex: 1,
-            cellEditor: "agNumberCellEditor",
-        },
-        {
-            headerName: "Width",
-            field: "width",
-            editable: true,
-            flex: 1,
-            cellEditor: "agNumberCellEditor",
-        },
+            cellEditor: "agSelectCellEditor",
+            cellEditorParams: {
+                values: roofPitchOptions,
+            }
+        }
     ],
     [TablesGroup.ROOF_ASSORYS]:[
         {

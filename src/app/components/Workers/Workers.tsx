@@ -4,7 +4,7 @@ import { Card, CardContent, Typography, Button, Box, CircularProgress, Alert, Gr
 import BlankCard from "../shared/BlankCard";
 import Link from "next/link";
 import {useGetWorkersQuery} from "@/app/hooks/useWorkers";
-import WorkerCard from "@/app/components/WorkerCard/WorkerCard";
+import WorkerCard from "@/app/components/Workers/WorkerCard/WorkerCard";
 const Workers: React.FC = () => {
     const {data:workers,error,isLoading}=useGetWorkersQuery()
     return (

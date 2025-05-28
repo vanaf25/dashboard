@@ -7,7 +7,7 @@ import { MenuItem, FormControl, InputLabel, Select } from "@mui/material";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import Button from "@mui/material/Button";
-import ProjectPopup from "@/app/components/ProjectPopup/ProjectPopup";
+import ProjectPopup from "@/app/components/Projects/ProjectPopup/ProjectPopup";
 
 interface ProjectPopupForm {
     close: () => void;
