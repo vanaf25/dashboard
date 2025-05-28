@@ -12,7 +12,7 @@ import BigCalendar from "@/app/(DashboardLayout)/apps/calendar/page";
 import Leads from "@/app/components/Leads/Leads";
 import Projects from "@/app/components/Projects/Projects";
 import {useDispatch} from "@/store/hooks";
-import {fetchProjects} from "@/store/apps/dasbhoard/dashboardSlice";
+import {fetchProjects} from "@/store/apps/dashboard/dashboardSlice";
 import Loading from "@/app/(DashboardLayout)/loading";
 import Workers from "@/app/components/Workers/Workers";
 export default function Dashboard() {

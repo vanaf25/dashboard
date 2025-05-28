@@ -10,7 +10,7 @@ import dayjs, {Dayjs} from "dayjs";
 import Typography from "@mui/material/Typography";
 import DialogActions from "@mui/material/DialogActions";
 import Button from "@mui/material/Button";
-import {addProject, changeProject} from "@/store/apps/dasbhoard/dashboardSlice";
+import {addProject, changeProject} from "@/store/apps/dashboard/dashboardSlice";
 import {useDispatch} from "@/store/hooks";
 import {Client, FormData} from "../Leads"
 import {contractData} from "@/app/consts/contractData/contractData";

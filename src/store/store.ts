@@ -4,6 +4,7 @@ import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
 import CustomizerReducer from "./customizer/CustomizerSlice";
+import DashboardSlice from "@/store/apps/dashboard/dashboardSlice";
 
 const persistConfig = {
   key: "root",
@@ -14,6 +15,7 @@ const persistConfig = {
 export const store = configureStore({
   reducer: {
     customizer: persistReducer<any>(persistConfig, CustomizerReducer),
+    dashboard:DashboardSlice
   },
   devTools: process.env.NODE_ENV !== "production",
   middleware: (getDefaultMiddleware) =>
