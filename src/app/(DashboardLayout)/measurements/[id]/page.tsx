@@ -36,6 +36,7 @@ const Page = () => {
                         </BlankCard>
                         <TablesLayout tables={data.tables}
                                       name={data.name}
+                                      parentId={data.parentId}
                                       defaultSubMeasurements={data.subMeasurements}
                                       isClient={false}
                                       measurementType={data.group as MeasurementsType}

@@ -52,6 +52,7 @@ export interface Measurement{
         service: string;
         clientName: string;
     };
+    parentId:number | null
     group:string,
     name:string  | null,
     subMeasurements:{id:number,name:string}[]

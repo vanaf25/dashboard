@@ -28,14 +28,16 @@ import SubTablesLayout from './SubTablesLayout/SubTablesLayout';
 import TableName from '../../letters/TableName/TableName';
 import Link from "next/link";
 import BlankCard from "@/app/components/shared/BlankCard";
+import Button from "@mui/material/Button";
 interface TablesLayoutProps{
-    name?:string  | null
-    isClient:boolean
+    name?:string  | null,
+    isClient:boolean,
     tables:Record<string,TableData[]>,
-    queryKeys:any[]
+    queryKeys:any[],
     measurementType:MeasurementsType,
     isSubMeasurement?:boolean,
     defaultSubMeasurements?:{id:number,name:string}[],
+    parentId?:number | null
 }
 export  interface SubMeasurementType{
     tables:Record<string,ActionTableType[]>,
@@ -50,7 +52,7 @@ interface CalculationsState{
 const TablesLayout:React.FC<TablesLayoutProps> = ({isClient,tables,
                                                       queryKeys,measurementType
                                                       ,isSubMeasurement
-                                                      ,defaultSubMeasurements,name}) => {
+                                                      ,defaultSubMeasurements,name,parentId}) => {
     const [calculations,setCalculations]=useState<CalculationsState | null>(null);
     const [properties,setProperties]=useState<TablesPropertiesIntegrated[]>([])
     const actionTables:Record<string, ActionTableType[]> = useMemo(() => {
@@ -105,6 +107,11 @@ const TablesLayout:React.FC<TablesLayoutProps> = ({isClient,tables,
     const deleteSubMeasurementHandle=(id:number)=>setSubMeasurements(prevState =>(prevState.filter(el=>el.id!==id)))
     return (
         <div>
+            {parentId ? <BlankCard sx={{mb:2}}>
+                <Link href={`/measurements/${parentId}`}>
+                    <Button size={"large"}>Back to  root measurement</Button>
+                </Link>
+            </BlankCard>:<></>}
             {name && <TableName sx={{mb:2}}>{name}</TableName>}
             {Object.entries(actionTables).map(([groupKey, tables]) => {
                 const layout = LayoutRules[groupKey as keyof typeof LayoutRules];
