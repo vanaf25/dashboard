@@ -4,10 +4,10 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
-import LeadItem from "@/app/components/Leads/LeadItem/LeadItem";
+import LeadItem from "@/app/components/home/Leads/LeadItem/LeadItem";
 import {useDispatch, useSelector} from "@/store/hooks";
 import {deleteProject} from "@/store/apps/dashboard/dashboardSlice";
-import LeadPopupForm from "@/app/components/Leads/LeadPopupForm/LeadPopupForm";
+import LeadPopupForm from "@/app/components/home/Leads/LeadPopupForm/LeadPopupForm";
 import {createClient} from "@/lib/supabase";
 
 export interface FormData {
@@ -82,7 +82,7 @@ const Leads: React.FC = () => {
     return (
         <BlankCard sx={{ mb: 2 }}>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', padding: 2 }}>
-                <Typography variant="h4">Leads ({leads.length})</Typography>
+                <Typography variant="h4">Leads ({leads?.length})</Typography>
                 <Button variant="contained" onClick={handleOpen}>Create New Lead</Button>
             </Box>
             <Box sx={{ display: 'flex', flexDirection: 'column' }}>

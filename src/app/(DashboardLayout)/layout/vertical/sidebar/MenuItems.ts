@@ -30,16 +30,9 @@ const Menuitems: MenuitemsType[] = [
   },
   {
     id: uniqueId(),
-    title: "system99",
+    title: "Measurements",
     icon: 'screencast-2-line-duotone',
     href: "/system99",
-    bgcolor: "primary",
-  },
-  {
-    id: uniqueId(),
-    title: "form Letters",
-    icon: 'screencast-2-line-duotone',
-    href: "/formLetters",
     bgcolor: "primary",
   },
 ];

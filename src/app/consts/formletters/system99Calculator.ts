@@ -7,11 +7,12 @@ import {LANDSCAPING_COLUMNS} from "@/app/consts/formletters/landscapingColumns";
 import {ROOFS_COLUMNS} from "@/app/consts/formletters/roofsColumns";
 import {STRUCTURES_COLUMNS} from "@/app/consts/formletters/structuresColumns";
 import {APERTURES_COLUMNS} from "@/app/consts/formletters/aperturesColumns";
-import {ValueGetterParams} from 'ag-grid-community'
+import {GENERAL_HEIGHT_COLUMN, GENERAL_LENGTH_COLUMN} from "@/app/consts/formletters/columnsUtils";
 
 
 const valueParser = (params: any) => params.newValue === "" ? 0 : Number(params.newValue);
 
+/*
 export const sidingColumns = [
     {
         headerName: 'Length',
@@ -131,8 +132,11 @@ export const sidingColumns = [
         editable: false,
     },
 ];
-export const EXTERIOR_SIDING_COLUMNS=sidingColumns
-    .filter((c) => c.field === "length" || c.field === "height")
+*/
+export const EXTERIOR_SIDING_COLUMNS=[
+    GENERAL_LENGTH_COLUMN,
+    GENERAL_HEIGHT_COLUMN
+]
     .map((col) => ({ ...col, flex: 1 }))
 export const CORNERS_COLUMNS=[
     {

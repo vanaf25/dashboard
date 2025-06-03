@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import { Typography, TextField } from "@mui/material";
-import DocumentLayout from "@/app/components/DocumentLayout/DocumentLayout";
+import DocumentLayout from "@/app/components/letters/Document/DocumentLayout/DocumentLayout";
 import { useGetQuoteQuery } from "@/app/hooks/useQuote";
 import {ElementType} from "@/app/types/exportPdfTypes";
 

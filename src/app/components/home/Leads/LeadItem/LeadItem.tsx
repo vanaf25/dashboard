@@ -18,9 +18,9 @@ import { useSupabaseClient } from '@supabase/auth-helpers-react';
 import { useRouter } from 'next/navigation';
 import { useDispatch } from '@/store/hooks';
 import { changeProject } from '@/store/apps/dashboard/dashboardSlice';
-import { Client } from '@/app/components/Leads/Leads';
+import { Client } from '@/app/components/home/Leads/Leads';
 import { contractData } from '@/app/consts/contractData/contractData';
-import ProjectPopup from '@/app/components/Projects/ProjectPopup/ProjectPopup';
+import ProjectPopup from '@/app/components/home/Projects/ProjectPopup/ProjectPopup';
 import {MAIN_CALCULATORS} from "@/app/consts/calculators";
 import Link from "next/link";
 

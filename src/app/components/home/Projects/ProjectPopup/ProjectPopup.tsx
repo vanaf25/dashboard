@@ -7,7 +7,7 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import { useForm, Controller } from "react-hook-form";
 import {useRouter} from "next/navigation";
-import {TERMS} from "../../../consts/contractData/contractData"
+import {TERMS} from "../../../../consts/contractData/contractData"
 import Grid from "@mui/material/Grid";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";

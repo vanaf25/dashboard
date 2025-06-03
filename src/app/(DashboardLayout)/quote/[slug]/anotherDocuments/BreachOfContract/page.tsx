@@ -1,7 +1,7 @@
 "use client";
 import { Box, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
-import DocumentLayout from "@/app/components/DocumentLayout/DocumentLayout";
+import DocumentLayout from "@/app/components/letters/Document/DocumentLayout/DocumentLayout";
 import { useGetQuoteQuery } from "@/app/hooks/useQuote";
 import { ElementType } from "@/app/types/exportPdfTypes";
 import Paragraphs from "@/app/components/letters/parahraphs/Paragraphs";

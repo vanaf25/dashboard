@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { AppDispatch } from '../../store';
-import {Client} from "@/app/components/Leads/Leads";
+import {Client} from "@/app/components/home/Leads/Leads";
 import {fetchCustomers} from "@/app/apis/usersApi";
 import {Meeting} from "@/app/types/dashboardTypes";
 

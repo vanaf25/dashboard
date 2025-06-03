@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import Dialog from "@mui/material/Dialog";
 import { useSelector } from "@/store/hooks";
-import { Client } from "@/app/components/Leads/Leads";
+import { Client } from "@/app/components/home/Leads/Leads";
 import { useForm, Controller } from "react-hook-form";
 import { MenuItem, FormControl, InputLabel, Select } from "@mui/material";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import Button from "@mui/material/Button";
-import ProjectPopup from "@/app/components/Projects/ProjectPopup/ProjectPopup";
+import ProjectPopup from "@/app/components/home/Projects/ProjectPopup/ProjectPopup";
 
 interface ProjectPopupForm {
     close: () => void;

@@ -19,7 +19,7 @@ import './Calendar.css';
 import { IconCheck } from '@tabler/icons-react';
 import BlankCard from '@/app/components/shared/BlankCard';
 import {useSelector} from "@/store/hooks";
-import {Client} from "@/app/components/Leads/Leads";
+import {Client} from "@/app/components/home/Leads/Leads";
 
 moment.locale('en-GB');
 const localizer = momentLocalizer(moment);

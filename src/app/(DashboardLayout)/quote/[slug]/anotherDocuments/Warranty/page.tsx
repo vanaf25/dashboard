@@ -1,6 +1,6 @@
 "use client";
 import {Typography} from '@mui/material';
-import DocumentLayout from "@/app/components/DocumentLayout/DocumentLayout";
+import DocumentLayout from "@/app/components/letters/Document/DocumentLayout/DocumentLayout";
 import {ElementType} from "@/app/types/exportPdfTypes";
 
 const Waranty = () => {

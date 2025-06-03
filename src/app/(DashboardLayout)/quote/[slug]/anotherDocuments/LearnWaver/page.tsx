@@ -1,6 +1,6 @@
 "use client";
 import {Typography} from '@mui/material';
-import DocumentLayout from "@/app/components/DocumentLayout/DocumentLayout";
+import DocumentLayout from "@/app/components/letters/Document/DocumentLayout/DocumentLayout";
 import SignaturesSection from "@/app/components/letters/signatureSection/signatureSection";
 import Card from "@mui/material/Card";
 import {useGetQuoteQuery} from "@/app/hooks/useQuote";

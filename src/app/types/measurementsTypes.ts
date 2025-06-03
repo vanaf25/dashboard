@@ -6,6 +6,7 @@ export interface CreateMeasurementsDto{
     documentId?: string;
     customerId:string;
     tables:TableDtoType[]
+    subMeasurements:{name:string,id:number,tables:TableDtoType[]}[]
 }
 /*
 interface Measurement<T extends Record<string, TableData>> {
@@ -52,6 +53,8 @@ export interface Measurement{
         clientName: string;
     };
     group:string,
+    name:string  | null,
+    subMeasurements:{id:number,name:string}[]
     tables:Record<string,TableData[]>
 }
 export enum TablesGroup{

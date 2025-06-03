@@ -5,7 +5,7 @@ import Table from "@/app/components/letters/Table/Table";
 import TableWithOutHeaders from "@/app/components/letters/TableWithoutHeaders/TableWithOutHeaders";
 import calculateSeriesOfNumbers from "@/app/utils/calculateSeriesOfNumbers";
 import calculateTotalAmount from "@/app/utils/tables/calculateTotalAmount";
-import DocumentLayout from "@/app/components/DocumentLayout/DocumentLayout";
+import DocumentLayout from "@/app/components/letters/Document/DocumentLayout/DocumentLayout";
 import type {AgGridReact as AgGridReactType} from "ag-grid-react/dist/types/src/agGridReact";
 import {ElementType, PDFElem} from "@/app/types/exportPdfTypes";
 import getActualTableData from "@/app/utils/tables/getActualTableData";

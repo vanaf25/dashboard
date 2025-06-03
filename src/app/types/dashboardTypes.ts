@@ -1,4 +1,4 @@
-import {Client} from "@/app/components/Leads/Leads";
+import {Client} from "@/app/components/home/Leads/Leads";
 
 export  interface Status{
     title:string,

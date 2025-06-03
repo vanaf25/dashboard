@@ -5,7 +5,7 @@ import {useGetQuoteQuery} from "@/app/hooks/useQuote";
 import Loading from "@/app/(DashboardLayout)/loading";
 import Typography from "@mui/material/Typography";
 import {CompanyDetails, UserDetails} from "@/app/components/global/CustomerDetails/CustomerDetails";
-import DocumentHeaderLayout from "@/app/components/DocumentHeaderLayout/DocumentHeaderLayout";
+import DocumentHeaderLayout from "@/app/components/letters/Document/DocumentHeaderLayout/DocumentHeaderLayout";
 import {PDFDownloadLink} from "@react-pdf/renderer";
 import GeneratePdf from "@/app/utils/GeneratePdf";
 import {ElementType, PDFElem} from "@/app/types/exportPdfTypes";

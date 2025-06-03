@@ -3,11 +3,11 @@ import Box from "@mui/material/Box";
 import {Document, Page as PDFPage, PDFDownloadLink, StyleSheet, Text, View} from "@react-pdf/renderer";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import DocumentHeader from "@/app/components/DocumentHeader/DocumentHeader";
+import DocumentHeader from "@/app/components/letters/Document/DocumentHeader/DocumentHeader";
 import Card from "@mui/material/Card";
 import PaymentCalculation from "@/app/components/TasksFields/PaymentCalculation/PaymentCalculation";
-import DocumentTermsConditions from "@/app/components/DocumentTermsConditions/DocumentTermsConditions";
-import DocumentFooter from "@/app/components/DocumentFooter/DocumentFooter";
+import DocumentTermsConditions from "@/app/components/letters/Document/DocumentTermsConditions/DocumentTermsConditions";
+import DocumentFooter from "@/app/components/letters/Document/DocumentFooter/DocumentFooter";
 import PrintableDocumentHeader from "@/app/components/ReactPdf/PrintableDocumentHeader/PrintableDocumentHeader";
 import PrintablePaymentCalculations
     from "@/app/components/ReactPdf/PrintablePaymentCalculations/PrintablePaymentCalculations";

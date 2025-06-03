@@ -11,7 +11,7 @@ import {Box} from "@mui/material";
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CircularProgress from '@mui/material/CircularProgress';
-import TablePropertyFormCreator from "@/app/components/TablePropertyFormCreator/TablePropertyFormCreator";
+import TablePropertyFormCreator from "@/app/components/tables/TablePropertyFormCreator/TablePropertyFormCreator";
 
 interface ActionTableProps {
     table: ActionTableType;

@@ -11,7 +11,7 @@ import {PageSize} from "@react-pdf/types";
 import {useGetWorkerQuery} from "@/app/hooks/useWorkers";
 import {useGetProfileQuery} from "@/app/hooks/useProfile";
 import {CompanyDetails, UserDetails} from "@/app/components/global/CustomerDetails/CustomerDetails";
-import DocumentHeaderLayout from "@/app/components/DocumentHeaderLayout/DocumentHeaderLayout";
+import DocumentHeaderLayout from "@/app/components/letters/Document/DocumentHeaderLayout/DocumentHeaderLayout";
 interface DocumentLayoutProps{
     children:ReactNode  | ReactNode[],
     exportElems?:PDFElem[],

@@ -4,7 +4,7 @@ import { Typography, TextField, Button, Box } from '@mui/material';
 import Table from "@/app/components/letters/Table/Table";
 import BlueBlock from "@/app/components/global/blueBlock/BlueBlock";
 import SignaturesSection from "@/app/components/letters/signatureSection/signatureSection";
-import DocumentLayout from "@/app/components/DocumentLayout/DocumentLayout";
+import DocumentLayout from "@/app/components/letters/Document/DocumentLayout/DocumentLayout";
 import { ElementType } from "@/app/types/exportPdfTypes";
 import Paragraphs from "@/app/components/letters/parahraphs/Paragraphs";
 import SignatureSection from "@/app/components/letters/signatureSection/signatureSection";

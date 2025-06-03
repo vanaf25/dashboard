@@ -1,5 +1,5 @@
 "use client";
-import DocumentLayout from "@/app/components/DocumentLayout/DocumentLayout";
+import DocumentLayout from "@/app/components/letters/Document/DocumentLayout/DocumentLayout";
 import Paragraphs from "@/app/components/letters/parahraphs/Paragraphs";
 import {ElementType} from "@/app/types/exportPdfTypes";
 import SignatureSection from "@/app/components/letters/signatureSection/signatureSection";

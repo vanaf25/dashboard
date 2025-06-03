@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import {Button, Typography } from '@mui/material';
-import DocumentLayout from "@/app/components/DocumentLayout/DocumentLayout";
+import DocumentLayout from "@/app/components/letters/Document/DocumentLayout/DocumentLayout";
 import {useGetQuoteQuery} from "@/app/hooks/useQuote";
 import {ElementType} from "@/app/types/exportPdfTypes";
 

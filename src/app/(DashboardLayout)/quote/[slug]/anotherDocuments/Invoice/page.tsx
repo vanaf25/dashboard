@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import Table from "@/app/components/letters/Table/Table";
 import { useMemo, useRef, useState } from "react";
 import filterPositiveNumbers from "@/app/utils/filterPositiveNumbers";
-import DocumentLayout from "@/app/components/DocumentLayout/DocumentLayout";
+import DocumentLayout from "@/app/components/letters/Document/DocumentLayout/DocumentLayout";
 import Paragraphs from "@/app/components/letters/parahraphs/Paragraphs";
 import ListCard from "@/app/components/letters/ListCard/ListCard";
 import calculateTotalAmount from "@/app/utils/tables/calculateTotalAmount";

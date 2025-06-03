@@ -7,7 +7,6 @@ interface CalculationValues {
 
 const CalculationValues: React.FC<CalculationValues> = ({ values }) => {
     const additionalParamsArray = Object.entries(values || {});
-
     return (
         <List>
             {additionalParamsArray.map(([key, value]) => {

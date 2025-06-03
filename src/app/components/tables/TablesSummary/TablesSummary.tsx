@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { Grid } from "@mui/material";
 import BlankCard from "@/app/components/shared/BlankCard";
 import CalculationValues from "@/app/components/CalculationValues/CalculationValues";
-import {ActionTableType, TablesPropertiesIntegrated} from "@/app/types/tablesTypes";
+import {ActionTableType, TableData, TablesPropertiesIntegrated} from "@/app/types/tablesTypes";
 import Button from "@mui/material/Button";
 import calculateTotalAmount from "@/app/utils/tables/calculateTotalAmount";
 import getActualTableData from "@/app/utils/tables/getActualTableData";
@@ -12,13 +12,15 @@ import { useMutation } from '@tanstack/react-query';
 import { useRouter, useSearchParams } from 'next/navigation';
 import {useSupabaseSession} from "@/app/hooks/useSupabaseSession";
 import Alert from "@mui/material/Alert";
+import {SubMeasurementType} from "@/app/components/tables/TablesLayout/TablesLayout";
 
 interface TablesSummaryProps {
     tables: ActionTableType[];
     clientOnly?: boolean;
     type?: MeasurementsType;
     setCalculation: (params:Record<string,number>)=>void;
-    properties:TablesPropertiesIntegrated[]
+    properties:TablesPropertiesIntegrated[];
+    subMeasurements:SubMeasurementType[]
 }
 interface TotalValues{
     key:string,
@@ -33,7 +35,7 @@ const transformTotalValues = (values: TotalValues[],isKey?:boolean): Record<stri
 };
 const TablesSummary: React.FC<TablesSummaryProps> = ({ tables, clientOnly
                                                          , type,
-                                                         setCalculation,properties
+                                                         setCalculation,properties,subMeasurements
 }) => {
     const [totalValues, setTotalValues] = useState<TotalValues[]>([]);
     const router = useRouter();
@@ -41,18 +43,17 @@ const TablesSummary: React.FC<TablesSummaryProps> = ({ tables, clientOnly
     const { session, loading: sessionLoading } = useSupabaseSession();
     const customerId = searchParams.get('customerId');
     const { mutate: createMeasurement, isPending } = useMutation({
-        mutationFn: async (tablesData: any) => {
+        mutationFn: async ({rootTables,subMeasurements}:any) => {
             if (!type || !session?.user?.id || !customerId) {
                 throw new Error('Missing required data');
             }
-            console.log('tables:',tablesData);
             const measurementData = {
                 type,
                 userId: session.user.id,
                 customerId,
-                tables: tablesData
+                tables: rootTables,
+                subMeasurements
             };
-
             return measurementsApi.createMeasurement(measurementData);
         },
         onSuccess: (data) => {
@@ -129,11 +130,10 @@ const TablesSummary: React.FC<TablesSummaryProps> = ({ tables, clientOnly
     }, [tables]);
     const saveMeasurementsHandle = () => {
         if (clientOnly && !sessionLoading  && type && customerId && session?.user?.id) {
-            console.log('tables:',tables);
-            const tablesWithActualData = tables.map(el => ({
+            const transformTable=(el:ActionTableType) => ({
                 ...el,
                 properties:properties.find(p=>{
-                 return p.tableId===el.id
+                    return p.tableId===el.id
                 })?.properties.map(p=>{
                     return {name:p.name,value:p.value}}),
                 rows: getActualTableData(el.ref),
@@ -143,9 +143,14 @@ const TablesSummary: React.FC<TablesSummaryProps> = ({ tables, clientOnly
                     field: column.field,
                     headerName: column.headerName
                 }))
-            }));
+            })
+            const tablesWithActualData = tables.map(transformTable);
+            const subMeasurementsWithActualData=subMeasurements.map(el=>({...el,tables:Object.values(el.tables).flat().map(transformTable)}))
             console.log('tables:',tablesWithActualData)
-            createMeasurement(tablesWithActualData);
+            console.log('subTables:',subMeasurementsWithActualData);
+            createMeasurement({rootTables:tablesWithActualData,
+                subMeasurements:subMeasurementsWithActualData
+            });
         }
     };
     const resetTableHandle = () => {

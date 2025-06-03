@@ -1,5 +1,6 @@
-import {MutableRefObject, RefObject} from "react";
+import {MutableRefObject} from "react";
 import { ColDef } from "ag-grid-community";
+import type { AgGridReact as AgGridReactType } from 'ag-grid-react';
 import {TablesGroup} from "@/app/types/measurementsTypes";
 
 export type TableData<T = Record<string, any>> = {
@@ -8,6 +9,7 @@ export type TableData<T = Record<string, any>> = {
     id?: number;
     group?:string;
     rows?: T[];
+    ref?:MutableRefObject<AgGridReactType>
     customProperties?:TableProperty[],
     properties?:{id:number,name:string,value:string}[]
 };

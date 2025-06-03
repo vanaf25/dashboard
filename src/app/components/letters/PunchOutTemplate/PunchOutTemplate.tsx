@@ -4,7 +4,7 @@ import Table from "@/app/components/letters/Table/Table";
 import type {AgGridReact as AgGridReactType} from "ag-grid-react";
 import SignaturesSection from "@/app/components/letters/signatureSection/signatureSection";
 import SignaturePad from "@/app/components/letters/SignaturePad/SignaturePad"
-import DocumentLayout from "@/app/components/DocumentLayout/DocumentLayout";
+import DocumentLayout from "@/app/components/letters/Document/DocumentLayout/DocumentLayout";
 import Paragraphs from "@/app/components/letters/parahraphs/Paragraphs";
 import {ElementType} from "@/app/types/exportPdfTypes";
 import React, {useMemo, useRef, useState} from "react";

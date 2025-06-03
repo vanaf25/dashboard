@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import BlankCard from "@/app/components/shared/BlankCard";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import ProjectCard from "@/app/components/Projects/ProjectCard/ProjectCard";
+import ProjectCard from "@/app/components/home/Projects/ProjectCard/ProjectCard";
 import axios from 'axios';
 import CircularProgress from '@mui/material/CircularProgress';
 import {useUser} from "@supabase/auth-helpers-react";
-import ProjectPopup from "@/app/components/Projects/ProjectPopup/ProjectPopup";
+import ProjectPopup from "@/app/components/home/Projects/ProjectPopup/ProjectPopup";
 import CreateProjectPopup from "@/app/components/CreateProjectPopup/CreateProjectPopup";
 
 const Projects = () => {
