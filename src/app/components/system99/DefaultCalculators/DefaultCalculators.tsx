@@ -1,7 +1,7 @@
 "use client";
 import React from 'react';
 import {Card, Grid, Typography} from "@mui/material";
-import CalculationValues from "@/app/components/CalculationValues/CalculationValues";
+import CalculationValues from "@/app/components/system99/CalculationValues/CalculationValues";
 interface DefaultCalculatorsProps{
     calculators:{name:string,values:any}[]
 }

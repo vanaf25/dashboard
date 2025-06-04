@@ -1,6 +1,5 @@
 "use client";
 import PageContainer from "@/app/components/container/PageContainer";
-import {useSupabaseClient} from "@supabase/auth-helpers-react";
 import {Card, Grid, Stack } from '@mui/material';
 import { Box } from '@mui/material';
 import AuthLogin from '@/app/auth/authForms/AuthLogin';

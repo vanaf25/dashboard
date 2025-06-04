@@ -14,16 +14,15 @@ import {
     Select,
     MenuItem, Paper,
 } from '@mui/material';
-import { useSupabaseClient } from '@supabase/auth-helpers-react';
 import { useRouter } from 'next/navigation';
 import { useDispatch } from '@/store/hooks';
 import { changeProject } from '@/store/apps/dashboard/dashboardSlice';
 import { Client } from '@/app/components/home/Leads/Leads';
+import {createClient} from "@/lib/supabase"
 import { contractData } from '@/app/consts/contractData/contractData';
 import ProjectPopup from '@/app/components/home/Projects/ProjectPopup/ProjectPopup';
 import {MAIN_CALCULATORS} from "@/app/consts/calculators";
 import Link from "next/link";
-
 type LeadItemProps = Client & {
     onEdit: (isDateOnly?: boolean) => void;
     onDelete: () => void;
@@ -41,10 +40,11 @@ const LeadItem: React.FC<LeadItemProps> = ({
     measurements,
                                                ...rest
                                            }) => {
-    const supabase = useSupabaseClient();
+    const supabase = createClient();
     const router = useRouter();
     console.log('rest:',rest);
     const statuses: string[] = ['In Progress', 'Completed'];
+
     const [currentDocumentId,setCurrentDocument]=useState<string | null>(
         null)
     const [isProjectPopup,setIsProjectPopup]=useState(false);
@@ -88,6 +88,7 @@ const LeadItem: React.FC<LeadItemProps> = ({
     const handleImageSelect=(event:any)=>{
         console.log('val:',event.target.value);
     }
+
     return (
         <>
             {currentStatus !== 'project' && (

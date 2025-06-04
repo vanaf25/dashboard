@@ -4,8 +4,8 @@ import { useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { Box, Button, MenuItem, Paper, TextField, Typography } from "@mui/material";
 import Card from '../Cards/Card/Card';
-import DefaultCalculationValues from "@/app/components/DefaultCalculationValues/DefaultCalculationValues";
-import CalculationValues from "@/app/components/CalculationValues/CalculationValues";
+import DefaultCalculationValues from "@/app/components/system99/DefaultCalculationValues/DefaultCalculationValues";
+import CalculationValues from "@/app/components/system99/CalculationValues/CalculationValues";
 import BlankCard from "@/app/components/shared/BlankCard";
 
 interface FormCreatorProps {

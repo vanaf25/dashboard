@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { Grid } from "@mui/material";
 import BlankCard from "@/app/components/shared/BlankCard";
-import CalculationValues from "@/app/components/CalculationValues/CalculationValues";
+import CalculationValues from "@/app/components/system99/CalculationValues/CalculationValues";
 import {ActionTableType, TableData, TablesPropertiesIntegrated} from "@/app/types/tablesTypes";
 import Button from "@mui/material/Button";
 import calculateTotalAmount from "@/app/utils/tables/calculateTotalAmount";

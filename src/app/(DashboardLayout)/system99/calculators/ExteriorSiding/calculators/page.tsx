@@ -1,7 +1,7 @@
 import { Metadata } from "next";
-import DefaultCalculationValues from "@/app/components/DefaultCalculationValues/DefaultCalculationValues";
-import DefaultCalculators from "@/app/components/DefaultCalculators/DefaultCalculators";
-import BackButton from "@/app/components/BackButton/BackButton";
+import DefaultCalculationValues from "@/app/components/system99/DefaultCalculationValues/DefaultCalculationValues";
+import DefaultCalculators from "@/app/components/system99/DefaultCalculators/DefaultCalculators";
+import BackButton from "@/app/components/global/BackButton/BackButton";
 
 interface PageProps {
     searchParams: Record<string, string | string[]>; // Explicitly typing searchParams

@@ -2,7 +2,7 @@
 import React from "react";
 import { useSearchParams } from "next/navigation";
 import { Card } from "@mui/material";
-import CalculationValues from "@/app/components/CalculationValues/CalculationValues";
+import CalculationValues from "@/app/components/system99/CalculationValues/CalculationValues";
 
 interface DefaultCalculationValuesProps {
     additionalValues?: { [key: string]: string };

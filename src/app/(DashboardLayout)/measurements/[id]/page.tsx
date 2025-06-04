@@ -7,7 +7,7 @@ import {Typography} from "@mui/material";
 import Alert from "@mui/material/Alert";
 import measurementsApi from "@/app/apis/measurementApi";
 import {Measurement, MeasurementsType} from "@/app/types/measurementsTypes";
-import CalculationValues from "@/app/components/CalculationValues/CalculationValues";
+import CalculationValues from "@/app/components/system99/CalculationValues/CalculationValues";
 import BlankCard from "@/app/components/shared/BlankCard";
 import TableNotes from "@/app/components/system99/TableNotes/TableNotes";
 import TablesLayout from "@/app/components/tables/TablesLayout/TablesLayout";

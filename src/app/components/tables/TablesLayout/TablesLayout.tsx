@@ -9,8 +9,8 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import TablesSummary from "@/app/components/tables/TablesSummary/TablesSummary";
 import {MeasurementsType} from "@/app/types/measurementsTypes";
 import {Box} from "@mui/system";
-import DefaultCalculationValues from "@/app/components/DefaultCalculationValues/DefaultCalculationValues";
-import DefaultCalculators from "@/app/components/DefaultCalculators/DefaultCalculators";
+import DefaultCalculationValues from "@/app/components/system99/DefaultCalculationValues/DefaultCalculationValues";
+import DefaultCalculators from "@/app/components/system99/DefaultCalculators/DefaultCalculators";
 import {
     ActionTableType,
     TableData,

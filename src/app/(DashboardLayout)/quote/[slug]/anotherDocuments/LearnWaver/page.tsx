@@ -6,7 +6,6 @@ import Card from "@mui/material/Card";
 import {useGetQuoteQuery} from "@/app/hooks/useQuote";
 import {useMemo} from "react";
 import {ElementType} from "@/app/types/exportPdfTypes";
-import {Element} from "canvg";
 
 const LearnWaver = () => {
   const {data}=useGetQuoteQuery()

@@ -18,7 +18,7 @@ const ReusableTable: React.FC<ReusableTableProps> = React.memo(
         const activeMode = useSelector((state: any) => state.customizer.activeMode);
 
         const themeClass =
-            activeMode === "light" ? "ag-theme-quartz" : "ag-theme-alpine-dark";
+            activeMode === "light" ? "ag-theme-quartz" : "ag-theme-quartz-dark";
 
        /* const containerStyle = {
            /!* height:

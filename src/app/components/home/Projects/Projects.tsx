@@ -5,24 +5,17 @@ import Button from "@mui/material/Button";
 import ProjectCard from "@/app/components/home/Projects/ProjectCard/ProjectCard";
 import axios from 'axios';
 import CircularProgress from '@mui/material/CircularProgress';
-import {useUser} from "@supabase/auth-helpers-react";
-import ProjectPopup from "@/app/components/home/Projects/ProjectPopup/ProjectPopup";
-import CreateProjectPopup from "@/app/components/CreateProjectPopup/CreateProjectPopup";
+import CreateProjectPopup from "@/app/components/home/Projects/CreateProjectPopup/CreateProjectPopup";
 
 const Projects = () => {
     const [projects, setProjects] = useState<any[]>([]);  // Change 'any' type if needed
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
-    const user=useUser();
     const [isPopupOpen,setIsPopupOpen]=useState(false);
     useEffect(() => {
         const fetchProjects = async () => {
             try {
-                const response = await axios.get('/api/contracts/getContracts', {
-                    params: {
-                        client_id: user?.id ? user.id:0,
-                    },
-                });
+                const response = await axios.get('/api/contracts/getContracts');
                 setProjects(response.data.documents || []);
             } catch (err) {
                 setError('Failed to fetch projects');
@@ -33,7 +26,6 @@ const Projects = () => {
 
         fetchProjects();
     }, []);
-
     return (
         <BlankCard sx={{ mb: 2 }}>
             <>
